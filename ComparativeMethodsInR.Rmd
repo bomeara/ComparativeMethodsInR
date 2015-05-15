@@ -71,9 +71,7 @@ print(phy)
 str(phy)
 ```
 
-`phylo4`
-`phylo4d`
-`simmap`
+This is the one used in most packages. However, it has some technical disadvantages (sensitivity to internal structure, no checking of objects) that has led to the `phylo4` format for trees and `phylo4d` for trees plus data in the `phylobase` package. Other packages add on to the `phylobase` format (i.e., `phytool`'s `simmap` format) but these are typically not shared across packages.
 
 ## Sequence data
 
