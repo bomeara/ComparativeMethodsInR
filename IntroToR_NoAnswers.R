@@ -66,3 +66,4 @@ abline(v=median(distribution.of.tips))
 #How would you do this for Tmax=2?
 
 #Could you plot them on the same plot (hint: ?lines)
+
