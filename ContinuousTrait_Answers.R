@@ -1,3 +1,46 @@
+require('geiger')
+?geiger #to get help on the overall package
+
+help(package="geiger") #to get help on all the functions
+
+#note all the deprecated functions. These are functions that used to work, and now have been changed to others. You'll want to use the non-deprecated ones. 
+
+#ok, let's get data
+geo=get(data(geospiza))
+
+tmp=treedata(geo$phy, geo$dat, sort=TRUE) #what does the warning mean?
+
+phy=tmp$phy 
+dat=tmp$data
+#stop("How do we get tree and data out of tmp?")
+
+#ok, let's try brownian motion
+geiger.brownian <-  fitContinuous(phy, dat[,"wingL"], SE=NA, ncores=1)
+print(geiger.brownian)
+#what does all this stuff mean?
+#convergence, log likelihood, etc.
+
+ConvertToOuchTreeData <- function(phy, data) {
+	ouch.phy <- ape2ouch(phy, scale=FALSE)
+	ouch.df <- as(ouch.phy, "data.frame")
+	ouch.data <- rep(NA, dim(ouch.df)[1])
+	names(ouch.data) <- as.character(ouch.df$labels) #this is a studid way to do this.
+	for (i in sequence(length(ouch.data))) {
+		if(nchar(names(ouch.data)[i])>0) {
+			ouch.data[i] <- data[ouch.df$labels[i]]	
+		}	
+	}
+	ouch.data <- data.frame(ouch.data)
+	return(list(phy=ouch.phy, data=ouch.data))
+}
+
+ouch.inputs <- ConvertToOuchTreeData(phy, dat[,"wingL"])
+
+ouch.brownian <- brown(ouch.inputs$data, ouch.inputs$phy)
+
+############# OUwie ##############
+
+
 require('OUwie')
 
 ?OUwie #gives help on OUwie
