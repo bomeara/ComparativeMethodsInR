@@ -1,7 +1,6 @@
 library('ape')
 library('phytools')
 library('TreeSim')
-library('OUwie')
 library('geiger')
 
 #first, let's simulate a tree
@@ -108,6 +107,8 @@ print(geiger.brownian$res)
 ############# OUwie ##############
 
 rm(list=ls()) #clean out our workspace
+
+library("OUwie")
 
 ?OUwie #gives help on OUwie
 
