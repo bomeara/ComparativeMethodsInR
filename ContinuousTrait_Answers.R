@@ -1,47 +1,113 @@
-require('geiger')
-?geiger #to get help on the overall package
+library('ape')
+library('phytools')
+library('TreeSim')
+library('OUwie')
+library('geiger')
+
+#first, let's simulate a tree
+#because TreeSim returns a list of trees, even with just one tree simulated, take first element in list.
+phy <- sim.bd.taxa(n=20,numbsim=1,lambda=1,mu=0.9)[[1]] 
+
+#let's look at this:
+plot(phy)
+
+#huh, that's weird. Why are the tips at different times?
+?sim.bd.taxa
+
+#ah, we forgot to repress the extinct lineages. We could do this in TreeSim or in geiger (drop.extinct). Let's do it in TreeSim
+phy <- sim.bd.taxa(n=30,numbsim=1,lambda=1,mu=0.9, complete=FALSE)[[1]] 
+
+
+#look at it again
+plot(phy)
+
+#ah, that looks right (except for those studying taxa at different time points, like viruses or fossils).
+
+#let's simulate some correlated data
+vcv.data <- matrix(data=c(.5,0.3, 0.3, 0.45), nrow=2, ncol=2, byrow=TRUE)
+print(vcv.data)
+data <- sim.corrs(phy, vcv.data, anc=c(17,3))
+
+#now let's look at the results
+plot(x=data[,1], y=data[,2], pch=16, bty="n")
+
+#that's the raw data; how does it look on a tree?
+par(mfcol=c(1,2))
+contMap(phy, data[,1])
+contMap(phy, data[,2], direction="leftwards")
+
+#or let's look at it in space:
+par(mfcol=c(1,1))
+phylomorphospace(phy, data)
+
+
+#Use independent contrasts
+
+pic.X <- pic(data[,1], phy)
+pic.Y <- pic(data[,2], phy)
+
+par(mfcol=c(1,2))
+plot(data[,1], data[,2], pch=16, bty="n", col="gray")
+plot(pic.X, pic.Y, pch=16, bty="n", col="gray")
+
+#for contrasts, you should positivize them, since the order doesn't matter. This is NOT taking absolute value.
+PositivizeContrasts <- function(x, y) {
+	x.positivized <- x * sign(x)
+	y.positivized <- y * sign(x)
+	return(cbind(x.positivized, y.positivized))
+}
+
+positivized.results <- PositivizeContrasts(pic.X, pic.Y)
+points(positivized.results[,1], positivized.results[,2], pch="x", col="red")
+
+print(cor.test(positivized.results[,1], positivized.results[,2]))
+
+#There are many other multivariate models in R for phylogenetic data, but let's go to simpler models for univariate traits
 
 help(package="geiger") #to get help on all the functions
 
-#note all the deprecated functions. These are functions that used to work, and now have been changed to others. You'll want to use the non-deprecated ones. 
+#note all the deprecated functions. These are functions that currently work, but are slated for eventual deletion. You'll want to use the non-deprecated ones. 
 
-#ok, let's get data
-geo=get(data(geospiza))
-
-tmp=treedata(geo$phy, geo$dat, sort=TRUE) #what does the warning mean?
-
-phy=tmp$phy 
-dat=tmp$data
-#stop("How do we get tree and data out of tmp?")
+data.x <- data[,1] #just to save on typing
 
 #ok, let's try brownian motion
-geiger.brownian <-  fitContinuous(phy, dat[,"wingL"], SE=NA, ncores=1)
+geiger.brownian <-  fitContinuous(phy, data.x, SE=NA, ncores=1)
 print(geiger.brownian)
 #what does all this stuff mean?
 #convergence, log likelihood, etc.
 
-ConvertToOuchTreeData <- function(phy, data) {
-	ouch.phy <- ape2ouch(phy, scale=FALSE)
-	ouch.df <- as(ouch.phy, "data.frame")
-	ouch.data <- rep(NA, dim(ouch.df)[1])
-	names(ouch.data) <- as.character(ouch.df$labels) #this is a studid way to do this.
-	for (i in sequence(length(ouch.data))) {
-		if(nchar(names(ouch.data)[i])>0) {
-			ouch.data[i] <- data[ouch.df$labels[i]]	
-		}	
-	}
-	ouch.data <- data.frame(ouch.data)
-	return(list(phy=ouch.phy, data=ouch.data))
+#did we do well estimating the rate?
+print(paste("true rate was", vcv.data[1,1], "; estimated rate was", geiger.brownian$opt$sigsq))
+
+#looks good (probably). But let's dig into it some more:
+?fitContinuous
+
+#there are different kinds of models, but there are other options, too: bounds, niter, etc. What are those for?
+
+#Let's try running this multiple times, changing the number of iterations to just 2, and try that a few times
+
+num.reps <- 25
+optimal.sigsq.vector <- rep(NA, num.reps)
+
+for (rep.index in sequence(num.reps)) {
+	optimal.sigsq.vector[rep.index] <- fitContinuous(phy, data.x, SE=NA, ncores=1, control=list(niter=2))$opt$sigsq
 }
 
-ouch.inputs <- ConvertToOuchTreeData(phy, dat[,"wingL"])
+plot(optimal.sigsq.vector, log="y", xlab="replicate", ylab="sigma squared", pch=16, bty="n")
+abline(h=vcv.data[1,1], col="red")
 
-ouch.brownian <- brown(ouch.inputs$data, ouch.inputs$phy)
+#why are some of the estimates off the red line showing the truth?
+
+#geiger now does many starting points and different optimizers (earlier versions weren't as thorough). You can see this in your first geiger run:
+
+print(geiger.brownian$res)
+
+#this shows for each replicate which optimizer was used, what it found as the best estimate for sigma squared and SE, the log likelihood, and the convergence diagnostic. A value of 0 for convergence indicates it worked fine, according to R, but note that many of those that converged actually didn't get at the right answer. This isn't a flaw in geiger but rather something about how optimization functions, even for simple problems like this. 
+
 
 ############# OUwie ##############
 
-
-require('OUwie')
+rm(list=ls()) #clean out our workspace
 
 ?OUwie #gives help on OUwie
 
@@ -177,7 +243,7 @@ text(x=best$solution[1,1], y=best$loglik, "unconstrained best", pos=4, col="red"
 abline(h=best$loglik-2, lty="dotted") #Two log-likelihood 
 
 #Now, let's try looking at both theta parameters at once, keeping the other parameters at their MLEs
-require("akima")
+library("akima")
 
 nreps<-400
 theta1.points<-c(best$theta[1,1], rnorm(nreps-1, best$theta[1,1], 5*best$theta[1,2])) #center on optimal value, have extra variance
