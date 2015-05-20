@@ -1,7 +1,31 @@
+#Learning outcomes:
+
+#Skills
+#	Ability to simulate a tree
+#	Ability to simulate data
+#	How to plot trees and data
+#	Running independent contrasts
+#	Estimating rates or other parameters
+#	Pulling in data and trees
+
+#Understanding:
+#	Why to check data and results
+#	Why to look at all program options
+#	How to use different measures of fit
+#	Uncertainty in estimates
+
+
+
 library('ape')
 library('phytools')
 library('TreeSim')
 library('geiger')
+library('OUwie')
+library('treebase')
+library('taxize')
+library('RColorBrewer')
+install.packages('rfishbase') #b/c this isn't in the task view
+library('rfishbase')
 
 #first, let's simulate a tree
 #because TreeSim returns a list of trees, even with just one tree simulated, take first element in list.
@@ -191,9 +215,58 @@ print(geiger.brownian$res)
 #this shows for each replicate which optimizer was used, what it found as the best estimate for sigma squared and SE, the log likelihood, and the convergence diagnostic. A value of 0 for convergence indicates it worked fine, according to R, but note that many of those that converged actually didn't get at the right answer. This isn't a flaw in geiger but rather something about how optimization functions, even for simple problems like this. 
 
 
-############# OUwie ##############
 
-rm(list=ls()) #clean out our workspace
+#GETTING DATA IN
+
+fish.trees <- search_treebase("menadoensis", by="taxon", branch_lengths=TRUE, max_trees=30) #only one fish tree in treebase matches this currently
+
+fish.phy <- fish.trees[[1]]
+
+fish.chronogram <- chronos(fish.phy) #chronos isn't an ideal dating function, but it may be the best in R right now. r8s, treepl, or Beast may be better
+class(fish.chronogram) <- "phylo" #we don't need this to also be class chronos
+
+fish.sizes <- getSize(value="length")
+
+fish.chronogram.name.resolve <- gnr_resolve(names = gsub("_", " ",fish.chronogram$tip.label), best_match_only=TRUE)
+
+
+print(fish.chronogram.name.resolve)
+stop("What are we seeing here?")
+
+fish.chronogram.name.resolve.ordered <- fish.chronogram.name.resolve$results[order(as.numeric(row.names(fish.chronogram.name.resolve$results))),] #puts it back in input order
+
+fish.chronogram.renamed <- fish.chronogram
+fish.chronogram.renamed$tip.label <- fish.chronogram.name.resolve.ordered$matched_name
+
+#now, check again!
+print(cbind(fish.chronogram$tip.label, fish.chronogram.renamed$tip.label))
+stop("Does this look okay?")
+
+#we would ideally resolve the size data to the same names. It will take too long. So we'll instead just change
+#underscores to spaces. We'll miss some matches.
+fish.sizes.renamed <- fish.sizes
+names(fish.sizes.renamed) <- gsub("_", " ", names(fish.sizes))
+
+#and check!
+print(cbind(names(fish.sizes.renamed), names(fish.sizes)))
+stop("What have we seen?")
+
+fish.sizes.renamed <- fish.sizes.renamed[!is.na(fish.sizes.renamed)] #get rid of NAs
+
+fish.resolved.all <- treedata(fish.chronogram.renamed, fish.sizes.renamed, sort=TRUE)
+fish.phy.final <- fish.resolved.all$phy
+fish.data.final <- fish.resolved.all$data
+
+#now you should look at these
+stop("How can we plot these together?")
+
+
+#DOING ANALYSES
+
+
+
+
+
 
 library("OUwie")
 
@@ -304,9 +377,43 @@ print(best) #prints info on best model
 
 
 
+#Ho and Ane (2014) point out that the Zhang & Siegmund (2007) modified BIC works better than AIC for determining the best number of regimes.
+#This will take some work to implement (but see the phylolm package for their model, but which currently allows shifts in theta regime only). 
+#However, it may be of interest how robust the best model selection is to different penalties for numbers of parameters.
 
+#Get the AIC values, put in a vector
+AIC.values<-sapply(results, "[[", "AIC")
+names(AIC.values)<-models
 
+#Get the loglik values, put in a vector
+loglik.values<-sapply(results, "[[", "loglik")
+names(loglik.values)<-models
 
+#AIC = -2lnL + 2K
+#AIC + 2 lnL = 2K
+#K = (AIC + 2 lnl)/2
+
+K.values = (AIC.values + 2 * loglik.values)/2
+
+#Check
+print(K.values)
+stop("Do these seem ok?")
+
+my.palette<-brewer.pal(length(K.values),"Dark2")
+
+multiplier.range <- seq(from=0, to=10, by=1)
+
+plot(x=c(-0.5+min(multiplier.range), 1.05*max(multiplier.range)), y=range(-2*max(loglik.values), -2*min(loglik.values)+max(multiplier.range)*max(K.values)), xlab="Multiplier", ylab="*IC", bty="n", type="n")
+
+for (model.index in sequence(length(K.values))) {
+	lines(x=multiplier.range, y=-2*loglik.values[model.index]+multiplier.range * K.values[model.index], col=my.palette[model.index])	
+	text(max(multiplier.range), y=-2*loglik.values[model.index]+max(multiplier.range) * K.values[model.index], names(K.values[model.index]), col=my.palette[model.index], pos=4, cex=0.5)
+	text(min(multiplier.range), y=-2*loglik.values[model.index]+min(multiplier.range) * K.values[model.index], names(K.values[model.index]), col=my.palette[model.index], pos=2, cex=0.5)
+}
+
+abline(v=2, lty="dotted") #line for regular AIC
+
+stop("What do you notice about the sensitivity of the best model to the multiplier on K?")
 
 
 

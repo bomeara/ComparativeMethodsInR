@@ -1,12 +1,12 @@
 ---
 title: "Comparative Methods in R"
 author: "Brian C. O'Meara"
-date: "May 15, 2015"
+date: "May 19, 2015"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     theme: united
-    toc: yes
-  pdf_document:
     toc: yes
 ---
 
