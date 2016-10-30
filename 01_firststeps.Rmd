@@ -1,6 +1,6 @@
-# Chapter 1: First steps
+# First steps
 
-First, understand the question you want to answer. There are a wide variety of methods, and they wax and wane in popularity, but the key to doing good science is addressing compelling questions, not using the latest method. Once you have that question, find the appropriate methods (and, depending on how early it is in the study design, the right taxa and data) to address it. Understand how those methods work, including the various ways they can fail (as all can). 
+First, understand the question you want to answer. There are a wide variety of methods, and they wax and wane in popularity, but the key to doing good science is addressing compelling questions, not using the latest method. Once you have that question, find the appropriate methods (and, depending on how early it is in the study design, the right taxa and data) to address it. Understand how those methods work, including the various ways they can fail (as all can).
 
 Many methods are now implemented in R: the [phylogenetics task view](http://cran.r-project.org/web/views/Phylogenetics.html) has a brief overview. You can also install the relevant packages that are on CRAN and R-Forge using the task view itself:
 
@@ -12,5 +12,4 @@ install.views("Phylogenetics")
 
 Note that this will not install packages that are on github or authors' individual websites. The `devtools` package can be useful for installing packages directly from github.
 
-An important resource for learning about phylogenetics in R is Emmanuel Paradis' book, [Analysis of Phylogenetics and Evolution with R](http://www.springer.com/us/book/9781461417422). This is written by the same person who is the lead author of the essential `ape` package for phylogenetics in R. 
-
+An important resource for learning about phylogenetics in R is Emmanuel Paradis' book, [Analysis of Phylogenetics and Evolution with R](http://www.springer.com/us/book/9781461417422). This is written by the same person who is the lead author of the essential `ape` package for phylogenetics in R.

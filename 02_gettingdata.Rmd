@@ -1,6 +1,6 @@
-# Chapter 2: Getting data and trees into R
+# Getting data and trees into R
 ## Data and tree object types
-In R, there are many kinds of objects. These kinds are called "classes". For example, take the text string "Darwin". 
+In R, there are many kinds of objects. These kinds are called "classes". For example, take the text string "Darwin".
 
 ```{r}
 class("Darwin")
@@ -13,7 +13,7 @@ print(pi)
 class(pi)
 ```
 
-Its class is `numeric` [and note that its value is stored with more precision than is printed on screen]. 
+Its class is `numeric` [and note that its value is stored with more precision than is printed on screen].
 
 Objects can sometimes be converted from one class to another, often using an `as.*` function:
 
@@ -66,10 +66,10 @@ You can use the same function to enter tree strings directly, changing the argum
 phy <- read.tree(text = '((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);')
 ```
 
-Note the trailing semicolon. 
+Note the trailing semicolon.
 
   One thing that can trip users up with `read.tree()` (and the `read.nexus()` function, below) is that the output class depends on the input. If you read from a file with one tree, the returned output is a single tree object with class `phylo`. You can then use `plot()` on this object to draw the tree, pass this object into a comparative methods package to estimate rates, and so forth. If the file has more than one tree, the returned class is `multiphylo`: `plot()` will automatically cycle through plots as you type return, most comparative method implementations will fail (they are written to expect one tree of class `phylo`, not a vector of trees in a different class). `read.tree()` has an optional `keep.multi` function: if set to TRUE, the class is always `multiphylo`, and you can always get the first tree by getting the first element in the returned object:
-  
+
 ```
 phy.multi <- read.tree(file='treefile.phy', keep.multi = TRUE)
 phy <- phy.multi[[1]]
@@ -79,5 +79,3 @@ For NEXUS formatted files (Maddison et al., 2007), `ape`'s `read.nexus()` functi
 
 
 ## Reconciling datasets
-
-
