@@ -1,0 +1,13 @@
+# Appendix
+
+Maybe include vignettes: see http://stackoverflow.com/questions/17593912/insert-portions-of-a-markdown-document-inside-another-markdown-document-using-kn
+
+```{r echo=FALSE, results='asis'}
+
+
+#library(RCurl)
+#data <- getURL("https://raw.githubusercontent.com/thej022214/hisse/master/vignettes/hisse-vignette.Rmd",
+#               ssl.verifypeer=0L, followlocation=1L)
+
+#cat(knitr::knit_child(text = data), sep = '\n')
+```
