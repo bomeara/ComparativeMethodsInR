@@ -1,0 +1,29 @@
+---
+title: "Comparative Methods"
+author: "Brian O'Meara"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: bomeara/ComparativeMethodsInR
+description: "How to do comparative methods for evolution and ecology"
+---
+
+# Prerequisites
+
+This book was created using bookdown. To make it,
+
+`bookdown::render_book("index.Rmd", "bookdown::pdf_book")`
+
+
+```{r include=FALSE}
+devtools::install_github("rstudio/bookdown")
+set.seed(1859) # Just to make things repeatable
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ape', 'geiger'
+), 'packages.bib')
+```
