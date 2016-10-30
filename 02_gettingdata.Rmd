@@ -1,32 +1,3 @@
----
-title: "Comparative Methods in R"
-author: "Brian C. O'Meara"
-date: "May 19, 2015"
-output:
-  pdf_document:
-    toc: yes
-  html_document:
-    theme: united
-    toc: yes
----
-
-
-# Chapter 1: First steps
-
-First, understand the question you want to answer. There are a wide variety of methods, and they wax and wane in popularity, but the key to doing good science is addressing compelling questions, not using the latest method. Once you have that question, find the appropriate methods (and, depending on how early it is in the study design, the right taxa and data) to address it. Understand how those methods work, including the various ways they can fail (as all can). 
-
-Many methods are now implemented in R: the [phylogenetics task view](http://cran.r-project.org/web/views/Phylogenetics.html) has a brief overview. You can also install the relevant packages that are on CRAN and R-Forge using the task view itself:
-
-```
-install.packages("ctv")
-library(ctv)
-install.views("Phylogenetics")
-```
-
-Note that this will not install packages that are on github or authors' individual websites. The `devtools` package can be useful for installing packages directly from github.
-
-An important resource for learning about phylogenetics in R is Emmanuel Paradis' book, [Analysis of Phylogenetics and Evolution with R](http://www.springer.com/us/book/9781461417422). This is written by the same person who is the lead author of the essential `ape` package for phylogenetics in R. 
-
 # Chapter 2: Getting data and trees into R
 ## Data and tree object types
 In R, there are many kinds of objects. These kinds are called "classes". For example, take the text string "Darwin". 
@@ -110,7 +81,3 @@ For NEXUS formatted files (Maddison et al., 2007), `ape`'s `read.nexus()` functi
 ## Reconciling datasets
 
 
-# Chapter 3: Visualizing data before use
-A key step in any analysis is looking at the data. If you have loaded protein coding DNA sequences, are they aligned correctly? Are the codon positions specified correctly? For trait data, is everything measured in the same units, or are some oddly a thousand-fold higher than others? Are you dealing with an older dataset format that uses -1 or 19 for missing data, and have you incorrectly treated those as observations? Is your tree ultrametric? 
-
-It is easy to overlook this step, but you can draw the wrong conclusions based on errors at this stage. Most peer reviewers will not notice this, either, so your error could slip into the literature and mislead others. Take the time to get to know your data.
