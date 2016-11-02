@@ -1,0 +1,19 @@
+---
+title: 'PhyloMeth: Diversification'
+author: "Brian O'Meara"
+output: html_document
+date: '`r format(Sys.time(), "Last updated %H:%M:%S %p %d %B, %Y")`'
+---
+
+
+
+##Objectives
+By the end of this week, you will:
+
+* Understand diversification models that don't incorporate traits
+* Be able to estimate diversification parameters for your data
+
+Make sure to **read the relevant papers**: https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/diversification/  
+
+And **do the relevant exercise**:
+https://github.com/PhyloMeth/Diversification

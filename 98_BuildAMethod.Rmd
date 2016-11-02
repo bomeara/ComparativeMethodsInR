@@ -1,0 +1,19 @@
+---
+title: 'PhyloMeth: Build a method'
+author: "Brian O'Meara"
+output: html_document
+date: '`r format(Sys.time(), "Last updated %H:%M:%S %p %d %B, %Y")`'
+---
+
+
+
+##Objectives
+By the end of these two weeks, you will:
+
+* Identify a problem
+* Figure out ways to address it
+* In the final week, you will test it.
+
+Why this? You've been exposed to a lot of approaches in phylogenetics to make a tree, date it, figure out support, and then use it to answer questions. But this is a tiny subset of all the available methods. Moreover, the methods we have today are just a subset of what we can have in the future. 
+
+More importantly, I find students can tend to be drawn to hot methods. If you're a taxon-focused person, you might say, "I really want to study pinniped evolution, so let me find what questions they're relevant for" and then choose diversification, trait evolution, etc. and an available method. But a different approach is to start from the question, find the taxon to use to answer it, and then find the best methods to use to go after that. That's what I want you to do for the next couple weeks, with two caveats: 1) it's ok to keep the taxon focus on your study organisms, 2) do a question you can't quite answer with existing tools. Once you have this, we'll talk in class about how to go about creating methods to answer this.

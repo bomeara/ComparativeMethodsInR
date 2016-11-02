@@ -1,0 +1,27 @@
+---
+title: 'PhyloMeth: Continuous Traits'
+author: "Brian O'Meara"
+output: html_document
+date: '`r format(Sys.time(), "Last updated %H:%M:%S %p %d %B, %Y")`'
+---
+
+
+
+##Objectives
+By the end of this week, you will:
+
+* Understand various continuous trait models
+* Be able to run key software
+
+Make sure to **read the relevant papers**: https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week7/    
+
+Last week we did some simulation under Brownian motion and talked about using this model for dealing with correlations (as in independent contrasts). The central limit theorem is great: as you add changes, you converge back to a normal distribution. But what if the changes aren't i.i.d.? For example, what if the rate of body size evolution of birds dramatically increased once other dinosaurs went extinct? We would have variance accumulating linearly with time before and after the KT extinction, but the rate of increase would be different between the two time periods. 
+
+**Do the homework at** https://github.com/PhyloMeth/ContinuousTraits
+
+You will:
+* Use Geiger to estimate rate of evolution under Brownian motion
+* Figure out what the units are
+* Try other ways of scaling rates
+* Compare different models using OUwie
+* Do model comparison

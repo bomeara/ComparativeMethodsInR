@@ -1,0 +1,93 @@
+---
+title: 'PhyloMeth: Dating'
+author: "Brian O'Meara"
+output: html_document
+---
+
+##Objectives
+By the end of this week, you will:
+
+* Understand dating algorithms
+* Be able to use r8s and BEAST
+* Be afraid of calibrations
+
+Make sure to **read the relevant papers**: https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week5/    
+
+To do this week's assignments, you will have to:
+
+* **Download and install r8s** from http://loco.biosci.arizona.edu/r8s/ 
+* **Download BEAST2 and Beauti** (come together), **TreeAnnotator**, and **Tracer** from http://beast2.org and http://beast.bio.ed.ac.uk/tracer.
+* **Install a tweaked version of Geiger**
+    - `library(devtools)`
+    - `install_github("bomeara/geiger-v2")` (eventually I'll make a pull request)
+ 
+## BEAST 
+For the BEAST part, we're not going to do our testing via R package approach: dealing with file paths and such are too problematic. So we'll just go through an exercise, but unlike many canned tutorials, you'll have to figure out what to do at stages. Note that this is based on the [tutorial](https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true) by Drummond, Rambaut, and Bouckaert. A tutorial that provides far more background info and other context than anything on the Beast2 website is Tracy Heath's [tutorial](http://phyloworks.org/workshops/DivTime_BEAST2_tutorial_FBD.pdf) from the Bodega Bay Workshop in Applied Phylogenetics: if you are going to run BEAST, read that. There is also now a [book](http://beast2.org/book/) that you can buy.
+
+BEAST uses XML files for commands, rather than NEXUS files (though it does use NEXUS files for data). This XML format is different from [NeXML](http://www.nexml.org) and [PhyloXML](http://www.phyloxml.org), two other XML formats proposed for phylogenetics (though, as of now, they're still not used much in the field -- most students won't encounter them). These files are often made using the program BEAUTi (also from the BEAST developers) and then, sometimes, hand edited. 
+
+1. **Import primates-mtDNA.nex** into BEAUTi; it's includided in examples/nexus in the BEAST folder. Note it's File -> Import alignment.
+2. But wait -- what are you loading? Have you looked at the file? Open it in a text editor (or R, or Mesquite) and look at it. Do you believe the sequences are aligned properly? Is there anything weird about them? This is an essential step.
+3. We will be partitioning, as with RAxML. This file already has some partitions, but some overlap (coding vs the three codon positions). Delete the coding partition using the `-` sign button on the bottom of the window.
+4. Partitions can be linked: allow different rates but the same topology, for example. Select all four partitions and click Link Trees. Then click on the first pull down (for noncoding) for the Tree column and name it "tree". Do the same for Clock (rename to "clock").
+5. Temporarily link sites in the same way.
+6. BEAST has a variety of models. We're going to do HKY (so, two different rates) with gamma-distributed rate differences. To do this:
+    + Set Gamma Category Count to 4
+    + Set the Shape to be estimated
+    + Select the HKY model
+    + Make sure Kappa is estimated
+    + Make sure frequences are estimated
+    + Select estimate for Substitution Rate
+7. Go back to partitions and click on Unlink Site Models. This lets each partition have its own HKY+gamma model (and doing the link -> set -> unlink lets you save on work of setting it for each one).
+8. We need to choose a clock model. A Strict Clock is the classic molecular clock. Most people using BEAST (and this is based on various sim studies) use relaxed clock log normal, so choose that. Having the number of discrete rates set to -1 will allow as many rates as branches.
+9. Now comes the tricky bit: setting your priors. For example, you need a prior for the tree: assume a Yule prior (only speciation events, no extinction)? Or a birth-death one? [and think about the implications of these choices for later analyses -- estimating extinction rates, for example]. And even if you have a belief about whether extinction might have happened or not, what about parameters like gamma shape for first codon position sites? Exponential, beta, etc.? You probably don't have a good idea of what they should be in terms of shape, let alone priors for the actual values. And this might affect your analyses: the result is due to the prior and the likelihood. Let's leave all the priors set to the default for now, except for the tree: do a birth-death model for that.
+10. We can also add priors: say, a prior for the age of a node.
+    + Click on the "+" button
+    + Call the Taxon set label "human-chimp"
+    + Click on Homo_sapiens and then the ">>" button
+    + Do the same for Pan
+    + Click ok
+    + Force it to be monophyletic
+    + Choose Log Normal for the age prior
+    + Select mean in real space (so it's easier for us to understand the age)
+    + Enter 6 (for 6 MY) for the M = mean of the distribution
+    + **Select a value for S that leads to a 95% range of about 5-7 MY (use the information on the right side of the window to help)**
+11. Go to MCMC to set parameters for the run
+    + Do 1M generations to start
+    + You can also set how often the info is saved to disk or printed on the screen. Change the tracelog to primates_birthdeath_prior.log
+12. Save this in the same folder as your original nexus file: maybe store as primates_birthdeath_prior.xml.
+13. Yay! We have created a file with commands to run BEAST. Open it in a text editor and look at it (don't modify or save it).
+14. Now open BEAST. Choose the xml file you just made and run.
+15. Time passes.
+16. Now open the log file in Tracer. Investigate some of the statistics, including looking at ESS: effective sample size. Ones that aren't black indicate ones that did not run long enough.
+17. Go back to BEAUTi. 
+    + Change the tree prior to a Yule tree
+    + Change the tracelog to primates_yule_prior.log and change the tree file name
+    + Save as the file to primates_yule_prior.xml
+18. Use this new xml file to run BEAST again.
+19. Now look at this log file with the other one, both in Tracer. Are the estimates the same? Even for something like tree height? What does this suggest?
+20. Use TreeAnnotator on one of your tree files to summarize.
+    + Decide what the burnin should be: that is the number of trees (not number of generations) to delete.
+    + Change Posterior probability limit to 0: if you are going to show an edge, you should show the support for that. Many people only show support above 50% but still show all branches: this is problematic (only showing uncertainty on the edges where uncertainty is relatively low).
+21. FigTree or R can be used to visualize the final tree with support.
+
+
+##r8s
+r8s implements several functions for converting a phylogram to a chronogram. It does the classic, Langley-Fitch molecular clock which stretches branches but assumes a constant rate for all. It also implements two algorithms by Sanderson: nonparametric rate smoothing (NPRS) and penalized likelihood (PL). Both relax the assumption of constant rate of evolution and instead allow rates to vary along the tree. NPRS tries to minimize rate changes at nodes. PL has a model for changes (to give likelihood of original branch lengths) and combines this with a nonparametric penalty for rate changes. It tries to minimize the combination of these two parameters, but there is a user-set penalty to decide the relative value of these in the combined sum. This is set by cross-validation: delete some data, estimate parameters, predict the deleted data, and see how close the deleted data are to the simulated data. In this case, the datum deleted is a single tip, and the length of this branch is the value to predict. This can now happen within r8s. In general, PL is more accurate than NPRS, but is slower (but both are much faster than BEAST). `treepl` is a later program that implements Sanderson's algorithms but can work on much larger trees.
+
+Jon Eastman coded an interface to this in Geiger, but it wasn't exposed to users. I've added some additional features (including an `ez.run` mode) and documentation to his code. This is now in a fork of Geiger, but I'll file a pull request soon to put it into the main code. For now, make sure you have installed the forked version:
+
+```
+devtools::install_github("bomeara/geiger-v2")
+library(geiger)
+```
+
+Then use the help for `?r8s.phylo` to figure out how to use this function. Also look at the [r8s manual](http://loco.biosci.arizona.edu/r8s/r8s1.7.manual.pdf) to understand the options.
+
+**Run the examples** in Geiger for this. You can also look at the examples that come with r8s.
+
+## Applying to your own work
+
+By this point in the course, you should be thirsting to apply these tools to your own questions. Do so! **Get a dataset (think back to the getting trees method), infer a tree (if needed), and date it using one of these approaches.** I'd advise making your own github repository for this. You could pay to keep it secret; I'd advise it's probably not worth it (there is some risk of being scooped, but it's pretty low) but it's your call. 
+
+

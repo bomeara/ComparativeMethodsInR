@@ -1,0 +1,19 @@
+---
+title: 'PhyloMeth: Discrete Traits'
+author: "Brian O'Meara"
+output: html_document
+date: '`r format(Sys.time(), "Last updated %H:%M:%S %p %d %B, %Y")`'
+---
+
+
+
+##Objectives
+By the end of this week, you will:
+
+* Understand how to incorporate rate heterogeneity in discrete trait models
+* Be able to explain how to test hypotheses about univariate trait evolution.
+
+Make sure to **read the relevant papers**: https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/discrete/  
+
+And **do the relevant exercise**:
+https://github.com/PhyloMeth/DiscreteTraits
