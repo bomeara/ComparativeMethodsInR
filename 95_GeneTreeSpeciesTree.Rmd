@@ -1,7 +1,8 @@
 # Gene Tree Species Tree
 
-##Objectives
-By the end of this week, you will:
+## Objectives
+
+By the end of this chapter, you will:
 
 * Understand why gene trees and species trees may not always agree
 * Know about some of the approaches in this area

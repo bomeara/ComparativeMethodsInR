@@ -1,7 +1,8 @@
 # SSE methods
 
-##Objectives
-By the end of this week, you will:
+## Objectives
+
+By the end of this chapter, you will:
 
 * Understand models that look at the effects of traits on diversification
 * Understand some of the problems with these

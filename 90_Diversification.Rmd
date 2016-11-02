@@ -1,7 +1,8 @@
 # Diversification
 
-##Objectives
-By the end of this week, you will:
+## Objectives
+
+By the end of this chapter, you will:
 
 * Understand diversification models that don't incorporate traits
 * Be able to estimate diversification parameters for your data

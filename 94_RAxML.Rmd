@@ -1,6 +1,7 @@
 # RAxML
 
-##Objectives
+## Objectives
+
 By the end of this week, you will:
 
 * Have RAxML installed

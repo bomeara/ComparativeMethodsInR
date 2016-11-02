@@ -1,8 +1,9 @@
 # Build a method
 
 
-##Objectives
-By the end of these two weeks, you will:
+## Objectives
+
+By the end of this section, you will:
 
 * Identify a problem
 * Figure out ways to address it

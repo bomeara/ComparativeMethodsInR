@@ -9,12 +9,12 @@ Almost all biologists believe this about the world:
 * Traits are uncorrelated
 * Species evolve completely independently
 * Extinction never happens
-* All evolutionary rates are constant 
+* All evolutionary rates are constant
     * Across all time
     * Across all space
-    
+
 However, a scrappy group of biologists are using comparative methods to attack the mainstream view. For example, using diversification analyses, they can show that extinction can sometimes be greater than zero. Using analyses of trait evolution, they have found that different species actually have different rates of evolution: whale body mass does *not* evolve in the same way bat body mass does. These ideas are rocking the scientific establishment.
 
 Of course, the above is all fiction. We *know* that different things are... different, because they're not the same. We know about extinction, about rates changing over time, about how traits must interact with each other. But the way we do science does not reflect this. Instead, when doing empirical analyses, we focus on rejecting trivial null models, or more simply, dull models. It is useful to show that using a more complex, biologically more credible model is warranted, but too many studies just stop there: a pure birth model is rejected for a logistic growth model for number of species, a single Brownian motion rate model is rejected for an Ornstein-Uhlenbeck model, etc. However, rejecting dull models we did not believe in does not advance science: it tells us more about the power of our study than about actual biological mechanisms. Of course different groups have different rates of evolution: what is the magnitude of the difference? Getting rates with uncertainty is a better way of getting at the biological meaning of differences.
 
-Dull model testing comes up in discussion of a method's fitness, too. The first question asked of a new method, or a published model under attack, is its type I error rate. This is relevant: a method that too often picks an alternate model when the null is true is worrisome. However, it is also not especially relevant biologically. The null model is never true. It may be that due to small sample size, the null is the best-fitting model, but in any empirical scenario the true model is never the null. 
+Dull model testing comes up in discussion of a method's fitness, too. The first question asked of a new method, or a published model under attack, is its type I error rate. This is relevant: a method that too often picks an alternate model when the null is true is worrisome. However, it is also not especially relevant biologically. The null model is never true. It may be that due to small sample size, the null is the best-fitting model, but in any empirical scenario the true model is never the null.

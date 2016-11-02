@@ -1,7 +1,8 @@
 # Dating
 
-##Objectives
-By the end of this week, you will:
+## Objectives
+
+By the end of this chapter, you will:
 
 * Understand dating algorithms
 * Be able to use r8s and BEAST
@@ -18,6 +19,7 @@ To do this week's assignments, you will have to:
     - `install_github("bomeara/geiger-v2")` (eventually I'll make a pull request)
 
 ## BEAST
+
 For the BEAST part, we're not going to do our testing via R package approach: dealing with file paths and such are too problematic. So we'll just go through an exercise, but unlike many canned tutorials, you'll have to figure out what to do at stages. Note that this is based on the [tutorial](https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true) by Drummond, Rambaut, and Bouckaert. A tutorial that provides far more background info and other context than anything on the Beast2 website is Tracy Heath's [tutorial](http://phyloworks.org/workshops/DivTime_BEAST2_tutorial_FBD.pdf) from the Bodega Bay Workshop in Applied Phylogenetics: if you are going to run BEAST, read that. There is also now a [book](http://beast2.org/book/) that you can buy.
 
 BEAST uses XML files for commands, rather than NEXUS files (though it does use NEXUS files for data). This XML format is different from [NeXML](http://www.nexml.org) and [PhyloXML](http://www.phyloxml.org), two other XML formats proposed for phylogenetics (though, as of now, they're still not used much in the field -- most students won't encounter them). These files are often made using the program BEAUTi (also from the BEAST developers) and then, sometimes, hand edited.
@@ -69,6 +71,7 @@ BEAST uses XML files for commands, rather than NEXUS files (though it does use N
 
 
 ##r8s
+
 r8s implements several functions for converting a phylogram to a chronogram. It does the classic, Langley-Fitch molecular clock which stretches branches but assumes a constant rate for all. It also implements two algorithms by Sanderson: nonparametric rate smoothing (NPRS) and penalized likelihood (PL). Both relax the assumption of constant rate of evolution and instead allow rates to vary along the tree. NPRS tries to minimize rate changes at nodes. PL has a model for changes (to give likelihood of original branch lengths) and combines this with a nonparametric penalty for rate changes. It tries to minimize the combination of these two parameters, but there is a user-set penalty to decide the relative value of these in the combined sum. This is set by cross-validation: delete some data, estimate parameters, predict the deleted data, and see how close the deleted data are to the simulated data. In this case, the datum deleted is a single tip, and the length of this branch is the value to predict. This can now happen within r8s. In general, PL is more accurate than NPRS, but is slower (but both are much faster than BEAST). `treepl` is a later program that implements Sanderson's algorithms but can work on much larger trees.
 
 Jon Eastman coded an interface to this in Geiger, but it wasn't exposed to users. I've added some additional features (including an `ez.run` mode) and documentation to his code. This is now in a fork of Geiger, but I'll file a pull request soon to put it into the main code. For now, make sure you have installed the forked version:

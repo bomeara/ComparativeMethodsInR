@@ -1,7 +1,8 @@
 # Discrete Traits
 
 ##Objectives
-By the end of this week, you will:
+
+By the end of this chapter, you will:
 
 * Understand how to incorporate rate heterogeneity in discrete trait models
 * Be able to explain how to test hypotheses about univariate trait evolution.

@@ -1,5 +1,7 @@
 # Getting data and trees into R
+
 ## Data and tree object types
+
 In R, there are many kinds of objects. These kinds are called "classes". For example, take the text string "Darwin".
 
 ```{r}

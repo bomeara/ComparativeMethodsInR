@@ -2,14 +2,16 @@
 
 *In progress*
 
-##Objectives
-By the end of this week, you will:
+## Objectives
+
+By the end of this chapter, you will:
 
 * Understand the importance of dealing with correlations in an evolutionary manner
 * Know methods for looking at correlations of continuous and discrete traits
 * Be able to point to reasons to be concerned.
 
 Make sure to **read the relevant papers**: https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week6/    
+
 ## Brownian motion
 
 First, let's get a tree:
