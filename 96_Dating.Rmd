@@ -1,8 +1,4 @@
----
-title: 'PhyloMeth: Dating'
-author: "Brian O'Meara"
-output: html_document
----
+# Dating
 
 ##Objectives
 By the end of this week, you will:
@@ -15,16 +11,16 @@ Make sure to **read the relevant papers**: https://www.mendeley.com/groups/81119
 
 To do this week's assignments, you will have to:
 
-* **Download and install r8s** from http://loco.biosci.arizona.edu/r8s/ 
+* **Download and install r8s** from http://loco.biosci.arizona.edu/r8s/
 * **Download BEAST2 and Beauti** (come together), **TreeAnnotator**, and **Tracer** from http://beast2.org and http://beast.bio.ed.ac.uk/tracer.
 * **Install a tweaked version of Geiger**
     - `library(devtools)`
     - `install_github("bomeara/geiger-v2")` (eventually I'll make a pull request)
- 
-## BEAST 
+
+## BEAST
 For the BEAST part, we're not going to do our testing via R package approach: dealing with file paths and such are too problematic. So we'll just go through an exercise, but unlike many canned tutorials, you'll have to figure out what to do at stages. Note that this is based on the [tutorial](https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true) by Drummond, Rambaut, and Bouckaert. A tutorial that provides far more background info and other context than anything on the Beast2 website is Tracy Heath's [tutorial](http://phyloworks.org/workshops/DivTime_BEAST2_tutorial_FBD.pdf) from the Bodega Bay Workshop in Applied Phylogenetics: if you are going to run BEAST, read that. There is also now a [book](http://beast2.org/book/) that you can buy.
 
-BEAST uses XML files for commands, rather than NEXUS files (though it does use NEXUS files for data). This XML format is different from [NeXML](http://www.nexml.org) and [PhyloXML](http://www.phyloxml.org), two other XML formats proposed for phylogenetics (though, as of now, they're still not used much in the field -- most students won't encounter them). These files are often made using the program BEAUTi (also from the BEAST developers) and then, sometimes, hand edited. 
+BEAST uses XML files for commands, rather than NEXUS files (though it does use NEXUS files for data). This XML format is different from [NeXML](http://www.nexml.org) and [PhyloXML](http://www.phyloxml.org), two other XML formats proposed for phylogenetics (though, as of now, they're still not used much in the field -- most students won't encounter them). These files are often made using the program BEAUTi (also from the BEAST developers) and then, sometimes, hand edited.
 
 1. **Import primates-mtDNA.nex** into BEAUTi; it's includided in examples/nexus in the BEAST folder. Note it's File -> Import alignment.
 2. But wait -- what are you loading? Have you looked at the file? Open it in a text editor (or R, or Mesquite) and look at it. Do you believe the sequences are aligned properly? Is there anything weird about them? This is an essential step.
@@ -60,7 +56,7 @@ BEAST uses XML files for commands, rather than NEXUS files (though it does use N
 14. Now open BEAST. Choose the xml file you just made and run.
 15. Time passes.
 16. Now open the log file in Tracer. Investigate some of the statistics, including looking at ESS: effective sample size. Ones that aren't black indicate ones that did not run long enough.
-17. Go back to BEAUTi. 
+17. Go back to BEAUTi.
     + Change the tree prior to a Yule tree
     + Change the tracelog to primates_yule_prior.log and change the tree file name
     + Save as the file to primates_yule_prior.xml
@@ -88,6 +84,4 @@ Then use the help for `?r8s.phylo` to figure out how to use this function. Also 
 
 ## Applying to your own work
 
-By this point in the course, you should be thirsting to apply these tools to your own questions. Do so! **Get a dataset (think back to the getting trees method), infer a tree (if needed), and date it using one of these approaches.** I'd advise making your own github repository for this. You could pay to keep it secret; I'd advise it's probably not worth it (there is some risk of being scooped, but it's pretty low) but it's your call. 
-
-
+By this point in the course, you should be thirsting to apply these tools to your own questions. Do so! **Get a dataset (think back to the getting trees method), infer a tree (if needed), and date it using one of these approaches.** I'd advise making your own github repository for this. You could pay to keep it secret; I'd advise it's probably not worth it (there is some risk of being scooped, but it's pretty low) but it's your call.

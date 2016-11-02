@@ -1,8 +1,4 @@
----
-title: 'PhyloMeth: Gene Tree Species Tree'
-author: "Brian O'Meara"
-output: html_document
----
+# Gene Tree Species Tree
 
 ##Objectives
 By the end of this week, you will:
@@ -12,7 +8,7 @@ By the end of this week, you will:
 * Understand about phylogenetic networks
 
 Make sure to read the relevant papers: https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week4/
-    
+
 First, we will be looking at distinctions between gene trees and species trees. For this, we'll be using Liang Liu's phybase package. This isn't on CRAN, but it is available on his [website](https://faculty.franklin.uga.edu/lliu/content/phybase?). However, we'll be using a version I modified slightly and put on github. Liang's package uses [newick](http://evolution.genetics.washington.edu/phylip/newicktree.html) format (yes, named after the [restaurant](http://newicks.com)), but with additional options for including population size (branch width, included as a `#` sign followed by a number) as well as the more traditional branch length. Both matter for coalescence: two copies are much more likely to have coalesced on a long, narrow branch than a short, fat one. Most packages in R instead use ape's `phylo` format, so I wrote a few functions to deal with that. This version of the package is on github; to install it:
 
 ```
@@ -20,7 +16,7 @@ library(devtools)
 install_github("bomeara/phybase")
 ```
 
-For real science, Liang's is the canonical one (and definitely cite his) but this will be easier for us to use for class. 
+For real science, Liang's is the canonical one (and definitely cite his) but this will be easier for us to use for class.
 
 First, get a tree from Open Tree of Life. We'll get a recent plant tree from Beaulieu et al:
 
@@ -60,7 +56,7 @@ plot(cophylo(phy, gene.tree, cbind(sort(phy$tip.label), sort(gene.tree$tip.label
 
 So, does this mean gene tree species tree issues aren't a problem?
 
-Well, it depends on the details of the tree. One common misconception is that gene tree species tree issues only relate to trees for recent events. This problem can happen any time there are short, fat branches, where lack of coalescence of copies can occur. 
+Well, it depends on the details of the tree. One common misconception is that gene tree species tree issues only relate to trees for recent events. This problem can happen any time there are short, fat branches, where lack of coalescence of copies can occur.
 
 ```{r, warning=FALSE, message=FALSE}
 species.tree <- rcoal(7)
@@ -87,4 +83,4 @@ gene.tree2.clado <- compute.brlen(gene.tree2)
 plot(cophylo(species.tree2.clado, gene.tree2.clado, cbind(sort(species.tree2.clado$tip.label), sort(gene.tree2.clado$tip.label))))
 ```
 
-So we can see that even though the relevant divergences happened long ago, gene tree species tree issues are still a problem. 
+So we can see that even though the relevant divergences happened long ago, gene tree species tree issues are still a problem.

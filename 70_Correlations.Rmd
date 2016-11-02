@@ -1,9 +1,4 @@
----
-title: 'PhyloMeth: Brownian Motion and Correlations'
-author: "Brian O'Meara"
-output: html_document
-date: '`r format(Sys.time(), "Last updated %H:%M:%S %p %d %B, %Y")`'
----
+# Brownian Motion and Correlations
 
 *In progress*
 
@@ -27,7 +22,7 @@ plot(phy, cex=0.5)
 axisPhylo(backward=TRUE)
 ```
 
-Note that this tree is a chronogram. 
+Note that this tree is a chronogram.
 
 Let's simulate data on this tree. But what model to use? For now, let's assume we are looking at continuous traits, things like body size. Over evolutionary time, these probably undergo a series of changes that then get added up. A species has an average mass of 15 kg, then it goes to 15.1 kg, then 14.8 kg, and so forth. But how could those changes be distributed?
 
@@ -49,7 +44,7 @@ ngen <- 100
 nsims <- 500
 final.positions <- rep(NA, nsims)
 # make a plot to hold our lines
-plot(x=c(-1,1)*ngen, y=c(1, 1+ngen), xlab="trait value", ylab="generation", bty="n", type="n") 
+plot(x=c(-1,1)*ngen, y=c(1, 1+ngen), xlab="trait value", ylab="generation", bty="n", type="n")
 for (sim.index in sequence(nsims)) {
   positions <- c(0, rep(NA,ngen))
   for (i in sequence(ngen)) {
@@ -74,7 +69,7 @@ rweird <- function() {
   if(runif(1,-2,2) < .1) {
     displacement <- rnorm(1, 7, 3) + runif(1,0,7)
   } else {
-    displacement <- 0.5 * rexp(1, 0.3) - 1 
+    displacement <- 0.5 * rexp(1, 0.3) - 1
   }
   displacement <- displacement + round(runif(1,1,100) %% 7)
   return(displacement)  
@@ -90,7 +85,7 @@ ngen <- 100
 nsims <- 500
 final.positions <- rep(NA, nsims)
 # make a plot to hold our lines
-plot(x=c(-100,1200), y=c(1, 1+ngen), xlab="trait value", ylab="generation", bty="n", type="n") 
+plot(x=c(-100,1200), y=c(1, 1+ngen), xlab="trait value", ylab="generation", bty="n", type="n")
 for (sim.index in sequence(nsims)) {
   positions <- c(0, rep(NA,ngen))
   for (i in sequence(ngen)) {
@@ -107,7 +102,7 @@ And now let's look at final positions again:
 plot(density(final.positions), col="black", bty="n")
 ```
 
-Again, it looks pretty much like a normal distribution. You can try with your own wacky distribution, and this will almost always happen (as long as the distribution has finite variance). 
+Again, it looks pretty much like a normal distribution. You can try with your own wacky distribution, and this will almost always happen (as long as the distribution has finite variance).
 
 Why?
 
@@ -117,13 +112,13 @@ Answer: the central limit theorem. The sum (or, equivalently, average) of a set 
 
 Biologically, the technical term for this is awesome. We know something like a species mean changes for many reasons: chasing an adaptive peak here, drifting there, mutation driving a it this way or that, etc. If there are enough shifts, where a species goes after many generations is normally distributed. For two species, there's one normal distribution for their evolution from the origin of life (or the start of the tree we're looking at) to their branching point (so they have identical history up to then) then each evolves from that point independently (though of course in reality they may interact; the method that's part of the grant supporting this course allows for this). So they have covariance due to the shared history, then accumulate variance independently after the split. We thus use a multivariate normal for multiple species on the tree (for continuous traits), but it again is due to Brownian motion. **This mixture of independent and shared evolution is quite important: it explains why species cannot be treated as independent data points, necessitating the correlation methods that use a phylogeny in this week's lessons.**
 
-However, in biological data there are (at least) two issues. One is that in some ways a normal distribution is weird: it says that for the trait of interest, there's a positive probability for any value from negative infinity to positive infinity. "Endless forms most beautiful and most wonderful have been, and are being, evolved" [Darwin] but nothing is so wonderful as to have a mass of -15 kg (or, for that matter, 1e7 kg). Under Brownian motion, we expect a displacement of 5 g to have equal chance no matter what the starting mass, but in reality a shrew species that has an average mass of 6 g is less likely to lose 5 g over one million years than a whale species that has an average adult mass of 100,000,000 g. Both difficulties go away if we think of the displacements not coming as an addition or subtraction to a species' state but rather a multiplying of a state: the chance of a whale or a shrew increasing in mass by 1% per million years may be the same, even if their starting mass magnitudes are very different. Conveniently, this also prevents us getting zero or lower for a mass (or other trait being examined). This works if we use the **log of the species trait and treat that as evolving under Brownian motion**, and this is why traits are commonly transformed in this way in phylogenetics (as well they should be). 
+However, in biological data there are (at least) two issues. One is that in some ways a normal distribution is weird: it says that for the trait of interest, there's a positive probability for any value from negative infinity to positive infinity. "Endless forms most beautiful and most wonderful have been, and are being, evolved" [Darwin] but nothing is so wonderful as to have a mass of -15 kg (or, for that matter, 1e7 kg). Under Brownian motion, we expect a displacement of 5 g to have equal chance no matter what the starting mass, but in reality a shrew species that has an average mass of 6 g is less likely to lose 5 g over one million years than a whale species that has an average adult mass of 100,000,000 g. Both difficulties go away if we think of the displacements not coming as an addition or subtraction to a species' state but rather a multiplying of a state: the chance of a whale or a shrew increasing in mass by 1% per million years may be the same, even if their starting mass magnitudes are very different. Conveniently, this also prevents us getting zero or lower for a mass (or other trait being examined). This works if we use the **log of the species trait and treat that as evolving under Brownian motion**, and this is why traits are commonly transformed in this way in phylogenetics (as well they should be).
 
 The other issue is that the normal approximation might not hold. For example, if species are being pulled back towards some fixed value, the net displacement is not a simple sum of the displacements: we keep getting pulled back, in effect eroding the influence of movements the deeper they are in the past: thus the utility of Ornstein-Uhlenbeck models. There may also be a set of displacements that all come from one model, then a later set of displacements that all come from some different model: we could better model evolution, especially correlation between species, by using these two (or more) models rather than assume the same normal distribution throughout time: thus the utility of approaches that allow different parameters or even different models on different parts of the tree.
 
 ## Discrete models
 
-Much of the above discussion (except for the part about covariance due to shared history) focuses on continuous traits. However, some traits are better thought of as discrete (btw, note the spelling here: having one, two or eight eyes is a *discrete* trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a *discreet* trait. The former is generally far more biologically relevant). This is always an approximation. Think of something like limbs: they seem distinct enough that we even name some groups by their count: tetrapods, hexapods. Except that when we look closely enough, it becomes fuzzy: insect mouthparts are derived from limbs, for example, so should we count these highly modified limbs as limbs (and if not, where in evolution have they become sufficiently modified to no longer count? And are nymphalid butterflies tetrapods under that definition yet?). Are modern whales thought to have four limbs, even though two are extremely vestigial? Often for neontologists problematic organisms with intermediate counts are conveniently extinct (so long, *Basilosaurus*), so we can ignore this fuzziness, but it is often there (and paleontologists are confronted with it more often). 
+Much of the above discussion (except for the part about covariance due to shared history) focuses on continuous traits. However, some traits are better thought of as discrete (btw, note the spelling here: having one, two or eight eyes is a *discrete* trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a *discreet* trait. The former is generally far more biologically relevant). This is always an approximation. Think of something like limbs: they seem distinct enough that we even name some groups by their count: tetrapods, hexapods. Except that when we look closely enough, it becomes fuzzy: insect mouthparts are derived from limbs, for example, so should we count these highly modified limbs as limbs (and if not, where in evolution have they become sufficiently modified to no longer count? And are nymphalid butterflies tetrapods under that definition yet?). Are modern whales thought to have four limbs, even though two are extremely vestigial? Often for neontologists problematic organisms with intermediate counts are conveniently extinct (so long, *Basilosaurus*), so we can ignore this fuzziness, but it is often there (and paleontologists are confronted with it more often).
 
 But, let's assume we can discretize traits and carry on. The simplest discretization is binary: 0 or 1, often absence or presence (but could be yellow or blue, etc.). Most models are like our commonly used DNA models: continuous time with discrete changes, using the same rates throughout. It is like a model for when an autonomous car will have an accident: assuming the car works perfectly (gives a whole new meaning to "blue screen of death") there's still a chance that at some point a human is going to run into it. There's a per hour chance of an accident: let's assume in each hour there's a 0.03% chance of our autonomous car having an accident (very roughly based on Google's experience, assuming a 40 MPH average speed). So the probability of having no accident in the first hour of driving is 99.97%; the probability of having no accidents in the first 40 hours of driving is 99.97% ^ 40 = 98.8%. The number of accidents is Poisson-distributed; the wait time between accidents is exponentially distributed. This is the model commonly used in phylogenetics for discrete traits, though sometimes with more complexity: one could move (with some rate) between two different rates, as in a covarion model, for example. A very different model is Felsenstein's threshold model, which we will discuss in a few weeks. For now, though, just envision models with a fixed rate of change between states as long as other characters don't change; it's possible, though, that the state of other characters do affect these rates (which is what correlation tests investigate). For example, the probability of switching from clawed feet to flippers for forelimbs is probably much higher for species that live in water than on land.
 

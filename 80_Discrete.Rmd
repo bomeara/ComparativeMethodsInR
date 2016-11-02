@@ -1,11 +1,4 @@
----
-title: 'PhyloMeth: Discrete Traits'
-author: "Brian O'Meara"
-output: html_document
-date: '`r format(Sys.time(), "Last updated %H:%M:%S %p %d %B, %Y")`'
----
-
-
+# Discrete Traits
 
 ##Objectives
 By the end of this week, you will:
