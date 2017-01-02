@@ -39,7 +39,7 @@ The main tree class in R is `phylo` and is defined in the `ape` package. Let's l
 
 ```{r}
 library(ape)
-phy <- rcoal(5) #to make a random five taxon tree
+phy <- ape::rcoal(5) #to make a random five taxon tree
 print(phy)
 str(phy)
 ```
@@ -57,15 +57,15 @@ This is the one used in most packages. However, it has some technical disadvanta
 The most common way to load trees is to use `ape`'s functions:
 
 ```
-phy <- read.tree(file='treefile.phy')
+phy <- ape::read.tree(file='treefile.phy')
 ```
 
 To get a tree in [Newick format](http://evolution.genetics.washington.edu/phylip/newicktree.html) (sometimes called Phylip format): essentially a series of parenthetical statements. An example (from `ape`'s documentation) is ```((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);```. The format name comes from the name of the [lobster house](http://newicks.com) where several major phylogenetic software developers met to agree on a tree format.
 
 You can use the same function to enter tree strings directly, changing the argument from the `file` containing the tree to `text` containing the tree string:
 
-```
-phy <- read.tree(text = '((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);')
+```{r}
+phy <- ape::read.tree(text = '((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);')
 ```
 
 Note the trailing semicolon.
@@ -73,11 +73,35 @@ Note the trailing semicolon.
   One thing that can trip users up with `read.tree()` (and the `read.nexus()` function, below) is that the output class depends on the input. If you read from a file with one tree, the returned output is a single tree object with class `phylo`. You can then use `plot()` on this object to draw the tree, pass this object into a comparative methods package to estimate rates, and so forth. If the file has more than one tree, the returned class is `multiphylo`: `plot()` will automatically cycle through plots as you type return, most comparative method implementations will fail (they are written to expect one tree of class `phylo`, not a vector of trees in a different class). `read.tree()` has an optional `keep.multi` function: if set to TRUE, the class is always `multiphylo`, and you can always get the first tree by getting the first element in the returned object:
 
 ```
-phy.multi <- read.tree(file='treefile.phy', keep.multi = TRUE)
+phy.multi <- ape::read.tree(file='treefile.phy', keep.multi = TRUE)
 phy <- phy.multi[[1]]
 ```
 
 For NEXUS formatted files (Maddison et al., 2007), `ape`'s `read.nexus()` function can pull in the trees (and its `read.nexus.data()` function can pull in data from a NEXUS file). NEXUS is a very flexible format, and there are valid NEXUS files that still cause errors with `ape`'s function. A more robust function to read in NEXUS trees is the package `phylobase`'s `readNexus()` function (note the lack of a period and different capitalization of Nexus from `ape`'s similar function). `phylobase` uses a different structure to store trees than `ape` does.
 
+### Great scientists steal
+
+Scientists have been creating trait-based phylogenetic trees for decades. These scientists are often experts in their group, in potential problems in their data, in how to use relevant software. In other words, their trees are likely to be better than any you make. Traditionally, these trees are published as a figure in a paper, largely unavailable for reuse. This hurts reproducibility, makes it less likely for the work to be cited, and stymies scientific progress in general. However, the field is increasingly moving to more frequent deposition of trees in reusable form: sometimes based on author initiative, sometimes based on journal requirements. The main repository for this is [TreeBase](http://treebase.org): if you are reading a paper, and want to use its tree, that's the first place to look. You can also use their website to search for taxa. The trees can be downloaded and loaded into R using `phylobase` (the NEXUS format used by TreeBase is hard for `ape` to load).
+
+Another approach that is growing in importance is [Open Tree of Life](http://otol.org). It seeks to synthesize thousands of trees to create a single tree of life. The `rotl` package can download this synthetic tree or components of it (the tree for a particular genus, for example). For most groups, however, the synthetic tree is largely based on taxonomy, so it is not very resolved. This is improving as the database of trees available for Open Tree's synthesis grows (to add to it, go to ___________________), but for most scientific studies, I wouldn't currently suggest using the synthetic tree (but for getting a sense for a group, making a tree for a class, it can be useful; also see the [Phylotastic](http://www.phylotastic.org) project for ways to use trees in teaching or other purposes). However, the Open Tree project also has a cache of thousands of trees that have been hand curated (taxonomic names resolved, ingroups specified, tree type recorded, etc.). The `rotl` package lets you download these, too. For most analyses, you want trees with branch lengths, and so you can download just chronograms. For example,
+
+```{r}
+rotl::_________________
+```
+
+Two important notes about reusing trees:
+
+* **Give credit**: If your entire paper is based on the tree from one other paper, you **must** cite that paper (and also the ways you got the tree, including the packages and/or repositories). If it's based on trees from around a dozen papers, you should cite them, too. If you're getting into the hundreds, many editors will object to properly citing them all, but one compromise approach until a better way of giving credit appears is to have supplemental info or an appendix with citations for all the relevant papers (including DOIs to make these easier to parse later)
+* **Tree quality matters**: As you will see in later sections, many comparative methods are based on using branch lengths: look at different rates of character evolution, looking at diversification rates over time, etc. If your starting tree is wrong, even if the topology is perfect but the branch lengths are wrong, later downstream analyses are also likely to be wrong. Some methods (like independent contrasts) are fairly robust to this (__________________), but the field has not tested many others yet, and most should be far more sensitive than contrasts. This matters less if you are testing dull hypotheses (see Chapter __________) but for folks working on biology where understanding processes, especially using parameter estimates, is the point, just taking a tree and making up branch lengths is often a bad idea.
+
 
 ## Reconciling datasets
+
+We use scientific names to communicate clearly. In the picture below ________________________, "Look at the robin!" will have an American glance at the bird on the left, and a Brit look at the bird on the right, but both, if trained sufficiently will know which to look at if told to look at *_____Scientific name_______*. We thus use scientific names in writing. However, the correct scientific name for a specimen can change for various reasons:
+
+* A species is split into two species: some individual specimens remain in the original species, others are given a new species names (rules of taxonomy allow this, and give constraints on how the new species can be named and described)
+* Two species are lumped into one species: some individual specimens thus have their names changed (and which name persists after the merge is specified by the rules of taxonomy)
+* A higher level group is changed. For example, _________ proposed to split the *Anolis* genus into eight genera. Thus the genus name for some species changes, and sometimes the species name itself changes to match the genus names: *______* becomes *____________*. This can be a merge or a split. This is often motivaed by a new discovery (the group known as acacias are not a clade (an ancestor and all its descendants) and since we only want to name clades, one of the groups needs a new name).
+* An error is fixed. For example, it could be discovered that there was an earlier name for a species in the literature, and so the species name must be changed based on the rules of priority.
+
+Importantly, for all but the last point, it is perfectly valid based on the rules of taxonomy for different scientists to use the names before and after the change.
