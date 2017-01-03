@@ -86,7 +86,7 @@ Scientists have been creating trait-based phylogenetic trees for decades. These 
 Another approach that is growing in importance is [Open Tree of Life](http://otol.org). It seeks to synthesize thousands of trees to create a single tree of life. The `rotl` package can download this synthetic tree or components of it (the tree for a particular genus, for example). For most groups, however, the synthetic tree is largely based on taxonomy, so it is not very resolved. This is improving as the database of trees available for Open Tree's synthesis grows (to add to it, go to ___________________), but for most scientific studies, I wouldn't currently suggest using the synthetic tree (but for getting a sense for a group, making a tree for a class, it can be useful; also see the [Phylotastic](http://www.phylotastic.org) project for ways to use trees in teaching or other purposes). However, the Open Tree project also has a cache of thousands of trees that have been hand curated (taxonomic names resolved, ingroups specified, tree type recorded, etc.). The `rotl` package lets you download these, too. For most analyses, you want trees with branch lengths, and so you can download just chronograms. For example,
 
 ```{r}
-rotl::_________________
+#rotl::_________________
 ```
 
 Two important notes about reusing trees:
