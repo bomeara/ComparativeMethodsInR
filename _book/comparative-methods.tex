@@ -148,15 +148,18 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\chapter{Overview}\label{overview}
+\section{Overview}\label{overview}
 
 This book was created as part of my
 \href{http://www.phylometh.org}{PhyloMeth} class, which focuses on
 sensibly using and developing comparative methods. It will be actively
 developed over the course of Spring 2017, so if you don't like this
-version (see date above), check back soon!
+version (see date above), check back soon! The book is available
+\href{https://bookdown.org/bomeara/comparative-methods/}{here} but you
+can fork it, add issues, and look at raw source code at
+\url{https://github.com/bomeara/ComparativeMethodsInR}.
 
-\chapter{Prerequisites}\label{prerequisites}
+\section{Prerequisites}\label{prerequisites}
 
 Many methods are now implemented in R \citep{R-base}: the
 \href{http://cran.r-project.org/web/views/Phylogenetics.html}{phylogenetics
@@ -201,16 +204,6 @@ that will run in your browser and have everything you might need. You
 might want to do \texttt{setwd("/data")} to make sure you're in the
 right directory. You can save any results or figures to this directory
 and it will still exist when you quit this instance.
-
-\chapter{Compiling the book}\label{compiling-the-book}
-
-This book was created using bookdown. To make it,
-
-\texttt{bookdown::render\_book("index.Rmd",\ "bookdown::pdf\_book")}
-
-Or for an html version,
-
-\texttt{bookdown::render\_book("index.Rmd",\ "bookdown::gitbook")}
 
 \chapter{First steps}\label{first-steps}
 
@@ -372,7 +365,7 @@ The main tree class in R is \texttt{phylo} and is defined in the
 ## Phylogenetic tree with 5 tips and 4 internal nodes.
 ## 
 ## Tip labels:
-## [1] "t1" "t3" "t5" "t2" "t4"
+## [1] "t4" "t1" "t2" "t5" "t3"
 ## 
 ## Rooted; includes branch lengths.
 \end{verbatim}
@@ -385,9 +378,9 @@ The main tree class in R is \texttt{phylo} and is defined in the
 
 \begin{verbatim}
 ## List of 4
-##  $ edge       : int [1:8, 1:2] 6 7 7 6 8 8 9 9 7 1 ...
-##  $ edge.length: num [1:8] 1.096 0.758 0.758 1.376 0.478 ...
-##  $ tip.label  : chr [1:5] "t1" "t3" "t5" "t2" ...
+##  $ edge       : int [1:8, 1:2] 6 7 9 9 7 6 8 8 7 9 ...
+##  $ edge.length: num [1:8] 0.8398 0.9268 0.0806 0.0806 1.0074 ...
+##  $ tip.label  : chr [1:5] "t4" "t1" "t2" "t5" ...
 ##  $ Nnode      : int 4
 ##  - attr(*, "class")= chr "phylo"
 ##  - attr(*, "order")= chr "cladewise"
