@@ -148,7 +148,7 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\section{Overview}\label{overview}
+\chapter{Introduction}\label{introduction}
 
 This book was created as part of my
 \href{http://www.phylometh.org}{PhyloMeth} class, which focuses on
@@ -157,9 +157,37 @@ developed over the course of Spring 2017, so if you don't like this
 version (see date above), check back soon! The book is available
 \href{https://bookdown.org/bomeara/comparative-methods/}{here} but you
 can fork it, add issues, and look at raw source code at
-\url{https://github.com/bomeara/ComparativeMethodsInR}.
+\url{https://github.com/bomeara/ComparativeMethodsInR}. {[}Note I'll be
+changing the name of the repo eventually; the course is largely in R
+(not entirely) but of course many key methods appear in other
+languages.{]}
+
+\section{Learning objectives}\label{learning-objectives}
+
+Readers of this book will be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Approach a study of a group of organisms by developing meaningful
+  questions
+\item
+  Identify the appropriate methods to answer these questions
+\item
+  Where methods do not yet exist, be able to work on potential new
+  methods
+\item
+  Understand limtations of methods and how to evaluate these limits
+\item
+  Draw sensible biological conclusions
+\end{itemize}
 
 \section{Prerequisites}\label{prerequisites}
+
+These are mostly prereqs for doing exercises associated with the class,
+but will help readers of the book, too.
+
+\subsection{R}\label{r}
 
 Many methods are now implemented in R \citep{R-base}: the
 \href{http://cran.r-project.org/web/views/Phylogenetics.html}{phylogenetics
@@ -176,6 +204,8 @@ Note that this will not install packages that are on GitHub or authors'
 individual websites. The \texttt{devtools} package can be useful for
 installing packages directly from GitHub.
 
+\subsection{Docker}\label{docker}
+
 Another option for installing things is to use the
 \href{https://hub.docker.com/r/bomeara/phydocker/}{phydocker} instance
 for Docker. \href{https://www.docker.com}{Docker} is (oversimplifying)
@@ -183,8 +213,9 @@ like a very lightweight virtual machine. Note that it runs on Macs,
 Linux, Windows (Pro, Enterprise, and Education versions; for other
 versions, use
 \href{https://docs.docker.com/toolbox/toolbox_install_windows/}{Docker
-Toolbox}), and various cloud service providers. This instance runs a
-copy of RStudio Server that has most of the relevant phylogenetic
+Toolbox}), and various cloud service providers (i.e., you could throw
+money at Amazon to run this on one of their servers). This instance runs
+a copy of RStudio Server that has most of the relevant phylogenetic
 packages already installed. Once you have Docker installed, you can do
 
 \texttt{docker\ run\ -it\ -p\ 8787:8787\ bomeara/phydocker}
@@ -205,6 +236,13 @@ might want to do \texttt{setwd("/data")} to make sure you're in the
 right directory. You can save any results or figures to this directory
 and it will still exist when you quit this instance.
 
+\subsection{Other}\label{other}
+
+RevBayes, BEAST, RAxML, and much other key software implement important
+methods in phylogenetics but are not in R. Readers will need to install
+these and many more, but fortunately the authors of much of this
+software have excellent tutorials already.
+
 \chapter{First steps}\label{first-steps}
 
 First, understand the question you want to answer. There are a wide
@@ -215,27 +253,83 @@ latest method. Once you have that question, find the appropriate methods
 and data) to address it. Understand how those methods work, including
 the various ways they can fail (as all can).
 
-Many methods are now implemented in R \citep{R-base}: the
-\href{http://cran.r-project.org/web/views/Phylogenetics.html}{phylogenetics
-task view} has a brief overview. You can also install the relevant
-packages that are on CRAN and R-Forge using the task view itself:
+\section{Questions}\label{questions}
 
-\begin{verbatim}
-install.packages("ctv")
-library(ctv)
-install.views("Phylogenetics")
-\end{verbatim}
+``The currency of science is papers.''
 
-Note that this will not install packages that are on github or authors'
-individual websites. The \texttt{devtools} package can be useful for
-installing packages directly from github.
+``You need to get grants to get a job and tenure.''
+
+Both true (for those pursuing traditional academic careers), but it can
+be easy to lose sight of the reason we do science: to learn about the
+natural world. Too often, I see students and other colleagues focus on
+fast ways to get high profile papers out without caring much about the
+questions. Some of this takes the form of what I call
+\protect\hyperlink{dull-model-testing}{dull model testing}: seeking to
+reject a trivial null that no one believed in anyway (Has
+diversification rate ever changed through time? Do terrestrial and
+aquatic species have exactly the same body size over time?). However, it
+can also be, ``I need to add something interesting to this basic
+phylogeny paper to get it published -- what can I map on the tree?''
+There can also be questions asked where it seems, upon reflection, that
+results will not be credible (can one really estimate 999 independent
+diversification rates from a single tree with 500 species?).
+
+A better approach, and one adopted in this book, is to start from
+questions that we actually learn something from answering. For example,
+we believe that how flowering plants reproduce (selfing versus
+outcrossing) can affect diversification rate. The first step is to ask
+if that is really true and show it statistically, but that is largely
+going to be a question of power: no one would really think that these
+two life history strategies would lead to exactly the same speciation
+rates \emph{and} exactly the same extinction rates: selfers might more
+readily speciate since they can settle new areas and not lack for mates,
+for example. One could publish a paper on just this using one of variety
+of methods (see \protect\hyperlink{diversification}{Diversification})
+and be done. However, that is a largely sterile question: are two
+different things unequal? A more important question, once a difference
+is shown, is what this explains about the world. For example, Igic and
+Goldberg wondered why selfing persisted despite having a lower overall
+diversification rate than outcrossing. In answering that more
+interesting question, they found that it stemmed from subsidizing:
+outcrossers diversified more quickly, but transitions from outcrossing
+to selfing occurred much more frequently than the reverse: species moved
+into selfing from outcrossing, but had an overall negative
+diversification rate. This suggests an interesting conflict between
+microevolution (factors leading to selfing, in this case), and
+macroevolution (the differential diversification of species). In another
+paper, we looked at floral morphological traits to see which
+combinations led to higher rates of diversification (O'Meara, Smith, et
+al); we found one combination had a major impact, but also discovered
+that it was still fairly infrequent in flowering plants due to the
+estimated tens of millions of years required to assemble this
+combination from the angiosperm ancestral state. We thus learned about
+how slow trait evolution can hold back diversification over a very long
+time period.
+
+Many interesting questions hinge on parameter estimation. How much worse
+is it long term to be a selfer? How long will it take to evolve multiple
+floral traits? How do species typically move from one habitat to
+another?
+
+\subsection{Other resources}\label{other-resources}
+
+There are many books and articles written about phylogenetic analysis.
+Some of the key books for readers of this one:
+
+Tree Thinking
+
+Felsenstein
+
+Yang
+
+Steele
 
 An important resource for learning about phylogenetics in R is Emmanuel
 Paradis' book,
 \href{http://www.springer.com/us/book/9781461417422}{Analysis of
 Phylogenetics and Evolution with R}. This is written by the same person
-who is the lead author of the essential \texttt{ape} package for
-phylogenetics in R.
+who is the lead author of the essential \texttt{ape} package
+\citep{R-ape} for phylogenetics in R.
 
 \chapter{Getting data and trees into
 R}\label{getting-data-and-trees-into-r}
@@ -588,7 +682,8 @@ based on errors at this stage. Most peer reviewers will not notice this,
 either, so your error could slip into the literature and mislead others.
 Take the time to get to know your data.
 
-\chapter{Dull model testing}\label{dull-model-testing}
+\hypertarget{dull-model-testing}{\chapter{Dull model
+testing}\label{dull-model-testing}}
 
 Almost all biologists believe this about the world:
 
@@ -1015,7 +1110,7 @@ Make sure to \textbf{read the relevant papers}:
 And \textbf{do the relevant exercise}:
 \url{https://github.com/PhyloMeth/DiscreteTraits}
 
-\chapter{Diversification}\label{diversification}
+\hypertarget{diversification}{\chapter{Diversification}\label{diversification}}
 
 \section{Objectives}\label{objectives-3}
 
