@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Comparative Methods</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="How to do comparative methods for evolution and ecology">
+  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to do comparative methods for evolution and ecology" />
+  <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Comparative Methods" />
+  
+  <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
+  
+
+<meta name="author" content="Brian O’Meara">
+
+
+<meta name="date" content="2017-01-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="first-steps.html">
+<link rel="next" href="visualizing-data-before-use.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Comparative Methods</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3" data-path="compiling-the-book.html"><a href="compiling-the-book.html"><i class="fa fa-check"></i><b>3</b> Compiling the book</a></li>
+<li class="chapter" data-level="4" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>4</b> First steps</a></li>
+<li class="chapter" data-level="5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>5</b> Getting data and trees into R</a><ul>
+<li class="chapter" data-level="5.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>5.1</b> Data and tree object types</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>5.1.1</b> Tree classes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>5.2</b> Sequence data</a></li>
+<li class="chapter" data-level="5.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>5.3</b> Other character data</a></li>
+<li class="chapter" data-level="5.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>5.4</b> Phylogenies</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>5.4.1</b> Great scientists steal</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>5.5</b> Reconciling datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>6</b> Visualizing data before use</a></li>
+<li class="chapter" data-level="7" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>7</b> Dull model testing</a></li>
+<li class="chapter" data-level="8" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>8</b> Continuous traits</a><ul>
+<li class="chapter" data-level="8.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>9</b> Brownian Motion and Correlations</a><ul>
+<li class="chapter" data-level="9.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-1"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
+<li class="chapter" data-level="9.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>9.2</b> Brownian motion</a></li>
+<li class="chapter" data-level="9.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#discrete-models"><i class="fa fa-check"></i><b>9.3</b> Discrete models</a></li>
+<li class="chapter" data-level="9.4" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>9.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits</a><ul>
+<li class="chapter" data-level="10.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-2"><i class="fa fa-check"></i><b>10.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>11</b> Diversification</a><ul>
+<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-3"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>12</b> SSE methods</a><ul>
+<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-4"><i class="fa fa-check"></i><b>12.1</b> Objectives</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>12.1.1</b> Discussion prompts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>13</b> RAxML</a><ul>
+<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-5"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
+<li class="chapter" data-level="13.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>13.2</b> Install RAxML</a></li>
+<li class="chapter" data-level="13.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>13.3</b> Morphology search</a></li>
+<li class="chapter" data-level="13.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>13.4</b> DNA</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>14</b> Gene Tree Species Tree</a><ul>
+<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-6"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>15</b> Dating</a><ul>
+<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-7"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
+<li class="chapter" data-level="15.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>15.2</b> BEAST</a></li>
+<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#r8s"><i class="fa fa-check"></i><b>15.3</b> r8s</a></li>
+<li class="chapter" data-level="15.4" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.4</b> Applying to your own work</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="build-a-method.html"><a href="build-a-method.html"><i class="fa fa-check"></i><b>16</b> Build a method</a><ul>
+<li class="chapter" data-level="16.1" data-path="build-a-method.html"><a href="build-a-method.html#objectives-8"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="17" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>17</b> Appendix</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="getting-data-and-trees-into-r" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Getting data and trees into R</h1>
+<div id="data-and-tree-object-types" class="section level2">
+<h2><span class="header-section-number">5.1</span> Data and tree object types</h2>
+<p>In R, there are many kinds of objects. These kinds are called “classes”. For example, take the text string “Darwin”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="st">&quot;Darwin&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>It is a <code>character</code> class. <code>pi</code> is a defined constant in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(pi)</code></pre></div>
+<pre><code>## [1] 3.141593</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(pi)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>Its class is <code>numeric</code> [and note that its value is stored with more precision than is printed on screen].</p>
+<p>Objects can sometimes be converted from one class to another, often using an <code>as.*</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example<span class="fl">.1</span> &lt;-<span class="st"> &quot;6&quot;</span>
+<span class="kw">print</span>(example<span class="fl">.1</span>)</code></pre></div>
+<pre><code>## [1] &quot;6&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(example<span class="fl">.1</span>)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(example<span class="fl">.1</span>)
+<span class="kw">print</span>(example<span class="fl">.2</span>)</code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(example<span class="fl">.2</span>)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">example<span class="fl">.2</span> *<span class="st"> </span><span class="dv">7</span></code></pre></div>
+<pre><code>## [1] 42</code></pre>
+<p>Trying to multiply example.1 by seven results in an error: you are trying to multiply a character string by a number, and R does not automatically convert classes. Classes have many uses in R; for example, one can write a different <code>plot()</code> function for each class, so that a tree is plotted one way, while a result from a regression model is plotted a different way, but users just have to call <code>plot()</code> on each and R knows what to do.</p>
+<p>In phylogenetics, we mostly care about classes for trees, for data, and for things to hold trees and data.</p>
+<div id="tree-classes" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Tree classes</h3>
+<p>The main tree class in R is <code>phylo</code> and is defined in the <code>ape</code> package. Let’s look at one in the wild:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ape)
+phy &lt;-<span class="st"> </span>ape::<span class="kw">rcoal</span>(<span class="dv">5</span>) <span class="co">#to make a random five taxon tree</span>
+<span class="kw">print</span>(phy)</code></pre></div>
+<pre><code>## 
+## Phylogenetic tree with 5 tips and 4 internal nodes.
+## 
+## Tip labels:
+## [1] &quot;t4&quot; &quot;t1&quot; &quot;t2&quot; &quot;t5&quot; &quot;t3&quot;
+## 
+## Rooted; includes branch lengths.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(phy)</code></pre></div>
+<pre><code>## List of 4
+##  $ edge       : int [1:8, 1:2] 6 7 9 9 7 6 8 8 7 9 ...
+##  $ edge.length: num [1:8] 0.8398 0.9268 0.0806 0.0806 1.0074 ...
+##  $ tip.label  : chr [1:5] &quot;t4&quot; &quot;t1&quot; &quot;t2&quot; &quot;t5&quot; ...
+##  $ Nnode      : int 4
+##  - attr(*, &quot;class&quot;)= chr &quot;phylo&quot;
+##  - attr(*, &quot;order&quot;)= chr &quot;cladewise&quot;</code></pre>
+<p>This is the one used in most packages. However, it has some technical disadvantages (sensitivity to internal structure, no checking of objects) that has led to the <code>phylo4</code> format for trees and <code>phylo4d</code> for trees plus data in the <code>phylobase</code> package. Other packages add on to the <code>phylobase</code> format (i.e., <code>phytool</code>’s <code>simmap</code> format) but these are typically not shared across packages.</p>
+</div>
+</div>
+<div id="sequence-data" class="section level2">
+<h2><span class="header-section-number">5.2</span> Sequence data</h2>
+</div>
+<div id="other-character-data" class="section level2">
+<h2><span class="header-section-number">5.3</span> Other character data</h2>
+</div>
+<div id="phylogenies" class="section level2">
+<h2><span class="header-section-number">5.4</span> Phylogenies</h2>
+<p>The most common way to load trees is to use <code>ape</code>’s functions:</p>
+<pre><code>phy &lt;- ape::read.tree(file=&#39;treefile.phy&#39;)</code></pre>
+<p>To get a tree in <a href="http://evolution.genetics.washington.edu/phylip/newicktree.html">Newick format</a> (sometimes called Phylip format): essentially a series of parenthetical statements. An example (from <code>ape</code>’s documentation) is <code>((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);</code>. The format name comes from the name of the <a href="http://newicks.com">lobster house</a> where several major phylogenetic software developers met to agree on a tree format.</p>
+<p>You can use the same function to enter tree strings directly, changing the argument from the <code>file</code> containing the tree to <code>text</code> containing the tree string:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phy &lt;-<span class="st"> </span>ape::<span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&#39;((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);&#39;</span>)</code></pre></div>
+<p>Note the trailing semicolon.</p>
+<p>One thing that can trip users up with <code>read.tree()</code> (and the <code>read.nexus()</code> function, below) is that the output class depends on the input. If you read from a file with one tree, the returned output is a single tree object with class <code>phylo</code>. You can then use <code>plot()</code> on this object to draw the tree, pass this object into a comparative methods package to estimate rates, and so forth. If the file has more than one tree, the returned class is <code>multiphylo</code>: <code>plot()</code> will automatically cycle through plots as you type return, most comparative method implementations will fail (they are written to expect one tree of class <code>phylo</code>, not a vector of trees in a different class). <code>read.tree()</code> has an optional <code>keep.multi</code> function: if set to TRUE, the class is always <code>multiphylo</code>, and you can always get the first tree by getting the first element in the returned object:</p>
+<pre><code>phy.multi &lt;- ape::read.tree(file=&#39;treefile.phy&#39;, keep.multi = TRUE)
+phy &lt;- phy.multi[[1]]</code></pre>
+<p>For NEXUS formatted files (Maddison et al., 2007), <code>ape</code>’s <code>read.nexus()</code> function can pull in the trees (and its <code>read.nexus.data()</code> function can pull in data from a NEXUS file). NEXUS is a very flexible format, and there are valid NEXUS files that still cause errors with <code>ape</code>’s function. A more robust function to read in NEXUS trees is the package <code>phylobase</code>’s <code>readNexus()</code> function (note the lack of a period and different capitalization of Nexus from <code>ape</code>’s similar function). <code>phylobase</code> uses a different structure to store trees than <code>ape</code> does.</p>
+<div id="great-scientists-steal" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Great scientists steal</h3>
+<p>Scientists have been creating trait-based phylogenetic trees for decades. These scientists are often experts in their group, in potential problems in their data, in how to use relevant software. In other words, their trees are likely to be better than any you make. Traditionally, these trees are published as a figure in a paper, largely unavailable for reuse. This hurts reproducibility, makes it less likely for the work to be cited, and stymies scientific progress in general. However, the field is increasingly moving to more frequent deposition of trees in reusable form: sometimes based on author initiative, sometimes based on journal requirements. The main repository for this is <a href="http://treebase.org">TreeBase</a>: if you are reading a paper, and want to use its tree, that’s the first place to look. You can also use their website to search for taxa. The trees can be downloaded and loaded into R using <code>phylobase</code> (the NEXUS format used by TreeBase is hard for <code>ape</code> to load).</p>
+<p>Another approach that is growing in importance is <a href="http://otol.org">Open Tree of Life</a>. It seeks to synthesize thousands of trees to create a single tree of life. The <code>rotl</code> package can download this synthetic tree or components of it (the tree for a particular genus, for example). For most groups, however, the synthetic tree is largely based on taxonomy, so it is not very resolved. This is improving as the database of trees available for Open Tree’s synthesis grows (to add to it, go to ___________________), but for most scientific studies, I wouldn’t currently suggest using the synthetic tree (but for getting a sense for a group, making a tree for a class, it can be useful; also see the <a href="http://www.phylotastic.org">Phylotastic</a> project for ways to use trees in teaching or other purposes). However, the Open Tree project also has a cache of thousands of trees that have been hand curated (taxonomic names resolved, ingroups specified, tree type recorded, etc.). The <code>rotl</code> package lets you download these, too. For most analyses, you want trees with branch lengths, and so you can download just chronograms. For example,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#rotl::_________________</span></code></pre></div>
+<p>Two important notes about reusing trees:</p>
+<ul>
+<li><strong>Give credit</strong>: If your entire paper is based on the tree from one other paper, you <strong>must</strong> cite that paper (and also the ways you got the tree, including the packages and/or repositories). If it’s based on trees from around a dozen papers, you should cite them, too. If you’re getting into the hundreds, many editors will object to properly citing them all, but one compromise approach until a better way of giving credit appears is to have supplemental info or an appendix with citations for all the relevant papers (including DOIs to make these easier to parse later)</li>
+<li><strong>Tree quality matters</strong>: As you will see in later sections, many comparative methods are based on using branch lengths: look at different rates of character evolution, looking at diversification rates over time, etc. If your starting tree is wrong, even if the topology is perfect but the branch lengths are wrong, later downstream analyses are also likely to be wrong. Some methods (like independent contrasts) are fairly robust to this (__________________), but the field has not tested many others yet, and most should be far more sensitive than contrasts. This matters less if you are testing dull hypotheses (see Chapter __________) but for folks working on biology where understanding processes, especially using parameter estimates, is the point, just taking a tree and making up branch lengths is often a bad idea.</li>
+</ul>
+</div>
+</div>
+<div id="reconciling-datasets" class="section level2">
+<h2><span class="header-section-number">5.5</span> Reconciling datasets</h2>
+<p>We use scientific names to communicate clearly. In the picture below ________________________, “Look at the robin!” will have an American glance at the bird on the left, and a Brit look at the bird on the right, but both, if trained sufficiently will know which to look at if told to look at <em>_____Scientific name_______</em>. We thus use scientific names in writing. However, the correct scientific name for a specimen can change for various reasons:</p>
+<ul>
+<li>A species is split into two species: some individual specimens remain in the original species, others are given a new species names (rules of taxonomy allow this, and give constraints on how the new species can be named and described)</li>
+<li>Two species are lumped into one species: some individual specimens thus have their names changed (and which name persists after the merge is specified by the rules of taxonomy)</li>
+<li>A higher level group is changed. For example, _________ proposed to split the <em>Anolis</em> genus into eight genera. Thus the genus name for some species changes, and sometimes the species name itself changes to match the genus names: <em>______</em> becomes <em>____________</em>. This can be a merge or a split. This is often motivaed by a new discovery (the group known as acacias are not a clade (an ancestor and all its descendants) and since we only want to name clades, one of the groups needs a new name).</li>
+<li>An error is fixed. For example, it could be discovered that there was an earlier name for a species in the literature, and so the species name must be changed based on the rules of priority.</li>
+</ul>
+<p>Importantly, for all but the last point, it is perfectly valid based on the rules of taxonomy for different scientists to use the names before and after the change.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="first-steps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizing-data-before-use.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/20_gettingdata.Rmd",
+"text": "Edit"
+},
+"download": ["comparative-methods.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
