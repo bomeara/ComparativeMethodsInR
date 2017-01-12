@@ -12,12 +12,45 @@ github-repo: bomeara/ComparativeMethodsInR
 description: "How to do comparative methods for evolution and ecology"
 ---
 
+# Overview
+
+This book was created as part of my [PhyloMeth](http://www.phylometh.org) class, which focuses on sensibly using and developing comparative methods. It will be actively developed over the course of Spring 2017, so if you don't like this version (see date above), check back soon!
+
 # Prerequisites
+
+
+
+Many methods are now implemented in R [@R-base]: the [phylogenetics task view](http://cran.r-project.org/web/views/Phylogenetics.html) has a brief overview. You can also install the relevant packages that are on CRAN and R-Forge using the task view itself:
+
+```
+install.packages("ctv")
+library(ctv)
+install.views("Phylogenetics")
+```
+
+Note that this will not install packages that are on GitHub or authors' individual websites. The `devtools` package can be useful for installing packages directly from GitHub.
+
+Another option for installing things is to use the [phydocker](https://hub.docker.com/r/bomeara/phydocker/) instance for Docker. [Docker](https://www.docker.com) is (oversimplifying) like a very lightweight virtual machine. Note that it runs on Macs, Linux, Windows (Pro, Enterprise, and Education versions; for other versions, use [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/)), and various cloud service providers.  This instance runs a copy of RStudio Server that has most of the relevant phylogenetic packages already installed. Once you have Docker installed, you can do
+
+```docker run -it -p 8787:8787 bomeara/phydocker```
+
+to run it as an RStudio Server.
+
+If you want to use a local folder, you can use
+
+```docker run -it -v /Path/To/My/Folder:/data -p 8787:8787 bomeara/phydocker```
+
+Change `/Path/To/My/Folder` to the absolute path to the folder you want access to (any subfolders will also be accessible). You can read and write to this in RStudio as the `/data` directory. In your web browser, go to `localhost:8787`, enter username and password (both are `rstudio`), to launch a version of RStudio that will run in your browser and have everything you might need. You might want to do `setwd("/data")` to make sure you’re in the right directory. You can save any results or figures to this directory and it will still exist when you quit this instance.
+
+# Compiling the book
 
 This book was created using bookdown. To make it,
 
 `bookdown::render_book("index.Rmd", "bookdown::pdf_book")`
 
+Or for an html version,
+
+`bookdown::render_book("index.Rmd", "bookdown::gitbook")`
 
 ```{r include=FALSE}
 devtools::install_github("rstudio/bookdown")
