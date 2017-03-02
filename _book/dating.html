@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Comparative Methods</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="How to do comparative methods for evolution and ecology">
+  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to do comparative methods for evolution and ecology" />
+  <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Comparative Methods" />
+  
+  <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
+  
+
+<meta name="author" content="Brian O’Meara">
+
+
+<meta name="date" content="2017-01-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="gene-tree-species-tree.html">
+<link rel="next" href="build-a-method.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Comparative Methods</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps</a><ul>
+<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R</a><ul>
+<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data</a></li>
+<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use</a></li>
+<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing</a></li>
+<li class="chapter" data-level="6" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>6</b> Continuous traits</a><ul>
+<li class="chapter" data-level="6.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>7</b> Brownian Motion and Correlations</a><ul>
+<li class="chapter" data-level="7.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-1"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>7.2</b> Brownian motion</a></li>
+<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#discrete-models"><i class="fa fa-check"></i><b>7.3</b> Discrete models</a></li>
+<li class="chapter" data-level="7.4" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>8</b> Discrete Traits</a><ul>
+<li class="chapter" data-level="8.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>9</b> Diversification</a><ul>
+<li class="chapter" data-level="9.1" data-path="diversification.html"><a href="diversification.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>10</b> SSE methods</a><ul>
+<li class="chapter" data-level="10.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-4"><i class="fa fa-check"></i><b>10.1</b> Objectives</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>10.1.1</b> Discussion prompts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>11</b> RAxML</a><ul>
+<li class="chapter" data-level="11.1" data-path="raxml.html"><a href="raxml.html#objectives-5"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>11.2</b> Install RAxML</a></li>
+<li class="chapter" data-level="11.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>11.3</b> Morphology search</a></li>
+<li class="chapter" data-level="11.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>11.4</b> DNA</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>12</b> Gene Tree Species Tree</a><ul>
+<li class="chapter" data-level="12.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-6"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>13</b> Dating</a><ul>
+<li class="chapter" data-level="13.1" data-path="dating.html"><a href="dating.html#objectives-7"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
+<li class="chapter" data-level="13.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>13.2</b> BEAST</a></li>
+<li class="chapter" data-level="13.3" data-path="dating.html"><a href="dating.html#r8s"><i class="fa fa-check"></i><b>13.3</b> r8s</a></li>
+<li class="chapter" data-level="13.4" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>13.4</b> Applying to your own work</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="build-a-method.html"><a href="build-a-method.html"><i class="fa fa-check"></i><b>14</b> Build a method</a><ul>
+<li class="chapter" data-level="14.1" data-path="build-a-method.html"><a href="build-a-method.html#objectives-8"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="15" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>15</b> Appendix</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dating" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Dating</h1>
+<div id="objectives-7" class="section level2">
+<h2><span class="header-section-number">13.1</span> Objectives</h2>
+<p>By the end of this chapter, you will:</p>
+<ul>
+<li>Understand dating algorithms</li>
+<li>Be able to use r8s and BEAST</li>
+<li>Be afraid of calibrations</li>
+</ul>
+<p>Make sure to <strong>read the relevant papers</strong>: <a href="https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week5/" class="uri">https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week5/</a></p>
+<p>To do this week’s assignments, you will have to:</p>
+<ul>
+<li><strong>Download and install r8s</strong> from <a href="http://loco.biosci.arizona.edu/r8s/" class="uri">http://loco.biosci.arizona.edu/r8s/</a></li>
+<li><strong>Download BEAST2 and Beauti</strong> (come together), <strong>TreeAnnotator</strong>, and <strong>Tracer</strong> from <a href="http://beast2.org" class="uri">http://beast2.org</a> and <a href="http://beast.bio.ed.ac.uk/tracer" class="uri">http://beast.bio.ed.ac.uk/tracer</a>.</li>
+<li><strong>Install a tweaked version of Geiger</strong>
+<ul>
+<li><code>library(devtools)</code></li>
+<li><code>install_github(&quot;bomeara/geiger-v2&quot;)</code> (eventually I’ll make a pull request)</li>
+</ul></li>
+</ul>
+</div>
+<div id="beast" class="section level2">
+<h2><span class="header-section-number">13.2</span> BEAST</h2>
+<p>For the BEAST part, we’re not going to do our testing via R package approach: dealing with file paths and such are too problematic. So we’ll just go through an exercise, but unlike many canned tutorials, you’ll have to figure out what to do at stages. Note that this is based on the <a href="https://github.com/CompEvol/beast2/blob/master/doc/tutorials/DivergenceDating/DivergenceDatingTutorialv2.0.3.pdf?raw=true">tutorial</a> by Drummond, Rambaut, and Bouckaert. A tutorial that provides far more background info and other context than anything on the Beast2 website is Tracy Heath’s <a href="http://phyloworks.org/workshops/DivTime_BEAST2_tutorial_FBD.pdf">tutorial</a> from the Bodega Bay Workshop in Applied Phylogenetics: if you are going to run BEAST, read that. There is also now a <a href="http://beast2.org/book/">book</a> that you can buy.</p>
+<p>BEAST uses XML files for commands, rather than NEXUS files (though it does use NEXUS files for data). This XML format is different from <a href="http://www.nexml.org">NeXML</a> and <a href="http://www.phyloxml.org">PhyloXML</a>, two other XML formats proposed for phylogenetics (though, as of now, they’re still not used much in the field – most students won’t encounter them). These files are often made using the program BEAUTi (also from the BEAST developers) and then, sometimes, hand edited.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Import primates-mtDNA.nex</strong> into BEAUTi; it’s includided in examples/nexus in the BEAST folder. Note it’s File -&gt; Import alignment.</li>
+<li>But wait – what are you loading? Have you looked at the file? Open it in a text editor (or R, or Mesquite) and look at it. Do you believe the sequences are aligned properly? Is there anything weird about them? This is an essential step.</li>
+<li>We will be partitioning, as with RAxML. This file already has some partitions, but some overlap (coding vs the three codon positions). Delete the coding partition using the <code>-</code> sign button on the bottom of the window.</li>
+<li>Partitions can be linked: allow different rates but the same topology, for example. Select all four partitions and click Link Trees. Then click on the first pull down (for noncoding) for the Tree column and name it “tree”. Do the same for Clock (rename to “clock”).</li>
+<li>Temporarily link sites in the same way.</li>
+<li>BEAST has a variety of models. We’re going to do HKY (so, two different rates) with gamma-distributed rate differences. To do this:
+<ul>
+<li>Set Gamma Category Count to 4</li>
+<li>Set the Shape to be estimated</li>
+<li>Select the HKY model</li>
+<li>Make sure Kappa is estimated</li>
+<li>Make sure frequences are estimated</li>
+<li>Select estimate for Substitution Rate</li>
+</ul></li>
+<li>Go back to partitions and click on Unlink Site Models. This lets each partition have its own HKY+gamma model (and doing the link -&gt; set -&gt; unlink lets you save on work of setting it for each one).</li>
+<li>We need to choose a clock model. A Strict Clock is the classic molecular clock. Most people using BEAST (and this is based on various sim studies) use relaxed clock log normal, so choose that. Having the number of discrete rates set to -1 will allow as many rates as branches.</li>
+<li>Now comes the tricky bit: setting your priors. For example, you need a prior for the tree: assume a Yule prior (only speciation events, no extinction)? Or a birth-death one? [and think about the implications of these choices for later analyses – estimating extinction rates, for example]. And even if you have a belief about whether extinction might have happened or not, what about parameters like gamma shape for first codon position sites? Exponential, beta, etc.? You probably don’t have a good idea of what they should be in terms of shape, let alone priors for the actual values. And this might affect your analyses: the result is due to the prior and the likelihood. Let’s leave all the priors set to the default for now, except for the tree: do a birth-death model for that.</li>
+<li>We can also add priors: say, a prior for the age of a node.
+<ul>
+<li>Click on the “+” button</li>
+<li>Call the Taxon set label “human-chimp”</li>
+<li>Click on Homo_sapiens and then the “&gt;&gt;” button</li>
+<li>Do the same for Pan</li>
+<li>Click ok</li>
+<li>Force it to be monophyletic</li>
+<li>Choose Log Normal for the age prior</li>
+<li>Select mean in real space (so it’s easier for us to understand the age)</li>
+<li>Enter 6 (for 6 MY) for the M = mean of the distribution</li>
+<li><strong>Select a value for S that leads to a 95% range of about 5-7 MY (use the information on the right side of the window to help)</strong></li>
+</ul></li>
+<li>Go to MCMC to set parameters for the run
+<ul>
+<li>Do 1M generations to start</li>
+<li>You can also set how often the info is saved to disk or printed on the screen. Change the tracelog to primates_birthdeath_prior.log</li>
+</ul></li>
+<li>Save this in the same folder as your original nexus file: maybe store as primates_birthdeath_prior.xml.</li>
+<li>Yay! We have created a file with commands to run BEAST. Open it in a text editor and look at it (don’t modify or save it).</li>
+<li>Now open BEAST. Choose the xml file you just made and run.</li>
+<li>Time passes.</li>
+<li>Now open the log file in Tracer. Investigate some of the statistics, including looking at ESS: effective sample size. Ones that aren’t black indicate ones that did not run long enough.</li>
+<li>Go back to BEAUTi.
+<ul>
+<li>Change the tree prior to a Yule tree</li>
+<li>Change the tracelog to primates_yule_prior.log and change the tree file name</li>
+<li>Save as the file to primates_yule_prior.xml</li>
+</ul></li>
+<li>Use this new xml file to run BEAST again.</li>
+<li>Now look at this log file with the other one, both in Tracer. Are the estimates the same? Even for something like tree height? What does this suggest?</li>
+<li>Use TreeAnnotator on one of your tree files to summarize.
+<ul>
+<li>Decide what the burnin should be: that is the number of trees (not number of generations) to delete.</li>
+<li>Change Posterior probability limit to 0: if you are going to show an edge, you should show the support for that. Many people only show support above 50% but still show all branches: this is problematic (only showing uncertainty on the edges where uncertainty is relatively low).</li>
+</ul></li>
+<li>FigTree or R can be used to visualize the final tree with support.</li>
+</ol>
+</div>
+<div id="r8s" class="section level2">
+<h2><span class="header-section-number">13.3</span> r8s</h2>
+<p>r8s implements several functions for converting a phylogram to a chronogram. It does the classic, Langley-Fitch molecular clock which stretches branches but assumes a constant rate for all. It also implements two algorithms by Sanderson: nonparametric rate smoothing (NPRS) and penalized likelihood (PL). Both relax the assumption of constant rate of evolution and instead allow rates to vary along the tree. NPRS tries to minimize rate changes at nodes. PL has a model for changes (to give likelihood of original branch lengths) and combines this with a nonparametric penalty for rate changes. It tries to minimize the combination of these two parameters, but there is a user-set penalty to decide the relative value of these in the combined sum. This is set by cross-validation: delete some data, estimate parameters, predict the deleted data, and see how close the deleted data are to the simulated data. In this case, the datum deleted is a single tip, and the length of this branch is the value to predict. This can now happen within r8s. In general, PL is more accurate than NPRS, but is slower (but both are much faster than BEAST). <code>treepl</code> is a later program that implements Sanderson’s algorithms but can work on much larger trees.</p>
+<p>Jon Eastman coded an interface to this in Geiger, but it wasn’t exposed to users. I’ve added some additional features (including an <code>ez.run</code> mode) and documentation to his code. This is now in a fork of Geiger, but I’ll file a pull request soon to put it into the main code. For now, make sure you have installed the forked version:</p>
+<pre><code>devtools::install_github(&quot;bomeara/geiger-v2&quot;)
+library(geiger)</code></pre>
+<p>Then use the help for <code>?r8s.phylo</code> to figure out how to use this function. Also look at the <a href="http://loco.biosci.arizona.edu/r8s/r8s1.7.manual.pdf">r8s manual</a> to understand the options.</p>
+<p><strong>Run the examples</strong> in Geiger for this. You can also look at the examples that come with r8s.</p>
+</div>
+<div id="applying-to-your-own-work" class="section level2">
+<h2><span class="header-section-number">13.4</span> Applying to your own work</h2>
+<p>By this point in the course, you should be thirsting to apply these tools to your own questions. Do so! <strong>Get a dataset (think back to the getting trees method), infer a tree (if needed), and date it using one of these approaches.</strong> I’d advise making your own github repository for this. You could pay to keep it secret; I’d advise it’s probably not worth it (there is some risk of being scooped, but it’s pretty low) but it’s your call.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="gene-tree-species-tree.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="build-a-method.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/96_Dating.Rmd",
+"text": "Edit"
+},
+"download": ["comparative-methods.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

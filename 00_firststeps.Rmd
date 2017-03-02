@@ -2,14 +2,29 @@
 
 First, understand the question you want to answer. There are a wide variety of methods, and they wax and wane in popularity, but the key to doing good science is addressing compelling questions, not using the latest method. Once you have that question, find the appropriate methods (and, depending on how early it is in the study design, the right taxa and data) to address it. Understand how those methods work, including the various ways they can fail (as all can).
 
-Many methods are now implemented in R [@R-base]: the [phylogenetics task view](http://cran.r-project.org/web/views/Phylogenetics.html) has a brief overview. You can also install the relevant packages that are on CRAN and R-Forge using the task view itself:
+## Questions
 
-```
-install.packages("ctv")
-library(ctv)
-install.views("Phylogenetics")
-```
+"The currency of science is papers."
 
-Note that this will not install packages that are on github or authors' individual websites. The `devtools` package can be useful for installing packages directly from github.
+"You need to get grants to get a job and tenure."
 
-An important resource for learning about phylogenetics in R is Emmanuel Paradis' book, [Analysis of Phylogenetics and Evolution with R](http://www.springer.com/us/book/9781461417422). This is written by the same person who is the lead author of the essential `ape` package for phylogenetics in R.
+Both true (for those pursuing traditional academic careers), but it can be easy to lose sight of the reason we do science: to learn about the natural world. Too often, I see students and other colleagues focus on fast ways to get high profile papers out without caring much about the questions. Some of this takes the form of what I call [dull model testing][Dull model testing]: seeking to reject a trivial null that no one believed in anyway (Has diversification rate ever changed through time? Do terrestrial and aquatic species have exactly the same body size over time?). However, it can also be, "I need to add something interesting to this basic phylogeny paper to get it published -- what can I map on the tree?" There can also be questions asked where it seems, upon reflection, that results will not be credible (can one really estimate 999 independent diversification rates from a single tree with 500 species?).
+
+A better approach, and one adopted in this book, is to start from questions that we actually learn something from answering. For example, we believe that how flowering plants reproduce (selfing versus outcrossing) can affect diversification rate. The first step is to ask if that is really true and show it statistically, but that is largely going to be a question of power: no one would really think that these two life history strategies would lead to exactly the same speciation rates *and* exactly the same extinction rates: selfers might more readily speciate since they can settle new areas and not lack for mates, for example. One could publish a paper on just this using one of variety of methods (see [Diversification]) and be done. However, that is a largely sterile question: are two different things unequal? A more important question, once a difference is shown, is what this explains about the world. For example, Igic and Goldberg wondered why selfing persisted despite having a lower overall diversification rate than outcrossing. In answering that more interesting question, they found that it stemmed from subsidizing: outcrossers diversified more quickly, but transitions from outcrossing to selfing occurred much more frequently than the reverse: species moved into selfing from outcrossing, but had an overall negative diversification rate. This suggests an interesting conflict between microevolution (factors leading to selfing, in this case), and macroevolution (the differential diversification of species). In another paper, we looked at floral morphological traits to see which combinations led to higher rates of diversification (O'Meara, Smith, et al); we found one combination had a major impact, but also discovered that it was still fairly infrequent in flowering plants due to the estimated tens of millions of years required to assemble this combination from the angiosperm ancestral state. We thus learned about how slow trait evolution can hold back diversification over a very long time period. 
+
+Many interesting questions hinge on parameter estimation. How much worse is it long term to be a selfer? How long will it take to evolve multiple floral traits? How do species typically move from one habitat to another?
+
+### Other resources
+
+There are many books and articles written about phylogenetic analysis. Some of the key books for readers of this one:
+
+Tree Thinking
+
+Felsenstein
+
+Yang
+
+Steele
+
+An important resource for learning about phylogenetics in R is Emmanuel Paradis' book, [Analysis of Phylogenetics and Evolution with R](http://www.springer.com/us/book/9781461417422). This is written by the same person who is the lead author of the essential `ape` package [@R-ape] for phylogenetics in R.
+

@@ -1,0 +1,263 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Comparative Methods},
+            pdfauthor={Brian O'Meara},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Comparative Methods}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Brian O'Meara}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2017-02-17}
+
+\usepackage{booktabs}
+\usepackage{makeidx}
+\makeindex
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter{Introduction}\label{introduction}
+
+\chapter{First steps}\label{first-steps}
+
+\chapter{Getting data and trees into
+R}\label{getting-data-and-trees-into-r}
+
+\chapter{Visualizing data before use}\label{visualizing-data-before-use}
+
+\chapter{Dull model testing}\label{dull-model-testing}
+
+\chapter{Continuous traits}\label{continuous-traits}
+
+\chapter{Brownian Motion and
+Correlations}\label{brownian-motion-and-correlations}
+
+\chapter{Discrete Traits}\label{discrete-traits}
+
+\section{Objectives}\label{objectives}
+
+By the end of this chapter, you will:
+
+\begin{itemize}
+\tightlist
+\item
+  Understand how to incorporate rate heterogeneity in discrete trait
+  models
+\item
+  Be able to explain how to test hypotheses about univariate trait
+  evolution.
+\end{itemize}
+
+Many traits can be thought of as discrete traits: a DNA site comes in
+ATGC, protein have one of 20 amino acids, some animals have functional
+eyes and others do not, some plants are woody and others are herbaceous.
+This is nearly always an approximation. Think of something like limbs:
+they seem distinct enough that we even name some groups by their count:
+tetrapods, hexapods. Except that when we look closely enough, it becomes
+fuzzy: insect mouthparts are derived from limbs, for example, so should
+we count these highly modified limbs as limbs (and if not, where in
+evolution have they become sufficiently modified to no longer count? And
+are nymphalid butterflies tetrapods under that definition yet?). Are
+modern whales thought to have four limbs, even though two are extremely
+vestigial? Often for neontologists problematic organisms with
+intermediate counts are conveniently extinct (so long,
+\emph{Basilosaurus}), so we can ignore this fuzziness, but it is often
+there (and paleontologists are confronted with it more often). Think
+about the details of a species changing from one discrete state to
+another, even for something like a seemingly perfectly discrete
+character like a base changing from an A to a T. At first this is
+present in just a single individual (for a multicellular diploid, on one
+DNA strand in one cell in the germ line). Even if under selection, it
+will take generations to sweep through to fixation: during that time,
+what is ``the'' state of the species? It is even harder to discretize
+characters like woodiness (how much wood is required?), eyes (when does
+a fish population evolving in a cave finally ``lose'' its eyes?),
+biogeography (how finely do you divide the range: by continent? biome?
+state?), and so forth.
+
+As for many decisions, this comes back to the biological hypotheses
+being tested and the size of the study. For example, one question could
+be does a complex trait like wings ever re-evolve once lost?
+\citet{Whiting2003} examined this in stick insects: some species have
+wings in both sexes, some in one only, and some lack wings in both
+sexes. If the question hinges on whether loss of wing genes in a species
+prevents re-evolution, then as long as one sex in a species has wings
+the species should be coded as having wings. If the question hinges on
+the effect of loss of wings on ability to settle new areas, it could be
+that having either sex lack wings is enough to prevent effective
+colonization, and thus a species with only one sex with wings should be
+coded as being wingless. If the study system is large enough to have
+sufficient power, one could code this as a four state character,
+instead: \textbf{A}: both males and females have wings; \textbf{B}:
+males have, females lack wings; \textbf{C}: males lack, females have
+wings; and \textbf{D}: both males and females lack wings.
+
+One way to deal with this is to gather discrete data as finely divided
+as reasonable and then aggregate. For example, in the stick insect
+example, code it as a four state character as above and then, depending
+on the biological question, group them. If the question is whether wings
+can reappear after being entirely lost, for example, one would group
+\textbf{A}, \textbf{B}, and \textbf{C} as having wings (in at least some
+members of the species, so the genes remain under selection for
+functionality) and \textbf{D} as wingless, but for the dispersal
+question one could lump \textbf{B}, \textbf{C}, and \textbf{D}, leaving
+\textbf{A} as the other state, or even lump \textbf{B} and \textbf{C}
+only.
+
+\begin{tabular}{l|l|l|r|r|r}
+\hline
+males & females & four\_states & question\_1 & question\_2a & question\_2b\\
+\hline
+wings & wings & A & 1 & 1 & 2\\
+\hline
+wings & wingless & B & 0 & 1 & 1\\
+\hline
+wingless & wings & C & 0 & 1 & 1\\
+\hline
+wingless & wingless & D & 0 & 0 & 0\\
+\hline
+\end{tabular}
+
+But, let's assume we can discretize traits and carry on. The simplest
+discretization is binary: 0 or 1, often absence or presence (but could
+be yellow or blue, etc.). Most models are like our commonly used DNA
+models: continuous time with discrete changes, using the same rates
+throughout. It is like a model for when an autonomous car will have an
+accident: assuming the car works perfectly (gives a whole new meaning to
+``blue screen of death'') there's still a chance that at some point a
+human is going to run into it. There's a per hour chance of an accident:
+let's assume in each hour there's a 0.03\% chance of our autonomous car
+having an accident (very roughly based on Google's experience, assuming
+a 40 MPH average speed). So the probability of having no accident in the
+first hour of driving is 99.97\%; the probability of having no accidents
+in the first 40 hours of driving is 99.97\% \^{} 40 = 98.8\%. The number
+of accidents is Poisson-distributed; the wait time between accidents is
+exponentially distributed. This is the model commonly used in
+phylogenetics for discrete traits, though sometimes with more
+complexity: one could move (with some rate) between two different rates,
+as in a covarion model, for example. A very different model is
+Felsenstein's threshold model, which we will discuss in a few weeks. For
+now, though, just envision models with a fixed rate of change between
+states as long as other characters don't change; it's possible, though,
+that the state of other characters do affect these rates (which is what
+correlation tests investigate). For example, the probability of
+switching from clawed feet to flippers for forelimbs is probably much
+higher for species that live in water than on land.
+
+(btw, note the spelling here: having one, two or eight eyes is a
+\emph{discrete} trait: individually separate and distinct. Forming an
+enclosed bower for hidden mating is a \emph{discreet} trait. The former
+is generally far more biologically relevant)
+
+\chapter{Diversification}\label{diversification}
+
+\chapter{SSE methods}\label{sse-methods}
+
+\chapter{RAxML}\label{raxml}
+
+\chapter{Gene Tree Species Tree}\label{gene-tree-species-tree}
+
+\chapter{Dating}\label{dating}
+
+\chapter{Build a method}\label{build-a-method}
+
+\chapter{Placeholder}\label{placeholder}
+
+\chapter{Appendix}\label{appendix}
+
+\bibliography{packages.bib,book.bib}
+
+
+\end{document}

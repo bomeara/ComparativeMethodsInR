@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Comparative Methods</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="How to do comparative methods for evolution and ecology">
+  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to do comparative methods for evolution and ecology" />
+  <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Comparative Methods" />
+  
+  <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
+  
+
+<meta name="author" content="Brian O’Meara">
+
+
+<meta name="date" content="2017-01-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="sse-methods.html">
+<link rel="next" href="gene-tree-species-tree.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Comparative Methods</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps</a><ul>
+<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R</a><ul>
+<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data</a></li>
+<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use</a></li>
+<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing</a></li>
+<li class="chapter" data-level="6" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>6</b> Continuous traits</a><ul>
+<li class="chapter" data-level="6.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>7</b> Brownian Motion and Correlations</a><ul>
+<li class="chapter" data-level="7.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-1"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>7.2</b> Brownian motion</a></li>
+<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#discrete-models"><i class="fa fa-check"></i><b>7.3</b> Discrete models</a></li>
+<li class="chapter" data-level="7.4" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>8</b> Discrete Traits</a><ul>
+<li class="chapter" data-level="8.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>9</b> Diversification</a><ul>
+<li class="chapter" data-level="9.1" data-path="diversification.html"><a href="diversification.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>10</b> SSE methods</a><ul>
+<li class="chapter" data-level="10.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-4"><i class="fa fa-check"></i><b>10.1</b> Objectives</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>10.1.1</b> Discussion prompts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>11</b> RAxML</a><ul>
+<li class="chapter" data-level="11.1" data-path="raxml.html"><a href="raxml.html#objectives-5"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>11.2</b> Install RAxML</a></li>
+<li class="chapter" data-level="11.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>11.3</b> Morphology search</a></li>
+<li class="chapter" data-level="11.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>11.4</b> DNA</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>12</b> Gene Tree Species Tree</a><ul>
+<li class="chapter" data-level="12.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-6"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>13</b> Dating</a><ul>
+<li class="chapter" data-level="13.1" data-path="dating.html"><a href="dating.html#objectives-7"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
+<li class="chapter" data-level="13.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>13.2</b> BEAST</a></li>
+<li class="chapter" data-level="13.3" data-path="dating.html"><a href="dating.html#r8s"><i class="fa fa-check"></i><b>13.3</b> r8s</a></li>
+<li class="chapter" data-level="13.4" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>13.4</b> Applying to your own work</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="build-a-method.html"><a href="build-a-method.html"><i class="fa fa-check"></i><b>14</b> Build a method</a><ul>
+<li class="chapter" data-level="14.1" data-path="build-a-method.html"><a href="build-a-method.html#objectives-8"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="15" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>15</b> Appendix</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="raxml" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> RAxML</h1>
+<div id="objectives-5" class="section level2">
+<h2><span class="header-section-number">11.1</span> Objectives</h2>
+<p>By the end of this week, you will:</p>
+<ul>
+<li>Have RAxML installed</li>
+<li>Be able to do an analysis with likelihood with various models</li>
+<li>Understand partitioning</li>
+<li>Be able to use a variety of character types</li>
+</ul>
+<p>RAxML (Stamatakis, 2014) is a very popular program for inferring phylogenies using likelihood, though there are many others. It is notable for being able to infer trees for tens of thousands of species or more. New versions can use DNA, amino acid, SNP, and/or morphological characters.</p>
+</div>
+<div id="install-raxml" class="section level2">
+<h2><span class="header-section-number">11.2</span> Install RAxML</h2>
+<p>To begin, <strong>install RAxML</strong>. Follow the instructions in Step 1 of <a href="http://sco.h-its.org/exelixis/web/software/raxml/hands_on.html" class="uri">http://sco.h-its.org/exelixis/web/software/raxml/hands_on.html</a>. For the fewest issues, just do <code>make -f Makefile.gcc</code> on the command line (not in R) to compile the basic vanilla version. For actual work, you’ll likely find the versions with SSE3 and/or PTHREADS will work faster. On a Mac (Linux is similar; RAxML has <a href="https://github.com/stamatak/standard-RAxML/tree/master/WindowsExecutables_v8.2.4">binaries</a>), the easiest way to get use this would be:</p>
+<pre><code>git clone git@github.com:stamatak/standard-RAxML.git
+cd standard-RAxML
+make -f Makefile.gcc</code></pre>
+<p>If compiling went correctly, you should see a line like</p>
+<pre><code>gcc  -o raxmlHPC axml.o  optimizeModel.o multiple.o searchAlgo.o topologies.o parsePartitions.o treeIO.o models.o bipartitionList.o rapidBootstrap.o evaluatePartialGenericSpecial.o evaluateGenericSpecial.o newviewGenericSpecial.o makenewzGenericSpecial.o   classify.o fastDNAparsimony.o fastSearch.o leaveDropping.o rmqs.o rogueEPA.o ancestralStates.o  mem_alloc.o  eigen.o -lm</code></pre>
+<p><strong>Now you need to put the program in a path.</strong> This is where your computer looks for programs to run. If you type a program name, like <code>ls</code> or <code>raxmlHPC</code>, your computer checks the folders indicated in the path for a program of this name; when it finds one, it runs that. You can see your path by typing <code>echo $PATH</code>. If you want to run a program, like the newly compiled <code>raxmlHPC</code>, you have two options: you can specify where it is each time you want to run it, or you can put it in a folder in your existing path. The former becomes a pain, so I’d recommend the latter. <code>/usr/bin</code> is in your path, but this is reserved for programs your computer needs to run – don’t mess with it. I’d suggest putting it in <code>/usr/local/bin</code>. To do this, type</p>
+<pre><code>sudo cp raxmlHPC /usr/local/bin/raxmlHPC</code></pre>
+<p><code>sudo</code> means superuser do. It’s a very powerful command. Generally, typing on the command line you can delete files that are important to you, but it’s hard to utterly destroy your computer; with superuser abilities, you could delete key files.</p>
+<div class="figure">
+<img src="images/sandwich.png" alt="Sudo sandwich from xkcd" />
+<p class="caption">Sudo sandwich from xkcd</p>
+</div>
+<p>Ok, so we now have RAxML installed. To run it, you could use the very handy <code>ips</code> package to call it from R, but it doesn’t have an interface to all of the relevant commands. Instead, we’re going to just create some commands to run ourselves.</p>
+<p>First, we need sample data sets. We will be using ones, modified somewhat, from <a href="http://sco.h-its.org/exelixis/web/software/raxml/hands_on.html">this tutorial</a>. The original files are <a href="http://sco.h-its.org/exelixis/resource/download/hands-on/Hands-On.tar.bz2">here</a> but the modified ones are in the <a href="https://github.com/PhyloMeth/LikelihoodTrees">repository for this PhyloMeth exercise</a> in the <code>/inst/extdata</code> folder.</p>
+<p>Until now, we’ve seen NEXUS files, which can include data blocks. RAxML uses Phylip-formatted files instead, which are simpler: a line that has the number of taxa and the number of sites, followed by one line per taxon with the taxon name, a space, and then the characters (though there could be interleaving).</p>
+</div>
+<div id="morphology-search" class="section level2">
+<h2><span class="header-section-number">11.3</span> Morphology search</h2>
+<p>First, we are going to examine morphology using likelihood. While morphology is typically analyzed with parsimony, there are models for morphology (i.e., Lewis 2001) and research suggests (Wright &amp; Hillis, 2014) that such models outperform parsimony for morphology, in addition to being less prone (in theory) to long branch attraction (Felsenstein 1978). Therefore, absent strongly held concerns rooted in an <a href="http://onlinelibrary.wiley.com/doi/10.1111/cla.12148/full">epistemological paradigm</a>, it seems prudent to use a parametric model for morphology (note this can be done in likelihood or Bayesian contexts).</p>
+<p>Get the <a href="https://github.com/PhyloMeth/LikelihoodTrees">exercise</a> and <strong>complete the <code>InferMorphologyTree_exercise</code> function in <code>exercise.R</code></strong>. Also, look at the data in a text editor to get a sense of the structure. Which taxa are going to be lumped into clades, do you think? Some important things to note:</p>
+<ul>
+<li>Morphology (as well as some other data, such as SNPs) often includes only variable sites. This can cause a problem if not accounted for (it looks like all sites are evolving really fast, because the slow ones are ignored). There are corrections for this, three of which are implemented in RAxML.</li>
+<li>RAxML creates a starting tree, then does a parsimony optimization, then likelihood. This is not a full parsimony search, though.</li>
+<li>Remember that for nearly all tree searches, heuristic methods are used. That means that you are not guaranteed to get the best tree; given the size of tree space, one could almost say you’re guaranteed not to find the best tree.</li>
+<li>Computers are great at being logical. The downside is that they are terrible at being random. They often use the current time as a “seed” to get a pseudorandom number. You could think of it (this is more of an analogy than a description) as if the computer had a long table of stored “random” numbers, and that it started using numbers at the row corresponding to the number of seconds elapsed between the current time and some fixed date in the past. If you start two runs at different times, they’ll have different numbers, but if you start them at the same time, they’ll have the same ones. For tree search, there are often random moves: which branch is broken off and moved somewhere else. If you start two searches at the same time, thinking you’re doing two independent searches, they’ll perform exactly the same, despite the “randomness”. RAxML asks users to supply a random number seed to it. If you use the same one across runs, they’ll be exactly the same.</li>
+</ul>
+</div>
+<div id="dna" class="section level2">
+<h2><span class="header-section-number">11.4</span> DNA</h2>
+<p>Most phylogenetic analyses for extant organisms use sequence data. This is often presented as DNA, though sometimes the data are translated to amino acids instead. Usually sequences from multiple genes are concatenated. There are a wide range of models available for sequence evolution. For DNA, the most popular remains general time reversible (GTR): a model that allows for a different transition rate between every pair of nucleotides, subject to the constraint that the rate from nucleotide <em>i</em> to <em>j</em> is the same as the rate from <em>j</em> to <em>i</em>. Different sites evolve at different rates (think of the sites coding for the active site of an enzyme versus those in an intron that has little to no functional purpose). One way to model this heterogeneity is with a gamma distribution: the likelihood is evaluated using several different rates for that site (Yang 1995). One can also apply partitions: allow different sections of the data to have different rates. This is commonly done to allow first, second, and third codon positions to have different rates, or to allow different genes to have different models of evolution. This can offer dramatic improvements in the fit of a model to the data; it is especially important when dealing with gappy data, such as cases where one gene is present for all taxa but another gene has ben sampled for only a subset of taxa.</p>
+<p><strong>Do InferDNATreeWithBootstrappingAndPartitions_exercise() in the homework</strong>. Once this is done, install this homework library into R. From the folder containing the homework:</p>
+<pre><code>R CMD INSTALL LikelihoodTrees</code></pre>
+<p>Then, in R:</p>
+<pre><code>library(PhyloMethLikelihoodTrees)
+results &lt;- InferDNATreeWithBootstrappingAndPartitions_exercise()</code></pre>
+<p>Though you may have to include other arguments (especially <code>input.path</code>).</p>
+<p>You can <strong>plot your final tree</strong>:</p>
+<pre><code>library(ape)
+plot.phylo(results$ml.with.bs.tree, show.node.label=TRUE)</code></pre>
+<p>This shows the branch lengths of the best ML tree and the bootstrap proportions. This is from a non-parametric bootstrap (Felsenstein 1985): the columns of data are sampled with replacement and then a tree search is redone. The more times a bipartition (an edge) on a tree is recovered, the more confidence we have in it (but this is not the same as the probability of it being true). Note one common error: the numbers reported, and in this case shown at nodes, are <em>not</em> properties of a node or a clade: they are bipartitions: taxa A, C, E fall attach (perhaps through other nodes) to one end of an edge, and taxa B, D, E, F, G, H are attached to the other end.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sse-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gene-tree-species-tree.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/94_RAxML.Rmd",
+"text": "Edit"
+},
+"download": ["comparative-methods.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

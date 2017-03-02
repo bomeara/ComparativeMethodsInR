@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Comparative Methods</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="How to do comparative methods for evolution and ecology">
+  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="How to do comparative methods for evolution and ecology" />
+  <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Comparative Methods" />
+  
+  <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
+  
+
+<meta name="author" content="Brian O’Meara">
+
+
+<meta name="date" content="2017-01-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="continuous-traits.html">
+<link rel="next" href="discrete-traits.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Comparative Methods</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps</a><ul>
+<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R</a><ul>
+<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data</a></li>
+<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use</a></li>
+<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing</a></li>
+<li class="chapter" data-level="6" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>6</b> Continuous traits</a><ul>
+<li class="chapter" data-level="6.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>7</b> Brownian Motion and Correlations</a><ul>
+<li class="chapter" data-level="7.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-1"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>7.2</b> Brownian motion</a></li>
+<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#discrete-models"><i class="fa fa-check"></i><b>7.3</b> Discrete models</a></li>
+<li class="chapter" data-level="7.4" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>8</b> Discrete Traits</a><ul>
+<li class="chapter" data-level="8.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>9</b> Diversification</a><ul>
+<li class="chapter" data-level="9.1" data-path="diversification.html"><a href="diversification.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>10</b> SSE methods</a><ul>
+<li class="chapter" data-level="10.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-4"><i class="fa fa-check"></i><b>10.1</b> Objectives</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>10.1.1</b> Discussion prompts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>11</b> RAxML</a><ul>
+<li class="chapter" data-level="11.1" data-path="raxml.html"><a href="raxml.html#objectives-5"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>11.2</b> Install RAxML</a></li>
+<li class="chapter" data-level="11.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>11.3</b> Morphology search</a></li>
+<li class="chapter" data-level="11.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>11.4</b> DNA</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>12</b> Gene Tree Species Tree</a><ul>
+<li class="chapter" data-level="12.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-6"><i class="fa fa-check"></i><b>12.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>13</b> Dating</a><ul>
+<li class="chapter" data-level="13.1" data-path="dating.html"><a href="dating.html#objectives-7"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
+<li class="chapter" data-level="13.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>13.2</b> BEAST</a></li>
+<li class="chapter" data-level="13.3" data-path="dating.html"><a href="dating.html#r8s"><i class="fa fa-check"></i><b>13.3</b> r8s</a></li>
+<li class="chapter" data-level="13.4" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>13.4</b> Applying to your own work</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="build-a-method.html"><a href="build-a-method.html"><i class="fa fa-check"></i><b>14</b> Build a method</a><ul>
+<li class="chapter" data-level="14.1" data-path="build-a-method.html"><a href="build-a-method.html#objectives-8"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="15" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>15</b> Appendix</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Comparative Methods</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="brownian-motion-and-correlations" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Brownian Motion and Correlations</h1>
+<p><em>In progress</em></p>
+<div id="objectives-1" class="section level2">
+<h2><span class="header-section-number">7.1</span> Objectives</h2>
+<p>By the end of this chapter, you will:</p>
+<ul>
+<li>Understand the importance of dealing with correlations in an evolutionary manner</li>
+<li>Know methods for looking at correlations of continuous and discrete traits</li>
+<li>Be able to point to reasons to be concerned.</li>
+</ul>
+<p>Make sure to <strong>read the relevant papers</strong>: <a href="https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week6/" class="uri">https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week6/</a></p>
+</div>
+<div id="brownian-motion" class="section level2">
+<h2><span class="header-section-number">7.2</span> Brownian motion</h2>
+<p>First, let’s get a tree:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rotl)
+<span class="kw">library</span>(ape)
+phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)
+<span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.5</span>)
+<span class="kw">axisPhylo</span>(<span class="dt">backward=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Note that this tree is a chronogram.</p>
+<p>Let’s simulate data on this tree. But what model to use? For now, let’s assume we are looking at continuous traits, things like body size. Over evolutionary time, these probably undergo a series of changes that then get added up. A species has an average mass of 15 kg, then it goes to 15.1 kg, then 14.8 kg, and so forth. But how could those changes be distributed?</p>
+<p>Start with a uniform distribution. Take a starting value of 0, then pick a number from -1 to 1 to add to it (in other words, <code>runif(n=1, min=-1, max=1)</code>). There are efficient ways to do this for many generations, but let’s do the obvious way: a simple <code>for</code> loop. Do it for 100 generations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
+positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
+for (i in <span class="kw">sequence</span>(ngen)) {
+  positions[i<span class="dv">+1</span>] &lt;-<span class="st"> </span>positions[i] +<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,-<span class="dv">1</span>,<span class="dv">1</span>)
+}
+<span class="kw">plot</span>(<span class="dt">x=</span>positions, <span class="dt">y=</span><span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>We can repeat this simulation many times and see what the pattern looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
+nsims &lt;-<span class="st"> </span><span class="dv">500</span>
+final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)
+<span class="co"># make a plot to hold our lines</span>
+<span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(-<span class="dv">1</span>,<span class="dv">1</span>)*ngen, <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>+ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
+for (sim.index in <span class="kw">sequence</span>(nsims)) {
+  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
+  for (i in <span class="kw">sequence</span>(ngen)) {
+    positions[i<span class="dv">+1</span>] &lt;-<span class="st"> </span>positions[i] +<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,-<span class="dv">1</span>,<span class="dv">1</span>)
+  }
+  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))
+  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]
+}</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Well, that may seem odd: we’re adding a bunch of uniform random values between -1 and 1 (so, a flat distribution) and we get something that definitely has more lines ending up in the middle than further out. Look just at the distribution of final points:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Which looks almost normal. Ok, let’s try a weird distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rweird &lt;-<span class="st"> </span>function() {
+  displacement &lt;-<span class="st"> </span><span class="dv">0</span>
+  if(<span class="kw">runif</span>(<span class="dv">1</span>,-<span class="dv">2</span>,<span class="dv">2</span>) &lt;<span class="st"> </span>.<span class="dv">1</span>) {
+    displacement &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>) +<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>)
+  } else {
+    displacement &lt;-<span class="st"> </span><span class="fl">0.5</span> *<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="fl">0.3</span>) -<span class="st"> </span><span class="dv">1</span>
+  }
+  displacement &lt;-<span class="st"> </span>displacement +<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">100</span>) %%<span class="st"> </span><span class="dv">7</span>)
+  <span class="kw">return</span>(displacement)  
+}
+
+<span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">replicate</span>(<span class="dv">100000</span>, <span class="kw">rweird</span>())), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>When we ask <code>rweird()</code> for a number it sometimes gives us a normally distributed number multiplied by a unifor distribution, other times it gives us an exponentially distributed number, and then adds the remainder that comes when you divide a random number by 7. So, not exactly a simple distribution like uniform, normal, or Poisson. So, repeating the simulation above but using this funky distribution:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
+nsims &lt;-<span class="st"> </span><span class="dv">500</span>
+final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)
+<span class="co"># make a plot to hold our lines</span>
+<span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(-<span class="dv">100</span>,<span class="dv">1200</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>+ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
+for (sim.index in <span class="kw">sequence</span>(nsims)) {
+  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
+  for (i in <span class="kw">sequence</span>(ngen)) {
+    positions[i<span class="dv">+1</span>] &lt;-<span class="st"> </span>positions[i] +<span class="st"> </span><span class="kw">rweird</span>()
+  }
+  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))
+  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]
+}</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>And now let’s look at final positions again:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre></div>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Again, it looks pretty much like a normal distribution. You can try with your own wacky distribution, and this will almost always happen (as long as the distribution has finite variance).</p>
+<p>Why?</p>
+<p>Well, think back to stats: why do we use the normal distribution for so much?</p>
+<p>Answer: the central limit theorem. The sum (or, equivalently, average) of a set of numbers pulled from distributions that each have a finite mean and finite variance will approximate a normal distribution. The numbers could all be independent and come from the same probability distribution (i.e., could take numbers from the same Poisson distribution), but this isn’t required.</p>
+<p>Biologically, the technical term for this is awesome. We know something like a species mean changes for many reasons: chasing an adaptive peak here, drifting there, mutation driving a it this way or that, etc. If there are enough shifts, where a species goes after many generations is normally distributed. For two species, there’s one normal distribution for their evolution from the origin of life (or the start of the tree we’re looking at) to their branching point (so they have identical history up to then) then each evolves from that point independently (though of course in reality they may interact; the method that’s part of the grant supporting this course allows for this). So they have covariance due to the shared history, then accumulate variance independently after the split. We thus use a multivariate normal for multiple species on the tree (for continuous traits), but it again is due to Brownian motion. <strong>This mixture of independent and shared evolution is quite important: it explains why species cannot be treated as independent data points, necessitating the correlation methods that use a phylogeny in this week’s lessons.</strong></p>
+<p>However, in biological data there are (at least) two issues. One is that in some ways a normal distribution is weird: it says that for the trait of interest, there’s a positive probability for any value from negative infinity to positive infinity. “Endless forms most beautiful and most wonderful have been, and are being, evolved” [Darwin] but nothing is so wonderful as to have a mass of -15 kg (or, for that matter, 1e7 kg). Under Brownian motion, we expect a displacement of 5 g to have equal chance no matter what the starting mass, but in reality a shrew species that has an average mass of 6 g is less likely to lose 5 g over one million years than a whale species that has an average adult mass of 100,000,000 g. Both difficulties go away if we think of the displacements not coming as an addition or subtraction to a species’ state but rather a multiplying of a state: the chance of a whale or a shrew increasing in mass by 1% per million years may be the same, even if their starting mass magnitudes are very different. Conveniently, this also prevents us getting zero or lower for a mass (or other trait being examined). This works if we use the <strong>log of the species trait and treat that as evolving under Brownian motion</strong>, and this is why traits are commonly transformed in this way in phylogenetics (as well they should be).</p>
+<p>The other issue is that the normal approximation might not hold. For example, if species are being pulled back towards some fixed value, the net displacement is not a simple sum of the displacements: we keep getting pulled back, in effect eroding the influence of movements the deeper they are in the past: thus the utility of Ornstein-Uhlenbeck models. There may also be a set of displacements that all come from one model, then a later set of displacements that all come from some different model: we could better model evolution, especially correlation between species, by using these two (or more) models rather than assume the same normal distribution throughout time: thus the utility of approaches that allow different parameters or even different models on different parts of the tree.</p>
+</div>
+<div id="discrete-models" class="section level2">
+<h2><span class="header-section-number">7.3</span> Discrete models</h2>
+<p>Much of the above discussion (except for the part about covariance due to shared history) focuses on continuous traits. However, some traits are better thought of as discrete (btw, note the spelling here: having one, two or eight eyes is a <em>discrete</em> trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a <em>discreet</em> trait. The former is generally far more biologically relevant). This is always an approximation. Think of something like limbs: they seem distinct enough that we even name some groups by their count: tetrapods, hexapods. Except that when we look closely enough, it becomes fuzzy: insect mouthparts are derived from limbs, for example, so should we count these highly modified limbs as limbs (and if not, where in evolution have they become sufficiently modified to no longer count? And are nymphalid butterflies tetrapods under that definition yet?). Are modern whales thought to have four limbs, even though two are extremely vestigial? Often for neontologists problematic organisms with intermediate counts are conveniently extinct (so long, <em>Basilosaurus</em>), so we can ignore this fuzziness, but it is often there (and paleontologists are confronted with it more often).</p>
+<p>But, let’s assume we can discretize traits and carry on. The simplest discretization is binary: 0 or 1, often absence or presence (but could be yellow or blue, etc.). Most models are like our commonly used DNA models: continuous time with discrete changes, using the same rates throughout. It is like a model for when an autonomous car will have an accident: assuming the car works perfectly (gives a whole new meaning to “blue screen of death”) there’s still a chance that at some point a human is going to run into it. There’s a per hour chance of an accident: let’s assume in each hour there’s a 0.03% chance of our autonomous car having an accident (very roughly based on Google’s experience, assuming a 40 MPH average speed). So the probability of having no accident in the first hour of driving is 99.97%; the probability of having no accidents in the first 40 hours of driving is 99.97% ^ 40 = 98.8%. The number of accidents is Poisson-distributed; the wait time between accidents is exponentially distributed. This is the model commonly used in phylogenetics for discrete traits, though sometimes with more complexity: one could move (with some rate) between two different rates, as in a covarion model, for example. A very different model is Felsenstein’s threshold model, which we will discuss in a few weeks. For now, though, just envision models with a fixed rate of change between states as long as other characters don’t change; it’s possible, though, that the state of other characters do affect these rates (which is what correlation tests investigate). For example, the probability of switching from clawed feet to flippers for forelimbs is probably much higher for species that live in water than on land.</p>
+</div>
+<div id="correlation" class="section level2">
+<h2><span class="header-section-number">7.4</span> Correlation</h2>
+<p>For this week, bring your data and a tree for those taxa. Fork <a href="https://github.com/PhyloMeth/Correlation" class="uri">https://github.com/PhyloMeth/Correlation</a> and then add scripts there. When you’re done, do a pull request. Note if you add data to that directory and commit it, it’ll be uploaded to public GitHub. Probably not a big deal, unless you want to keep your data secret and safe (Lord of The Rings reference; c.f. <code>phangorn</code> package).</p>
+<p><strong>Do independent contrasts</strong> using <code>pic()</code> in <code>ape</code>. Remember to 1) positivize the contrasts (this is <em>not</em> the same as doing <code>abs()</code>). From the Garland et al. paper, think about ways to see if there are any problems. How do contrasts affect the correlations?</p>
+<p><strong>Do Pagel94</strong> There are at least three ways to do this in R: in the <code>phytools</code>, <code>diversitree</code>, and <code>corHMM</code> packages. With <code>phytools</code>, it’s pretty simple: use the <code>fitPagel()</code> function. With the others, you have to specify the constraint matrices (this allows you to do Pagel-style tests but on a wider range of models). Think about what you should assume at the root state: canonical Pagel94 assumes equal probabilities of each state at the root, but that might be a bad assumption for your taxa.</p>
+<p><strong>Use another correlation method</strong> Perhaps phyloGLM? Use the <code>phylolm</code> package, or some other approach to look at correlations.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="continuous-traits.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="discrete-traits.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/70_Correlations.Rmd",
+"text": "Edit"
+},
+"download": ["comparative-methods.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

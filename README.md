@@ -12,4 +12,14 @@ To render it:
 
 `bookdown::render_book("index.Rmd", "bookdown::pdf_book")`
 
+Or for an html version,
+
+`bookdown::render_book("index.Rmd", "bookdown::gitbook")`
+
+And to deploy on bookdown,
+
+`bookdown::publish_book(render = "local", account="bomeara")`
+
+Or just use the RenderAll.R script.
+
 The book.bib references are exported from Mendeley, from the PhyloMeth group.
