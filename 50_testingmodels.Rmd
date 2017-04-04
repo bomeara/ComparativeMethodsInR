@@ -1,0 +1,23 @@
+# Testing models and methods
+
+
+## Objectives
+
+* Understand distinction between model fit and model adequacy
+* Identify and avoid pitfalls in evaluating methods
+* Be able to identify methods that have been tested well.
+
+### Model fit and accuracy
+
+When we use models to understand biology, it helps if they are appropriate for the data. Most importantly, this gives meaningful parameter estimates. If the true model is one of constant diversification rates except for a single pulse of extinction at the KT boundary, we could fit a logistic diversification model, and it could give us an estimate of carrying capacity complete with uncertainty, but the reality is there is no carrying capacity. If the question were simply about comparing models, a test of whether a logistic or Yule model fits the data best, we will get an answer, but it does not help us understand reality: neither model is correct in our case. There are thus three questions to answer when thinking about models:
+
+
+```{r}
+library(TreePar)
+library(TreeSim)
+#example
+```
+
+1) Are the approximations in my models biologically reasonable?
+2) Which model(s) fit best?
+3) Are my models adequate?
