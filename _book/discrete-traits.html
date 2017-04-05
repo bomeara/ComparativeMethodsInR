@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Comparative Methods</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="Comparative Methods" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2017-01-12">
+<meta name="date" content="2017-02-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="brownian-motion-and-correlations.html">
 <link rel="next" href="diversification.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -137,8 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>7</b> Brownian Motion and Correlations</a><ul>
 <li class="chapter" data-level="7.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-1"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
 <li class="chapter" data-level="7.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>7.2</b> Brownian motion</a></li>
-<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#discrete-models"><i class="fa fa-check"></i><b>7.3</b> Discrete models</a></li>
-<li class="chapter" data-level="7.4" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.4</b> Correlation</a></li>
+<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.3</b> Correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>8</b> Discrete Traits</a><ul>
 <li class="chapter" data-level="8.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
@@ -200,9 +197,64 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Understand how to incorporate rate heterogeneity in discrete trait models</li>
 <li>Be able to explain how to test hypotheses about univariate trait evolution.</li>
 </ul>
-<p>Make sure to <strong>read the relevant papers</strong>: <a href="https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/discrete/" class="uri">https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/discrete/</a></p>
-<p>And <strong>do the relevant exercise</strong>: <a href="https://github.com/PhyloMeth/DiscreteTraits" class="uri">https://github.com/PhyloMeth/DiscreteTraits</a></p>
+<p>Many traits can be thought of as discrete traits: a DNA site comes in ATGC, protein have one of 20 amino acids, some animals have functional eyes and others do not, some plants are woody and others are herbaceous. This is nearly always an approximation. Think of something like limbs: they seem distinct enough that we even name some groups by their count: tetrapods, hexapods. Except that when we look closely enough, it becomes fuzzy: insect mouthparts are derived from limbs, for example, so should we count these highly modified limbs as limbs (and if not, where in evolution have they become sufficiently modified to no longer count? And are nymphalid butterflies tetrapods under that definition yet?). Are modern whales thought to have four limbs, even though two are extremely vestigial? Often for neontologists problematic organisms with intermediate counts are conveniently extinct (so long, <em>Basilosaurus</em>), so we can ignore this fuzziness, but it is often there (and paleontologists are confronted with it more often). Think about the details of a species changing from one discrete state to another, even for something like a seemingly perfectly discrete character like a base changing from an A to a T. At first this is present in just a single individual (for a multicellular diploid, on one DNA strand in one cell in the germ line). Even if under selection, it will take generations to sweep through to fixation: during that time, what is “the” state of the species? It is even harder to discretize characters like woodiness (how much wood is required?), eyes (when does a fish population evolving in a cave finally “lose” its eyes?), biogeography (how finely do you divide the range: by continent? biome? state?), and so forth.</p>
+<p>As for many decisions, this comes back to the biological hypotheses being tested and the size of the study. For example, one question could be does a complex trait like wings ever re-evolve once lost? <span class="citation">Whiting, Bradler, and Maxwell (<a href="#ref-Whiting2003">2003</a>)</span> examined this in stick insects: some species have wings in both sexes, some in one only, and some lack wings in both sexes. If the question hinges on whether loss of wing genes in a species prevents re-evolution, then as long as one sex in a species has wings the species should be coded as having wings. If the question hinges on the effect of loss of wings on ability to settle new areas, it could be that having either sex lack wings is enough to prevent effective colonization, and thus a species with only one sex with wings should be coded as being wingless. If the study system is large enough to have sufficient power, one could code this as a four state character, instead: <strong>A</strong>: both males and females have wings; <strong>B</strong>: males have, females lack wings; <strong>C</strong>: males lack, females have wings; and <strong>D</strong>: both males and females lack wings.</p>
+<p>One way to deal with this is to gather discrete data as finely divided as reasonable and then aggregate. For example, in the stick insect example, code it as a four state character as above and then, depending on the biological question, group them. If the question is whether wings can reappear after being entirely lost, for example, one would group <strong>A</strong>, <strong>B</strong>, and <strong>C</strong> as having wings (in at least some members of the species, so the genes remain under selection for functionality) and <strong>D</strong> as wingless, but for the dispersal question one could lump <strong>B</strong>, <strong>C</strong>, and <strong>D</strong>, leaving <strong>A</strong> as the other state, or even lump <strong>B</strong> and <strong>C</strong> only.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">males</th>
+<th align="left">females</th>
+<th align="left">four_states</th>
+<th align="right">question_1</th>
+<th align="right">question_2a</th>
+<th align="right">question_2b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">wings</td>
+<td align="left">wings</td>
+<td align="left">A</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">wings</td>
+<td align="left">wingless</td>
+<td align="left">B</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">wingless</td>
+<td align="left">wings</td>
+<td align="left">C</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">wingless</td>
+<td align="left">wingless</td>
+<td align="left">D</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>But, let’s assume we can discretize traits and carry on. The simplest discretization is binary: 0 or 1, often absence or presence (but could be yellow or blue, etc.). Most models are like our commonly used DNA models: continuous time with discrete changes, using the same rates throughout. It is like a model for when an autonomous car will have an accident: assuming the car works perfectly (gives a whole new meaning to “blue screen of death”) there’s still a chance that at some point a human is going to run into it. There’s a per hour chance of an accident: let’s assume in each hour there’s a 0.03% chance of our autonomous car having an accident (very roughly based on Google’s experience, assuming a 40 MPH average speed). So the probability of having no accident in the first hour of driving is 99.97%; the probability of having no accidents in the first 40 hours of driving is 99.97% ^ 40 = 98.8%. The number of accidents is Poisson-distributed; the wait time between accidents is exponentially distributed. This is the model commonly used in phylogenetics for discrete traits, though sometimes with more complexity: one could move (with some rate) between two different rates, as in a covarion model, for example. A very different model is Felsenstein’s threshold model, which we will discuss in a few weeks. For now, though, just envision models with a fixed rate of change between states as long as other characters don’t change; it’s possible, though, that the state of other characters do affect these rates (which is what correlation tests investigate). For example, the probability of switching from clawed feet to flippers for forelimbs is probably much higher for species that live in water than on land.</p>
+<p>(btw, note the spelling here: having one, two or eight eyes is a <em>discrete</em> trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a <em>discreet</em> trait. The former is generally far more biologically relevant)</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Whiting2003">
+<p>Whiting, Michael F, Sven Bradler, and Taylor Maxwell. 2003. “Loss and Recovery of Wings in Stick Insects.” <em>Nature</em> 421 (6920). Nature Publishing Group: 264–67.</p>
 </div>
 </div>
             </section>
@@ -211,8 +263,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="brownian-motion-and-correlations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="diversification.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="diversification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>

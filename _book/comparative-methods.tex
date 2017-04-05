@@ -84,7 +84,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-17}
+  \date{2017-04-05}
 
 \usepackage{booktabs}
 \usepackage{makeidx}
@@ -119,127 +119,67 @@ R}\label{getting-data-and-trees-into-r}
 
 \chapter{Dull model testing}\label{dull-model-testing}
 
+\chapter{Testing models and methods}\label{testing-models-and-methods}
+
+\chapter{Testing methods}\label{testing-methods}
+
+\subsection{Objectives}\label{objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify and avoid pitfalls in evaluating methods
+\item
+  Be able to identify methods that have been tested well.
+\end{itemize}
+
+\subsection{Kinds of testing}\label{kinds-of-testing}
+
+There are two kinds of testing. One can test the software to make sure
+it works properly. If you are trying to calculate the average of a set
+of observations, are you using \texttt{mean} or incorrectly using
+\texttt{median}? Does it use all the data or does it drop anything past
+the fifth observation? For this kind of question, it can be helpful to
+do test driven development: write a test, then write code, and
+automatically check the code to see if it passes the test. Then, as you
+change code, you can rerun all the old tests to verify they still work.
+This is often known as unit testing.
+
+But even if software has correctly implemented a method, a more
+compelling question is whether the method itself is any good. This comes
+down to a few questions:
+
+\subsection{Type I error}\label{type-i-error}
+
+This is when a model incorrectly rejects a true null hypothesis. For
+example, do clade A and clade B have exactly the same rate of evolution?
+If the truth is that they do, rejecting that to say they are unequal is
+a type I error. To test this property, data are ofen simulated under the
+null, analyzed under the null and alternate hypotheses, and the
+proportion of times the null is incorrectly rejected noted. For a
+typical significance theshold of 0.05, this should be 5\% of the time.
+
+This is a major focus\ldots{}
+
+\subsection{Type II error}\label{type-ii-error}
+
+This is incorrectly accepting a false null.
+
+\subsection{Getting rid of typological
+thinking}\label{getting-rid-of-typological-thinking}
+
+In biology, typological thinking is bad: one of Darwin's great insights
+was that there is substantial variation in nature. However, our
+statistical thinking is often limited (see also chapter on dull
+hypothesis testing). Appropriate Type I error rates is a nice property,
+but how often is the null \emph{actually} true? Never.
+
 \chapter{Continuous traits}\label{continuous-traits}
 
 \chapter{Brownian Motion and
 Correlations}\label{brownian-motion-and-correlations}
 
 \chapter{Discrete Traits}\label{discrete-traits}
-
-\section{Objectives}\label{objectives}
-
-By the end of this chapter, you will:
-
-\begin{itemize}
-\tightlist
-\item
-  Understand how to incorporate rate heterogeneity in discrete trait
-  models
-\item
-  Be able to explain how to test hypotheses about univariate trait
-  evolution.
-\end{itemize}
-
-Many traits can be thought of as discrete traits: a DNA site comes in
-ATGC, protein have one of 20 amino acids, some animals have functional
-eyes and others do not, some plants are woody and others are herbaceous.
-This is nearly always an approximation. Think of something like limbs:
-they seem distinct enough that we even name some groups by their count:
-tetrapods, hexapods. Except that when we look closely enough, it becomes
-fuzzy: insect mouthparts are derived from limbs, for example, so should
-we count these highly modified limbs as limbs (and if not, where in
-evolution have they become sufficiently modified to no longer count? And
-are nymphalid butterflies tetrapods under that definition yet?). Are
-modern whales thought to have four limbs, even though two are extremely
-vestigial? Often for neontologists problematic organisms with
-intermediate counts are conveniently extinct (so long,
-\emph{Basilosaurus}), so we can ignore this fuzziness, but it is often
-there (and paleontologists are confronted with it more often). Think
-about the details of a species changing from one discrete state to
-another, even for something like a seemingly perfectly discrete
-character like a base changing from an A to a T. At first this is
-present in just a single individual (for a multicellular diploid, on one
-DNA strand in one cell in the germ line). Even if under selection, it
-will take generations to sweep through to fixation: during that time,
-what is ``the'' state of the species? It is even harder to discretize
-characters like woodiness (how much wood is required?), eyes (when does
-a fish population evolving in a cave finally ``lose'' its eyes?),
-biogeography (how finely do you divide the range: by continent? biome?
-state?), and so forth.
-
-As for many decisions, this comes back to the biological hypotheses
-being tested and the size of the study. For example, one question could
-be does a complex trait like wings ever re-evolve once lost?
-\citet{Whiting2003} examined this in stick insects: some species have
-wings in both sexes, some in one only, and some lack wings in both
-sexes. If the question hinges on whether loss of wing genes in a species
-prevents re-evolution, then as long as one sex in a species has wings
-the species should be coded as having wings. If the question hinges on
-the effect of loss of wings on ability to settle new areas, it could be
-that having either sex lack wings is enough to prevent effective
-colonization, and thus a species with only one sex with wings should be
-coded as being wingless. If the study system is large enough to have
-sufficient power, one could code this as a four state character,
-instead: \textbf{A}: both males and females have wings; \textbf{B}:
-males have, females lack wings; \textbf{C}: males lack, females have
-wings; and \textbf{D}: both males and females lack wings.
-
-One way to deal with this is to gather discrete data as finely divided
-as reasonable and then aggregate. For example, in the stick insect
-example, code it as a four state character as above and then, depending
-on the biological question, group them. If the question is whether wings
-can reappear after being entirely lost, for example, one would group
-\textbf{A}, \textbf{B}, and \textbf{C} as having wings (in at least some
-members of the species, so the genes remain under selection for
-functionality) and \textbf{D} as wingless, but for the dispersal
-question one could lump \textbf{B}, \textbf{C}, and \textbf{D}, leaving
-\textbf{A} as the other state, or even lump \textbf{B} and \textbf{C}
-only.
-
-\begin{tabular}{l|l|l|r|r|r}
-\hline
-males & females & four\_states & question\_1 & question\_2a & question\_2b\\
-\hline
-wings & wings & A & 1 & 1 & 2\\
-\hline
-wings & wingless & B & 0 & 1 & 1\\
-\hline
-wingless & wings & C & 0 & 1 & 1\\
-\hline
-wingless & wingless & D & 0 & 0 & 0\\
-\hline
-\end{tabular}
-
-But, let's assume we can discretize traits and carry on. The simplest
-discretization is binary: 0 or 1, often absence or presence (but could
-be yellow or blue, etc.). Most models are like our commonly used DNA
-models: continuous time with discrete changes, using the same rates
-throughout. It is like a model for when an autonomous car will have an
-accident: assuming the car works perfectly (gives a whole new meaning to
-``blue screen of death'') there's still a chance that at some point a
-human is going to run into it. There's a per hour chance of an accident:
-let's assume in each hour there's a 0.03\% chance of our autonomous car
-having an accident (very roughly based on Google's experience, assuming
-a 40 MPH average speed). So the probability of having no accident in the
-first hour of driving is 99.97\%; the probability of having no accidents
-in the first 40 hours of driving is 99.97\% \^{} 40 = 98.8\%. The number
-of accidents is Poisson-distributed; the wait time between accidents is
-exponentially distributed. This is the model commonly used in
-phylogenetics for discrete traits, though sometimes with more
-complexity: one could move (with some rate) between two different rates,
-as in a covarion model, for example. A very different model is
-Felsenstein's threshold model, which we will discuss in a few weeks. For
-now, though, just envision models with a fixed rate of change between
-states as long as other characters don't change; it's possible, though,
-that the state of other characters do affect these rates (which is what
-correlation tests investigate). For example, the probability of
-switching from clawed feet to flippers for forelimbs is probably much
-higher for species that live in water than on land.
-
-(btw, note the spelling here: having one, two or eight eyes is a
-\emph{discrete} trait: individually separate and distinct. Forming an
-enclosed bower for hidden mating is a \emph{discreet} trait. The former
-is generally far more biologically relevant)
 
 \chapter{Diversification}\label{diversification}
 
@@ -250,8 +190,6 @@ is generally far more biologically relevant)
 \chapter{Gene Tree Species Tree}\label{gene-tree-species-tree}
 
 \chapter{Dating}\label{dating}
-
-\chapter{Build a method}\label{build-a-method}
 
 \chapter{Placeholder}\label{placeholder}
 

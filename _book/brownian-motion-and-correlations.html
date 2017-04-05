@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Comparative Methods</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.3.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="Comparative Methods" />
   <meta property="og:type" content="book" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2017-01-12">
+<meta name="date" content="2017-02-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +34,6 @@
   
 <link rel="prev" href="continuous-traits.html">
 <link rel="next" href="discrete-traits.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -137,8 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>7</b> Brownian Motion and Correlations</a><ul>
 <li class="chapter" data-level="7.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-1"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
 <li class="chapter" data-level="7.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>7.2</b> Brownian motion</a></li>
-<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#discrete-models"><i class="fa fa-check"></i><b>7.3</b> Discrete models</a></li>
-<li class="chapter" data-level="7.4" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.4</b> Correlation</a></li>
+<li class="chapter" data-level="7.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>7.3</b> Correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>8</b> Discrete Traits</a><ul>
 <li class="chapter" data-level="8.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
@@ -281,13 +278,8 @@ for (sim.index in <span class="kw">sequence</span>(nsims)) {
 <p>However, in biological data there are (at least) two issues. One is that in some ways a normal distribution is weird: it says that for the trait of interest, there’s a positive probability for any value from negative infinity to positive infinity. “Endless forms most beautiful and most wonderful have been, and are being, evolved” [Darwin] but nothing is so wonderful as to have a mass of -15 kg (or, for that matter, 1e7 kg). Under Brownian motion, we expect a displacement of 5 g to have equal chance no matter what the starting mass, but in reality a shrew species that has an average mass of 6 g is less likely to lose 5 g over one million years than a whale species that has an average adult mass of 100,000,000 g. Both difficulties go away if we think of the displacements not coming as an addition or subtraction to a species’ state but rather a multiplying of a state: the chance of a whale or a shrew increasing in mass by 1% per million years may be the same, even if their starting mass magnitudes are very different. Conveniently, this also prevents us getting zero or lower for a mass (or other trait being examined). This works if we use the <strong>log of the species trait and treat that as evolving under Brownian motion</strong>, and this is why traits are commonly transformed in this way in phylogenetics (as well they should be).</p>
 <p>The other issue is that the normal approximation might not hold. For example, if species are being pulled back towards some fixed value, the net displacement is not a simple sum of the displacements: we keep getting pulled back, in effect eroding the influence of movements the deeper they are in the past: thus the utility of Ornstein-Uhlenbeck models. There may also be a set of displacements that all come from one model, then a later set of displacements that all come from some different model: we could better model evolution, especially correlation between species, by using these two (or more) models rather than assume the same normal distribution throughout time: thus the utility of approaches that allow different parameters or even different models on different parts of the tree.</p>
 </div>
-<div id="discrete-models" class="section level2">
-<h2><span class="header-section-number">7.3</span> Discrete models</h2>
-<p>Much of the above discussion (except for the part about covariance due to shared history) focuses on continuous traits. However, some traits are better thought of as discrete (btw, note the spelling here: having one, two or eight eyes is a <em>discrete</em> trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a <em>discreet</em> trait. The former is generally far more biologically relevant). This is always an approximation. Think of something like limbs: they seem distinct enough that we even name some groups by their count: tetrapods, hexapods. Except that when we look closely enough, it becomes fuzzy: insect mouthparts are derived from limbs, for example, so should we count these highly modified limbs as limbs (and if not, where in evolution have they become sufficiently modified to no longer count? And are nymphalid butterflies tetrapods under that definition yet?). Are modern whales thought to have four limbs, even though two are extremely vestigial? Often for neontologists problematic organisms with intermediate counts are conveniently extinct (so long, <em>Basilosaurus</em>), so we can ignore this fuzziness, but it is often there (and paleontologists are confronted with it more often).</p>
-<p>But, let’s assume we can discretize traits and carry on. The simplest discretization is binary: 0 or 1, often absence or presence (but could be yellow or blue, etc.). Most models are like our commonly used DNA models: continuous time with discrete changes, using the same rates throughout. It is like a model for when an autonomous car will have an accident: assuming the car works perfectly (gives a whole new meaning to “blue screen of death”) there’s still a chance that at some point a human is going to run into it. There’s a per hour chance of an accident: let’s assume in each hour there’s a 0.03% chance of our autonomous car having an accident (very roughly based on Google’s experience, assuming a 40 MPH average speed). So the probability of having no accident in the first hour of driving is 99.97%; the probability of having no accidents in the first 40 hours of driving is 99.97% ^ 40 = 98.8%. The number of accidents is Poisson-distributed; the wait time between accidents is exponentially distributed. This is the model commonly used in phylogenetics for discrete traits, though sometimes with more complexity: one could move (with some rate) between two different rates, as in a covarion model, for example. A very different model is Felsenstein’s threshold model, which we will discuss in a few weeks. For now, though, just envision models with a fixed rate of change between states as long as other characters don’t change; it’s possible, though, that the state of other characters do affect these rates (which is what correlation tests investigate). For example, the probability of switching from clawed feet to flippers for forelimbs is probably much higher for species that live in water than on land.</p>
-</div>
 <div id="correlation" class="section level2">
-<h2><span class="header-section-number">7.4</span> Correlation</h2>
+<h2><span class="header-section-number">7.3</span> Correlation</h2>
 <p>For this week, bring your data and a tree for those taxa. Fork <a href="https://github.com/PhyloMeth/Correlation" class="uri">https://github.com/PhyloMeth/Correlation</a> and then add scripts there. When you’re done, do a pull request. Note if you add data to that directory and commit it, it’ll be uploaded to public GitHub. Probably not a big deal, unless you want to keep your data secret and safe (Lord of The Rings reference; c.f. <code>phangorn</code> package).</p>
 <p><strong>Do independent contrasts</strong> using <code>pic()</code> in <code>ape</code>. Remember to 1) positivize the contrasts (this is <em>not</em> the same as doing <code>abs()</code>). From the Garland et al. paper, think about ways to see if there are any problems. How do contrasts affect the correlations?</p>
 <p><strong>Do Pagel94</strong> There are at least three ways to do this in R: in the <code>phytools</code>, <code>diversitree</code>, and <code>corHMM</code> packages. With <code>phytools</code>, it’s pretty simple: use the <code>fitPagel()</code> function. With the others, you have to specify the constraint matrices (this allows you to do Pagel-style tests but on a wider range of models). Think about what you should assume at the root state: canonical Pagel94 assumes equal probabilities of each state at the root, but that might be a bad assumption for your taxa.</p>
@@ -301,8 +293,9 @@ for (sim.index in <span class="kw">sequence</span>(nsims)) {
         </div>
       </div>
 <a href="continuous-traits.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="discrete-traits.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="discrete-traits.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>

@@ -1,0 +1,32 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Testing  methods
+
+
+### Objectives
+
+* Identify and avoid pitfalls in evaluating methods
+* Be able to identify methods that have been tested well.
+
+### Kinds of testing
+
+There are two kinds of testing. One can test the software to make sure it works properly. If you are trying to calculate the average of a set of observations, are you using `mean` or incorrectly using `median`? Does it use all the data or does it drop anything past the fifth observation? For this kind of question, it can be helpful to do test driven development: write a test, then write code, and automatically check the code to see if it passes the test. Then, as you change code, you can rerun all the old tests to verify they still work. This is often known as unit testing.
+
+But even if software has correctly implemented a method, a more compelling question is whether the method itself is any good. This comes down to a few questions:
+
+### Type I error
+
+This is when a model incorrectly rejects a true null hypothesis. For example, do clade A and clade B have exactly the same rate of evolution? If the truth is that they do, rejecting that to say they are unequal is a type I error. To test this property, data are ofen simulated under the null, analyzed under the null and alternate hypotheses, and the proportion of times the null is incorrectly rejected noted. For a typical significance theshold of 0.05, this should be 5% of the time. 
+
+This is a major focus...
+
+### Type II error
+
+This is incorrectly accepting a false null. 
+
+### Getting rid of typological thinking
+
+In biology, typological thinking is bad: one of Darwin's great insights was that there is substantial variation in nature. However, our statistical thinking is often limited (see also chapter on dull hypothesis testing). Appropriate Type I error rates is a nice property, but how often is the null *actually* true? Never.

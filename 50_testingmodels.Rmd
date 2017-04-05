@@ -1,7 +1,12 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Testing models and methods
 
 
-## Objectives
+### Objectives
 
 * Understand distinction between model fit and model adequacy
 * Identify and avoid pitfalls in evaluating methods
@@ -9,15 +14,30 @@
 
 ### Model fit and accuracy
 
-When we use models to understand biology, it helps if they are appropriate for the data. Most importantly, this gives meaningful parameter estimates. If the true model is one of constant diversification rates except for a single pulse of extinction at the KT boundary, we could fit a logistic diversification model, and it could give us an estimate of carrying capacity complete with uncertainty, but the reality is there is no carrying capacity. If the question were simply about comparing models, a test of whether a logistic or Yule model fits the data best, we will get an answer, but it does not help us understand reality: neither model is correct in our case. There are thus three questions to answer when thinking about models:
+When we use models to understand biology, it helps if they are appropriate for the data. Most importantly, this gives meaningful parameter estimates. If the true model is one of constant diversification rates except for a single pulse of extinction at the KT boundary, and the data include sampling only 25% of current diversity, we could fit a logistic diversification model, and it could give us an estimate of carrying capacity, perhaps even complete with uncertainty, but the reality is there is no carrying capacity. If the question were simply about comparing models, a test of whether a logistic or Yule model fits the data best, we will get an answer, but it does not help us understand reality: neither model is correct in our case. 
 
-
-```{r}
-library(TreePar)
+```{r, eval=TRUE, cache=TRUE, echo=FALSE, warning=FALSE}
 library(TreeSim)
-#example
+library(laser)
+library(knitr)
+set.seed(1859)
+phy <- TreeSim::sim.rateshift.taxa(n=2000, numbsim=1, lambda=rep(0.1,2), mu=rep(0,2), frac=c(1,0.5), times=c(0,10), complete=FALSE)[[1]]
+phy <- geiger::drop.random(phy, 1500)
+yule.result <- laser::pureBirth(branching.times(phy))
+logistic.result <- laser::DDL(branching.times(phy))
+all.results <- data.frame(deltaAIC=c(yule.result$aic, logistic.result$aic), birth.rate=c(unname(yule.result$r1), logistic.result$r1), carrying.capacity=c(NA, logistic.result$kparam))
+all.results$deltaAIC = all.results$deltaAIC - min(all.results$deltaAIC)
+row.names(all.results) <- c("Yule", "Logistic")
+knitr::kable(all.results, digits=3, caption="Table of results from simulating a 2000 taxon tree under a pure birth model plus one mass extinction, then sampling tips perfectly randomly down to a 500 taxon tree.")
 ```
+
+In the above example, the result shows that the best model is one of logistic growth, with a carrying capacity of 1000. However, remember that the tree used had 2000 tips to start (they were subsampled to get a 500 taxon observed tree). Neither the model nor the parameter estimate is right, so this exercise would tell us little about biology. It *is* likely publishable. 
+
+There are thus three questions to answer when thinking about models:
 
 1) Are the approximations in my models biologically reasonable?
 2) Which model(s) fit best?
 3) Are my models adequate?
+
+
+
