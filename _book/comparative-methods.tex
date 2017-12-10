@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-04-15}
+  \date{2017-12-10}
 
 \usepackage{booktabs}
 \usepackage{makeidx}
@@ -139,8 +139,11 @@
 \newtheorem{proposition}{Proposition}[chapter]
 \theoremstyle{definition}
 \newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -148,7 +151,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\chapter{Introduction}\label{introduction}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
 This book was created as part of my
 \href{http://www.phylometh.org}{PhyloMeth} class, which focuses on
@@ -162,7 +166,8 @@ changing the name of the repo eventually; the course is largely in R
 (not entirely) but of course many key methods appear in other
 languages.{]}
 
-\section{Learning objectives}\label{learning-objectives}
+\hypertarget{learning-objectives}{%
+\section{Learning objectives}\label{learning-objectives}}
 
 Readers of this book will be able to:
 
@@ -182,12 +187,14 @@ Readers of this book will be able to:
   Draw sensible biological conclusions
 \end{itemize}
 
-\section{Prerequisites}\label{prerequisites}
+\hypertarget{prerequisites}{%
+\section{Prerequisites}\label{prerequisites}}
 
 These are mostly prereqs for doing exercises associated with the class,
 but will help readers of the book, too.
 
-\subsection{R}\label{r}
+\hypertarget{r}{%
+\subsection{R}\label{r}}
 
 Many methods are now implemented in R \citep{R-base}: the
 \href{http://cran.r-project.org/web/views/Phylogenetics.html}{phylogenetics
@@ -204,7 +211,8 @@ Note that this will not install packages that are on GitHub or authors'
 individual websites. The \texttt{devtools} package can be useful for
 installing packages directly from GitHub.
 
-\subsection{Docker}\label{docker}
+\hypertarget{docker}{%
+\subsection{Docker}\label{docker}}
 
 Another option for installing things is to use the
 \href{https://hub.docker.com/r/bomeara/phydocker/}{phydocker} instance
@@ -236,14 +244,16 @@ might want to do \texttt{setwd("/data")} to make sure you're in the
 right directory. You can save any results or figures to this directory
 and it will still exist when you quit this instance.
 
-\subsection{Other}\label{other}
+\hypertarget{other}{%
+\subsection{Other}\label{other}}
 
 RevBayes, BEAST, RAxML, and much other key software implement important
 methods in phylogenetics but are not in R. Readers will need to install
 these and many more, but fortunately the authors of much of this
 software have excellent tutorials already.
 
-\chapter{First steps}\label{first-steps}
+\hypertarget{first-steps}{%
+\chapter{First steps}\label{first-steps}}
 
 First, understand the question you want to answer. There are a wide
 variety of methods, and they wax and wane in popularity, but the key to
@@ -253,7 +263,8 @@ latest method. Once you have that question, find the appropriate methods
 and data) to address it. Understand how those methods work, including
 the various ways they can fail (as all can).
 
-\section{Questions}\label{questions}
+\hypertarget{questions}{%
+\section{Questions}\label{questions}}
 
 ``The currency of science is papers.''
 
@@ -311,7 +322,8 @@ is it long term to be a selfer? How long will it take to evolve multiple
 floral traits? How do species typically move from one habitat to
 another?
 
-\subsection{Other resources}\label{other-resources}
+\hypertarget{other-resources}{%
+\subsection{Other resources}\label{other-resources}}
 
 There are many books and articles written about phylogenetic analysis.
 Some of the key books for readers of this one:
@@ -331,10 +343,12 @@ Phylogenetics and Evolution with R}. This is written by the same person
 who is the lead author of the essential \texttt{ape} package
 \citep{R-ape} for phylogenetics in R.
 
+\hypertarget{getting-data-and-trees-into-r}{%
 \chapter{Getting data and trees into
-R}\label{getting-data-and-trees-into-r}
+R}\label{getting-data-and-trees-into-r}}
 
-\section{Data and tree object types}\label{data-and-tree-object-types}
+\hypertarget{data-and-tree-object-types}{%
+\section{Data and tree object types}\label{data-and-tree-object-types}}
 
 In R, there are many kinds of objects. These kinds are called
 ``classes''. For example, take the text string ``Darwin''.
@@ -380,8 +394,8 @@ using an \texttt{as.*} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example.}\DecValTok{1}\NormalTok{ <-}\StringTok{ "6"}
-\KeywordTok{print}\NormalTok{(example.}\DecValTok{1}\NormalTok{)}
+\NormalTok{example}\FloatTok{.1}\NormalTok{ <-}\StringTok{ "6"}
+\KeywordTok{print}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -391,7 +405,7 @@ using an \texttt{as.*} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(example.}\DecValTok{1}\NormalTok{)}
+\KeywordTok{class}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -401,8 +415,8 @@ using an \texttt{as.*} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example.}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(example.}\DecValTok{1}\NormalTok{)}
-\KeywordTok{print}\NormalTok{(example.}\DecValTok{2}\NormalTok{)}
+\NormalTok{example}\FloatTok{.2}\NormalTok{ <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -412,7 +426,7 @@ using an \texttt{as.*} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(example.}\DecValTok{2}\NormalTok{)}
+\KeywordTok{class}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -422,7 +436,7 @@ using an \texttt{as.*} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example.}\DecValTok{2} \OperatorTok{*}\StringTok{ }\DecValTok{7}
+\NormalTok{example}\FloatTok{.2} \OperatorTok{*}\StringTok{ }\DecValTok{7}
 \end{Highlighting}
 \end{Shaded}
 
@@ -441,7 +455,8 @@ on each and R knows what to do.
 In phylogenetics, we mostly care about classes for trees, for data, and
 for things to hold trees and data.
 
-\subsection{Tree classes}\label{tree-classes}
+\hypertarget{tree-classes}{%
+\subsection{Tree classes}\label{tree-classes}}
 
 The main tree class in R is \texttt{phylo} and is defined in the
 \texttt{ape} package. Let's look at one in the wild:
@@ -488,11 +503,14 @@ Other packages add on to the \texttt{phylobase} format (i.e.,
 \texttt{phytool}'s \texttt{simmap} format) but these are typically not
 shared across packages.
 
-\section{Sequence data}\label{sequence-data}
+\hypertarget{sequence-data}{%
+\section{Sequence data}\label{sequence-data}}
 
-\section{Other character data}\label{other-character-data}
+\hypertarget{other-character-data}{%
+\section{Other character data}\label{other-character-data}}
 
-\section{Phylogenies}\label{phylogenies}
+\hypertarget{phylogenies}{%
+\section{Phylogenies}\label{phylogenies}}
 
 The most common way to load trees is to use \texttt{ape}'s functions:
 
@@ -552,7 +570,8 @@ capitalization of Nexus from \texttt{ape}'s similar function).
 \texttt{phylobase} uses a different structure to store trees than
 \texttt{ape} does.
 
-\subsection{Great scientists steal}\label{great-scientists-steal}
+\hypertarget{great-scientists-steal}{%
+\subsection{Great scientists steal}\label{great-scientists-steal}}
 
 Scientists have been creating trait-based phylogenetic trees for
 decades. These scientists are often experts in their group, in potential
@@ -626,7 +645,8 @@ Two important notes about reusing trees:
   idea.
 \end{itemize}
 
-\section{Reconciling datasets}\label{reconciling-datasets}
+\hypertarget{reconciling-datasets}{%
+\section{Reconciling datasets}\label{reconciling-datasets}}
 
 We use scientific names to communicate clearly. In the picture below
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_, ``Look at the robin!''
@@ -667,7 +687,9 @@ Importantly, for all but the last point, it is perfectly valid based on
 the rules of taxonomy for different scientists to use the names before
 and after the change.
 
-\chapter{Visualizing data before use}\label{visualizing-data-before-use}
+\hypertarget{visualizing-data-before-use}{%
+\chapter{Visualizing data before
+use}\label{visualizing-data-before-use}}
 
 A key step in any analysis is looking at the data. If you have loaded
 protein coding DNA sequences, are they aligned correctly? Are the codon
@@ -682,8 +704,8 @@ based on errors at this stage. Most peer reviewers will not notice this,
 either, so your error could slip into the literature and mislead others.
 Take the time to get to know your data.
 
-\hypertarget{dull-model-testing}{\chapter{Dull model
-testing}\label{dull-model-testing}}
+\hypertarget{dull-model-testing}{%
+\chapter{Dull model testing}\label{dull-model-testing}}
 
 Almost all biologists believe this about the world:
 
@@ -691,12 +713,16 @@ Almost all biologists believe this about the world:
 \tightlist
 \item
   All species evolve identically
-\item
-  Rates of trait evolution are the same
-\item
-  Optimal states are the same
-\item
-  Speciation rates never change
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Rates of trait evolution are the same
+  \item
+    Optimal states are the same
+  \item
+    Speciation rates never change
+  \end{itemize}
 \item
   Traits are uncorrelated
 \item
@@ -749,9 +775,11 @@ is never true. It may be that due to small sample size, the null is the
 best-fitting model, but in any empirical scenario the true model is
 never the null.
 
-\chapter{Testing models and methods}\label{testing-models-and-methods}
+\hypertarget{testing-models-and-methods}{%
+\chapter{Testing models and methods}\label{testing-models-and-methods}}
 
-\subsection{Objectives}\label{objectives}
+\hypertarget{objectives}{%
+\subsection{Objectives}\label{objectives}}
 
 \begin{itemize}
 \tightlist
@@ -763,7 +791,8 @@ never the null.
   Be able to identify methods that have been tested well.
 \end{itemize}
 
-\subsection{Model fit and accuracy}\label{model-fit-and-accuracy}
+\hypertarget{model-fit-and-accuracy}{%
+\subsection{Model fit and accuracy}\label{model-fit-and-accuracy}}
 
 When we use models to understand biology, it helps if they are
 appropriate for the data. Most importantly, this gives meaningful
@@ -812,9 +841,11 @@ There are thus three questions to answer when thinking about models:
   Are my models adequate?
 \end{enumerate}
 
-\chapter{Testing methods}\label{testing-methods}
+\hypertarget{testing-methods}{%
+\chapter{Testing methods}\label{testing-methods}}
 
-\subsection{Objectives}\label{objectives-1}
+\hypertarget{objectives-1}{%
+\subsection{Objectives}\label{objectives-1}}
 
 \begin{itemize}
 \tightlist
@@ -824,7 +855,8 @@ There are thus three questions to answer when thinking about models:
   Be able to identify methods that have been tested well.
 \end{itemize}
 
-\subsection{Kinds of testing}\label{kinds-of-testing}
+\hypertarget{kinds-of-testing}{%
+\subsection{Kinds of testing}\label{kinds-of-testing}}
 
 There are two kinds of testing. One can test the software to make sure
 it works properly. If you are trying to calculate the average of a set
@@ -840,7 +872,8 @@ But even if software has correctly implemented a method, a more
 compelling question is whether the method itself is any good. This comes
 down to a few questions:
 
-\subsection{Type I error}\label{type-i-error}
+\hypertarget{type-i-error}{%
+\subsection{Type I error}\label{type-i-error}}
 
 This is when a model incorrectly rejects a true null hypothesis. For
 example, do clade A and clade B have exactly the same rate of evolution?
@@ -852,12 +885,14 @@ typical significance theshold of 0.05, this should be 5\% of the time.
 
 This is a major focus\ldots{}
 
-\subsection{Type II error}\label{type-ii-error}
+\hypertarget{type-ii-error}{%
+\subsection{Type II error}\label{type-ii-error}}
 
 This is incorrectly accepting a false null.
 
+\hypertarget{getting-rid-of-typological-thinking}{%
 \subsection{Getting rid of typological
-thinking}\label{getting-rid-of-typological-thinking}
+thinking}\label{getting-rid-of-typological-thinking}}
 
 In biology, typological thinking is bad: one of Darwin's great insights
 was that there is substantial variation in nature. However, our
@@ -865,9 +900,11 @@ statistical thinking is often limited (see also chapter on dull
 hypothesis testing). Appropriate Type I error rates is a nice property,
 but how often is the null \emph{actually} true? Never.
 
-\chapter{Continuous traits}\label{continuous-traits}
+\hypertarget{continuous-traits}{%
+\chapter{Continuous traits}\label{continuous-traits}}
 
-\section{Objectives}\label{objectives-2}
+\hypertarget{objectives-2}{%
+\section{Objectives}\label{objectives-2}}
 
 By the end of this chapter, you will:
 
@@ -899,12 +936,14 @@ You will: * Use Geiger to estimate rate of evolution under Brownian
 motion * Figure out what the units are * Try other ways of scaling rates
 * Compare different models using OUwie * Do model comparison
 
+\hypertarget{brownian-motion-and-correlations}{%
 \chapter{Brownian Motion and
-Correlations}\label{brownian-motion-and-correlations}
+Correlations}\label{brownian-motion-and-correlations}}
 
 \emph{In progress}
 
-\section{Objectives}\label{objectives-3}
+\hypertarget{objectives-3}{%
+\section{Objectives}\label{objectives-3}}
 
 By the end of this chapter, you will:
 
@@ -923,7 +962,8 @@ By the end of this chapter, you will:
 Make sure to \textbf{read the relevant papers}:
 \url{https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/week6/}
 
-\section{Brownian motion}\label{brownian-motion}
+\hypertarget{brownian-motion}{%
+\section{Brownian motion}\label{brownian-motion}}
 
 First, let's get a tree:
 
@@ -1009,7 +1049,7 @@ Which looks almost normal. Ok, let's try a weird distribution:
 \begin{Highlighting}[]
 \NormalTok{rweird <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
 \NormalTok{  displacement <-}\StringTok{ }\DecValTok{0}
-  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{) }\OperatorTok{<}\StringTok{ }\NormalTok{.}\DecValTok{1}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{) }\OperatorTok{<}\StringTok{ }\FloatTok{.1}\NormalTok{) \{}
 \NormalTok{    displacement <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
 \NormalTok{    displacement <-}\StringTok{ }\FloatTok{0.5} \OperatorTok{*}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\OperatorTok{-}\StringTok{ }\DecValTok{1}
@@ -1129,7 +1169,8 @@ the same normal distribution throughout time: thus the utility of
 approaches that allow different parameters or even different models on
 different parts of the tree.
 
-\section{Correlation}\label{correlation}
+\hypertarget{correlation}{%
+\section{Correlation}\label{correlation}}
 
 For this week, bring your data and a tree for those taxa. Fork
 \url{https://github.com/PhyloMeth/Correlation} and then add scripts
@@ -1140,7 +1181,7 @@ of The Rings reference; c.f. \texttt{phangorn} package).
 
 \textbf{Do independent contrasts} using \texttt{pic()} in \texttt{ape}.
 Remember to 1) positivize the contrasts (this is \emph{not} the same as
-doing \texttt{abs()}). From the Garland et al. paper, think about ways
+doing \texttt{abs()}). From the Garland et al.~paper, think about ways
 to see if there are any problems. How do contrasts affect the
 correlations?
 
@@ -1157,9 +1198,10 @@ the root, but that might be a bad assumption for your taxa.
 \texttt{phylolm} package, or some other approach to look at
 correlations.
 
-\chapter{Discrete Traits}\label{discrete-traits}
+\hypertarget{discrete-traits}{%
+\chapter{Discrete Traits}\label{discrete-traits}}
 
-\section{Objectives}\label{objectives-4}
+\#\#Objectives
 
 By the end of this chapter, you will:
 
@@ -1274,9 +1316,11 @@ higher for species that live in water than on land.
 enclosed bower for hidden mating is a \emph{discreet} trait. The former
 is generally far more biologically relevant)
 
-\hypertarget{diversification}{\chapter{Diversification}\label{diversification}}
+\hypertarget{diversification}{%
+\chapter{Diversification}\label{diversification}}
 
-\section{Objectives}\label{objectives-5}
+\hypertarget{objectives-4}{%
+\section{Objectives}\label{objectives-4}}
 
 By the end of this chapter, you will:
 
@@ -1294,9 +1338,11 @@ Make sure to \textbf{read the relevant papers}:
 And \textbf{do the relevant exercise}:
 \url{https://github.com/PhyloMeth/Diversification}
 
-\chapter{SSE methods}\label{sse-methods}
+\hypertarget{sse-methods}{%
+\chapter{SSE methods}\label{sse-methods}}
 
-\section{Objectives}\label{objectives-6}
+\hypertarget{objectives-5}{%
+\section{Objectives}\label{objectives-5}}
 
 By the end of this chapter, you will:
 
@@ -1459,7 +1505,8 @@ character changing elsewhere on the tree driving a result) but not all
 the issues (a single change being sufficient to give substantial support
 for an idea that that trait is driving diversification).
 
-\subsection{Discussion prompts}\label{discussion-prompts}
+\hypertarget{discussion-prompts}{%
+\subsection{Discussion prompts}\label{discussion-prompts}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1505,9 +1552,11 @@ For a lot of these questions, there isn't a right answer (at least, not
 one I know, and certainly not an agreement in the field). But it's worth
 thinking about as you develop your research career.
 
-\chapter{RAxML}\label{raxml}
+\hypertarget{raxml}{%
+\chapter{RAxML}\label{raxml}}
 
-\section{Objectives}\label{objectives-7}
+\hypertarget{objectives-6}{%
+\section{Objectives}\label{objectives-6}}
 
 By the end of this week, you will:
 
@@ -1529,7 +1578,8 @@ notable for being able to infer trees for tens of thousands of species
 or more. New versions can use DNA, amino acid, SNP, and/or morphological
 characters.
 
-\section{Install RAxML}\label{install-raxml}
+\hypertarget{install-raxml}{%
+\section{Install RAxML}\label{install-raxml}}
 
 To begin, \textbf{install RAxML}. Follow the instructions in Step 1 of
 \url{http://sco.h-its.org/exelixis/web/software/raxml/hands_on.html}.
@@ -1600,7 +1650,8 @@ the number of taxa and the number of sites, followed by one line per
 taxon with the taxon name, a space, and then the characters (though
 there could be interleaving).
 
-\section{Morphology search}\label{morphology-search}
+\hypertarget{morphology-search}{%
+\section{Morphology search}\label{morphology-search}}
 
 First, we are going to examine morphology using likelihood. While
 morphology is typically analyzed with parsimony, there are models for
@@ -1652,7 +1703,8 @@ do you think? Some important things to note:
   the same.
 \end{itemize}
 
-\section{DNA}\label{dna}
+\hypertarget{dna}{%
+\section{DNA}\label{dna}}
 
 Most phylogenetic analyses for extant organisms use sequence data. This
 is often presented as DNA, though sometimes the data are translated to
@@ -1711,9 +1763,11 @@ a node or a clade: they are bipartitions: taxa A, C, E fall attach
 (perhaps through other nodes) to one end of an edge, and taxa B, D, E,
 F, G, H are attached to the other end.
 
-\chapter{Gene Tree Species Tree}\label{gene-tree-species-tree}
+\hypertarget{gene-tree-species-tree}{%
+\chapter{Gene Tree Species Tree}\label{gene-tree-species-tree}}
 
-\section{Objectives}\label{objectives-8}
+\hypertarget{objectives-7}{%
+\section{Objectives}\label{objectives-7}}
 
 By the end of this chapter, you will:
 
@@ -1880,9 +1934,11 @@ lengths to do this, though note we do not resimulate the gene tree{]}.
 So we can see that even though the relevant divergences happened long
 ago, gene tree species tree issues are still a problem.
 
-\chapter{Dating}\label{dating}
+\hypertarget{dating}{%
+\chapter{Dating}\label{dating}}
 
-\section{Objectives}\label{objectives-9}
+\hypertarget{objectives-8}{%
+\section{Objectives}\label{objectives-8}}
 
 By the end of this chapter, you will:
 
@@ -1923,7 +1979,8 @@ To do this week's assignments, you will have to:
   \end{itemize}
 \end{itemize}
 
-\section{BEAST}\label{beast}
+\hypertarget{beast}{%
+\section{BEAST}\label{beast}}
 
 For the BEAST part, we're not going to do our testing via R package
 approach: dealing with file paths and such are too problematic. So we'll
@@ -2106,7 +2163,7 @@ sometimes, hand edited.
   FigTree or R can be used to visualize the final tree with support.
 \end{enumerate}
 
-\section{r8s}\label{r8s}
+\#\#r8s
 
 r8s implements several functions for converting a phylogram to a
 chronogram. It does the classic, Langley-Fitch molecular clock which
@@ -2146,7 +2203,8 @@ to understand the options.
 \textbf{Run the examples} in Geiger for this. You can also look at the
 examples that come with r8s.
 
-\section{Applying to your own work}\label{applying-to-your-own-work}
+\hypertarget{applying-to-your-own-work}{%
+\section{Applying to your own work}\label{applying-to-your-own-work}}
 
 By this point in the course, you should be thirsting to apply these
 tools to your own questions. Do so! \textbf{Get a dataset (think back to
@@ -2156,10 +2214,12 @@ for this. You could pay to keep it secret; I'd advise it's probably not
 worth it (there is some risk of being scooped, but it's pretty low) but
 it's your call.
 
+\hypertarget{visualizing-trees-and-trees-with-data}{%
 \chapter{Visualizing trees and trees with
-data}\label{visualizing-trees-and-trees-with-data}
+data}\label{visualizing-trees-and-trees-with-data}}
 
-\section{Objectives}\label{objectives-10}
+\hypertarget{objectives-9}{%
+\section{Objectives}\label{objectives-9}}
 
 By the end of this chapter, you will:
 
@@ -2170,6 +2230,71 @@ By the end of this chapter, you will:
 \item
   Understand how to visualize trees with data
 \end{itemize}
+
+\begin{verbatim}
+## Loading required package: deSolve
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: GenSA
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: subplex
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: nloptr
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ade4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'adephylo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ade4':
+## 
+##     orthogram
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: phangorn
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'phangorn'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:phybase':
+## 
+##     treedist, upgma
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: RColorBrewer
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: taxize
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'taxize'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:rotl':
+## 
+##     synonyms, tax_name, tax_rank
+\end{verbatim}
 
 It's always important to visualize trees, and data on your trees. For
 example, most comparative methods require branch lengths. Are yours
@@ -2226,12 +2351,13 @@ branch lengths:
 
 \includegraphics{comparative-methods_files/figure-latex/unnamed-chunk-29-1.pdf}
 
-\chapter{Appendix}\label{appendix}
+\hypertarget{appendix}{%
+\chapter{Appendix}\label{appendix}}
 
 Maybe include vignettes: see
 \url{http://stackoverflow.com/questions/17593912/insert-portions-of-a-markdown-document-inside-another-markdown-document-using-kn}
 
-\bibliography{packages.bib,book.bib}
+\bibliography{book.bib,packages.bib}
 
 
 \end{document}

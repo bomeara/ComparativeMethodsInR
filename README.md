@@ -23,3 +23,5 @@ And to deploy on bookdown,
 Or just use the RenderAll.R script.
 
 The book.bib references are exported from Mendeley, from the PhyloMeth group.
+
+use the `citr` package with the rstudio addin to cite easily
