@@ -1,0 +1,52 @@
+# Visualizing trees and trees with data
+
+## Objectives
+
+By the end of this chapter, you will:
+
+* Understand ways to visualize trees
+* Understand how to visualize trees with data
+
+```{r, echo=FALSE}
+library(ape)
+library(phytools)
+library(hisse)
+library(adephylo)
+library(MonoPhy)
+library(rotl)
+library(geiger)
+set.seed(1859)
+```
+
+It's always important to visualize trees, and data on your trees. For example, most comparative methods require branch lengths. Are yours reasonable? Do you have any taxa on very long branches (which could indicate alignment or paralogy issues)? Are there many effectively zero length branches? Does everything agree with what you know of taxonomy?
+
+```{r, echo=FALSE}
+phy <- rotl::get_study_tree(study_id="pg_1653", tree_id="tree6541")
+pub <- rotl::get_publication(rotl::get_study_meta("pg_1653"))
+small.phy <- geiger::drop.random(phy, n=ape::Ntip(phy)-12)
+```
+
+To start, let's take a sample tree: a tree of snakes by `r pub` [#TODO: add proper citation]. It is a tree of `r ape::Ntip(phy)` taxa. But we'll start with a 12 tip subtree.
+
+The natural way you'd plot this in R:
+
+```{r}
+ape::plot.phylo(small.phy)
+```
+
+Plotting it with tips to the right is most common, but there are other options, too:
+
+```{r}
+ape::plot.phylo(small.phy, direction="upwards")
+```
+
+Especially for big trees, fan (circle trees) can also be popular:
+
+```{r}
+ape::plot.phylo(small.phy, type="fan")
+```
+Sometimes for just seeing the tree structure itself, once can remove branch lengths:
+
+```{r}
+ape::plot.phylo(small.phy, type="cladogram")
+```
