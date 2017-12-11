@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
 
   <meta property="og:title" content="Comparative Methods" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2017-06-10">
+<meta name="date" content="2017-12-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,59 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.bn { color: #40a070; } /* BaseN */
+code span.fl { color: #40a070; } /* Float */
+code span.ch { color: #4070a0; } /* Char */
+code span.st { color: #4070a0; } /* String */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.ot { color: #007020; } /* Other */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.fu { color: #06287e; } /* Function */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #880000; } /* Constant */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #19177c; } /* Variable */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.op { color: #666666; } /* Operator */
+code span.bu { } /* BuiltIn */
+code span.ex { } /* Extension */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.at { color: #7d9029; } /* Attribute */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -148,36 +166,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>9.2</b> Brownian motion</a></li>
 <li class="chapter" data-level="9.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>9.3</b> Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits</a><ul>
-<li class="chapter" data-level="10.1" data-path="discrete-traits.html"><a href="discrete-traits.html#objectives-4"><i class="fa fa-check"></i><b>10.1</b> Objectives</a></li>
-</ul></li>
+<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits</a></li>
 <li class="chapter" data-level="11" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>11</b> Diversification</a><ul>
-<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-5"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-4"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>12</b> SSE methods</a><ul>
-<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-6"><i class="fa fa-check"></i><b>12.1</b> Objectives</a><ul>
+<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-5"><i class="fa fa-check"></i><b>12.1</b> Objectives</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>12.1.1</b> Discussion prompts</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>13</b> RAxML</a><ul>
-<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-7"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
+<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-6"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
 <li class="chapter" data-level="13.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>13.2</b> Install RAxML</a></li>
 <li class="chapter" data-level="13.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>13.3</b> Morphology search</a></li>
 <li class="chapter" data-level="13.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>13.4</b> DNA</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>14</b> Gene Tree Species Tree</a><ul>
-<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-8"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-7"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>15</b> Dating</a><ul>
-<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-9"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
+<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-8"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
 <li class="chapter" data-level="15.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>15.2</b> BEAST</a></li>
-<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#r8s"><i class="fa fa-check"></i><b>15.3</b> r8s</a></li>
-<li class="chapter" data-level="15.4" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.4</b> Applying to your own work</a></li>
+<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.3</b> Applying to your own work</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html"><i class="fa fa-check"></i><b>16</b> Visualizing trees and trees with data</a><ul>
-<li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-10"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
+<li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="17" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>17</b> Appendix</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -215,72 +229,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="brownian-motion" class="section level2">
 <h2><span class="header-section-number">9.2</span> Brownian motion</h2>
 <p>First, let’s get a tree:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rotl)
-<span class="kw">library</span>(ape)
-phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)
-<span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.5</span>)
-<span class="kw">axisPhylo</span>(<span class="dt">backward=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb27"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">library</span>(rotl)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">library</span>(ape)</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="kw">axisPhylo</span>(<span class="dt">backward=</span><span class="ot">TRUE</span>)</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Note that this tree is a chronogram.</p>
 <p>Let’s simulate data on this tree. But what model to use? For now, let’s assume we are looking at continuous traits, things like body size. Over evolutionary time, these probably undergo a series of changes that then get added up. A species has an average mass of 15 kg, then it goes to 15.1 kg, then 14.8 kg, and so forth. But how could those changes be distributed?</p>
 <p>Start with a uniform distribution. Take a starting value of 0, then pick a number from -1 to 1 to add to it (in other words, <code>runif(n=1, min=-1, max=1)</code>). There are efficient ways to do this for many generations, but let’s do the obvious way: a simple <code>for</code> loop. Do it for 100 generations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
-positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {
-  positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)
-}
-<span class="kw">plot</span>(<span class="dt">x=</span>positions, <span class="dt">y=</span><span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb28"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">ngen &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">  positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="kw">plot</span>(<span class="dt">x=</span>positions, <span class="dt">y=</span><span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-10-1.png" width="672" /></p>
 <p>We can repeat this simulation many times and see what the pattern looks like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
-nsims &lt;-<span class="st"> </span><span class="dv">500</span>
-final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)
-<span class="co"># make a plot to hold our lines</span>
-<span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="op">*</span>ngen, <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
-<span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {
-  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {
-    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)
-  }
-  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))
-  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]
-}</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb29"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">ngen &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">nsims &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="co"># make a plot to hold our lines</span></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="op">*</span>ngen, <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))</a>
+<a class="sourceLine" id="cb29-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {</a>
+<a class="sourceLine" id="cb29-9" data-line-number="9">    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb29-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb29-11" data-line-number="11">  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb29-12" data-line-number="12">  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]</a>
+<a class="sourceLine" id="cb29-13" data-line-number="13">}</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Well, that may seem odd: we’re adding a bunch of uniform random values between -1 and 1 (so, a flat distribution) and we get something that definitely has more lines ending up in the middle than further out. Look just at the distribution of final points:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb30"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Which looks almost normal. Ok, let’s try a weird distribution:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rweird &lt;-<span class="st"> </span><span class="cf">function</span>() {
-  displacement &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">if</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span>.<span class="dv">1</span>) {
-    displacement &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>)
-  } <span class="cf">else</span> {
-    displacement &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="fl">0.3</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
-  }
-  displacement &lt;-<span class="st"> </span>displacement <span class="op">+</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">100</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span>)
-  <span class="kw">return</span>(displacement)  
-}
-
-<span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">replicate</span>(<span class="dv">100000</span>, <span class="kw">rweird</span>())), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb31"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">rweird &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">  displacement &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="cf">if</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">.1</span>) {</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">    displacement &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">    displacement &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="fl">0.3</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">  displacement &lt;-<span class="st"> </span>displacement <span class="op">+</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">100</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb31-9" data-line-number="9">  <span class="kw">return</span>(displacement)  </a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb31-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb31-12" data-line-number="12"><span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">replicate</span>(<span class="dv">100000</span>, <span class="kw">rweird</span>())), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-13-1.png" width="672" /></p>
 <p>When we ask <code>rweird()</code> for a number it sometimes gives us a normally distributed number multiplied by a unifor distribution, other times it gives us an exponentially distributed number, and then adds the remainder that comes when you divide a random number by 7. So, not exactly a simple distribution like uniform, normal, or Poisson. So, repeating the simulation above but using this funky distribution:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
-nsims &lt;-<span class="st"> </span><span class="dv">500</span>
-final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)
-<span class="co"># make a plot to hold our lines</span>
-<span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>,<span class="dv">1200</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
-<span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {
-  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {
-    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">rweird</span>()
-  }
-  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))
-  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]
-}</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb32"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">ngen &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">nsims &lt;-<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co"># make a plot to hold our lines</span></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>,<span class="dv">1200</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">rweird</span>()</a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb32-11" data-line-number="11">  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb32-12" data-line-number="12">  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]</a>
+<a class="sourceLine" id="cb32-13" data-line-number="13">}</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-14-1.png" width="672" /></p>
 <p>And now let’s look at final positions again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre></div>
-<p><img src="comparative-methods_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="sourceCode r" id="cb33"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</a></code></pre>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Again, it looks pretty much like a normal distribution. You can try with your own wacky distribution, and this will almost always happen (as long as the distribution has finite variance).</p>
 <p>Why?</p>
 <p>Well, think back to stats: why do we use the normal distribution for so much?</p>
@@ -292,7 +306,7 @@ final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span 
 <div id="correlation" class="section level2">
 <h2><span class="header-section-number">9.3</span> Correlation</h2>
 <p>For this week, bring your data and a tree for those taxa. Fork <a href="https://github.com/PhyloMeth/Correlation" class="uri">https://github.com/PhyloMeth/Correlation</a> and then add scripts there. When you’re done, do a pull request. Note if you add data to that directory and commit it, it’ll be uploaded to public GitHub. Probably not a big deal, unless you want to keep your data secret and safe (Lord of The Rings reference; c.f. <code>phangorn</code> package).</p>
-<p><strong>Do independent contrasts</strong> using <code>pic()</code> in <code>ape</code>. Remember to 1) positivize the contrasts (this is <em>not</em> the same as doing <code>abs()</code>). From the Garland et al. paper, think about ways to see if there are any problems. How do contrasts affect the correlations?</p>
+<p><strong>Do independent contrasts</strong> using <code>pic()</code> in <code>ape</code>. Remember to 1) positivize the contrasts (this is <em>not</em> the same as doing <code>abs()</code>). From the Garland et al. paper, think about ways to see if there are any problems. How do contrasts affect the correlations?</p>
 <p><strong>Do Pagel94</strong> There are at least three ways to do this in R: in the <code>phytools</code>, <code>diversitree</code>, and <code>corHMM</code> packages. With <code>phytools</code>, it’s pretty simple: use the <code>fitPagel()</code> function. With the others, you have to specify the constraint matrices (this allows you to do Pagel-style tests but on a wider range of models). Think about what you should assume at the root state: canonical Pagel94 assumes equal probabilities of each state at the root, but that might be a bad assumption for your taxa.</p>
 <p><strong>Use another correlation method</strong> Perhaps phyloGLM? Use the <code>phylolm</code> package, or some other approach to look at correlations.</p>
 
