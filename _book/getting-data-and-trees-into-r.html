@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2017-12-11">
+<meta name="date" content="2017-12-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,16 +50,24 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
 @media print {
 code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
   { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
     position: absolute; left: -5em; text-align: right; vertical-align: baseline;
@@ -71,38 +79,40 @@ pre.numberSource a.sourceLine::before
     color: #aaaaaa;
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
 @media screen {
-a.sourceLine::before { text-decoration: underline; color: initial; }
+a.sourceLine::before { text-decoration: underline; }
 }
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code span.dt { color: #902000; } /* DataType */
 code span.dv { color: #40a070; } /* DecVal */
-code span.bn { color: #40a070; } /* BaseN */
-code span.fl { color: #40a070; } /* Float */
-code span.ch { color: #4070a0; } /* Char */
-code span.st { color: #4070a0; } /* String */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.ot { color: #007020; } /* Other */
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.fu { color: #06287e; } /* Function */
 code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code span.cn { color: #880000; } /* Constant */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.im { } /* Import */
-code span.va { color: #19177c; } /* Variable */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.op { color: #666666; } /* Operator */
-code span.bu { } /* BuiltIn */
 code span.ex { } /* Extension */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.at { color: #7d9029; } /* Attribute */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -218,35 +228,35 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 <div id="data-and-tree-object-types" class="section level2">
 <h2><span class="header-section-number">3.1</span> Data and tree object types</h2>
 <p>In R, there are many kinds of objects. These kinds are called “classes”. For example, take the text string “Darwin”.</p>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span>(<span class="st">&quot;Darwin&quot;</span>)</a></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span>(<span class="st">&quot;Darwin&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>It is a <code>character</code> class. <code>pi</code> is a defined constant in R:</p>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">print</span>(pi)</a></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">print</span>(pi)</a></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
-<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">class</span>(pi)</a></code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">class</span>(pi)</a></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>Its class is <code>numeric</code> [and note that its value is stored with more precision than is printed on screen].</p>
 <p>Objects can sometimes be converted from one class to another, often using an <code>as.*</code> function:</p>
-<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example<span class="fl">.1</span> &lt;-<span class="st"> &quot;6&quot;</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">print</span>(example<span class="fl">.1</span>)</a></code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example<span class="fl">.1</span> &lt;-<span class="st"> &quot;6&quot;</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">print</span>(example<span class="fl">.1</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;6&quot;</code></pre>
-<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span>(example<span class="fl">.1</span>)</a></code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span>(example<span class="fl">.1</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">example<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(example<span class="fl">.1</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">print</span>(example<span class="fl">.2</span>)</a></code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">example<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(example<span class="fl">.1</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">print</span>(example<span class="fl">.2</span>)</a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<pre class="sourceCode r" id="cb14"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">class</span>(example<span class="fl">.2</span>)</a></code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">class</span>(example<span class="fl">.2</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="sourceCode r" id="cb16"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">example<span class="fl">.2</span> <span class="op">*</span><span class="st"> </span><span class="dv">7</span></a></code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">example<span class="fl">.2</span> <span class="op">*</span><span class="st"> </span><span class="dv">7</span></a></code></pre></div>
 <pre><code>## [1] 42</code></pre>
 <p>Trying to multiply example.1 by seven results in an error: you are trying to multiply a character string by a number, and R does not automatically convert classes. Classes have many uses in R; for example, one can write a different <code>plot()</code> function for each class, so that a tree is plotted one way, while a result from a regression model is plotted a different way, but users just have to call <code>plot()</code> on each and R knows what to do.</p>
 <p>In phylogenetics, we mostly care about classes for trees, for data, and for things to hold trees and data.</p>
 <div id="tree-classes" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Tree classes</h3>
 <p>The main tree class in R is <code>phylo</code> and is defined in the <code>ape</code> package. Let’s look at one in the wild:</p>
-<pre class="sourceCode r" id="cb18"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(ape)</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(ape)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">rcoal</span>(<span class="dv">5</span>) <span class="co">#to make a random five taxon tree</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">print</span>(phy)</a></code></pre>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">print</span>(phy)</a></code></pre></div>
 <pre><code>## 
 ## Phylogenetic tree with 5 tips and 4 internal nodes.
 ## 
@@ -254,7 +264,7 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 ## [1] &quot;t4&quot; &quot;t1&quot; &quot;t2&quot; &quot;t5&quot; &quot;t3&quot;
 ## 
 ## Rooted; includes branch lengths.</code></pre>
-<pre class="sourceCode r" id="cb20"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">str</span>(phy)</a></code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">str</span>(phy)</a></code></pre></div>
 <pre><code>## List of 4
 ##  $ edge       : int [1:8, 1:2] 6 7 9 9 7 6 8 8 7 9 ...
 ##  $ edge.length: num [1:8] 0.8398 0.9268 0.0806 0.0806 1.0074 ...
@@ -277,7 +287,7 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 <pre><code>phy &lt;- ape::read.tree(file=&#39;treefile.phy&#39;)</code></pre>
 <p>To get a tree in <a href="http://evolution.genetics.washington.edu/phylip/newicktree.html">Newick format</a> (sometimes called Phylip format): essentially a series of parenthetical statements. An example (from <code>ape</code>’s documentation) is <code>((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);</code>. The format name comes from the name of the <a href="http://newicks.com">lobster house</a> where several major phylogenetic software developers met to agree on a tree format.</p>
 <p>You can use the same function to enter tree strings directly, changing the argument from the <code>file</code> containing the tree to <code>text</code> containing the tree string:</p>
-<pre class="sourceCode r" id="cb23"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&#39;((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);&#39;</span>)</a></code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&#39;((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);&#39;</span>)</a></code></pre></div>
 <p>Note the trailing semicolon.</p>
 <p>One thing that can trip users up with <code>read.tree()</code> (and the <code>read.nexus()</code> function, below) is that the output class depends on the input. If you read from a file with one tree, the returned output is a single tree object with class <code>phylo</code>. You can then use <code>plot()</code> on this object to draw the tree, pass this object into a comparative methods package to estimate rates, and so forth. If the file has more than one tree, the returned class is <code>multiphylo</code>: <code>plot()</code> will automatically cycle through plots as you type return, most comparative method implementations will fail (they are written to expect one tree of class <code>phylo</code>, not a vector of trees in a different class). <code>read.tree()</code> has an optional <code>keep.multi</code> function: if set to TRUE, the class is always <code>multiphylo</code>, and you can always get the first tree by getting the first element in the returned object:</p>
 <pre><code>phy.multi &lt;- ape::read.tree(file=&#39;treefile.phy&#39;, keep.multi = TRUE)
@@ -287,7 +297,7 @@ phy &lt;- phy.multi[[1]]</code></pre>
 <h3><span class="header-section-number">3.4.1</span> Great scientists steal</h3>
 <p>Scientists have been creating trait-based phylogenetic trees for decades. These scientists are often experts in their group, in potential problems in their data, in how to use relevant software. In other words, their trees are likely to be better than any you make. Traditionally, these trees are published as a figure in a paper, largely unavailable for reuse. This hurts reproducibility, makes it less likely for the work to be cited, and stymies scientific progress in general. However, the field is increasingly moving to more frequent deposition of trees in reusable form: sometimes based on author initiative, sometimes based on journal requirements. The main repository for this is <a href="http://treebase.org">TreeBase</a>: if you are reading a paper, and want to use its tree, that’s the first place to look. You can also use their website to search for taxa. The trees can be downloaded and loaded into R using <code>phylobase</code> (the NEXUS format used by TreeBase is hard for <code>ape</code> to load).</p>
 <p>Another approach that is growing in importance is <a href="http://otol.org">Open Tree of Life</a>. It seeks to synthesize thousands of trees to create a single tree of life. The <code>rotl</code> package can download this synthetic tree or components of it (the tree for a particular genus, for example). For most groups, however, the synthetic tree is largely based on taxonomy, so it is not very resolved. This is improving as the database of trees available for Open Tree’s synthesis grows (to add to it, go to ___________________), but for most scientific studies, I wouldn’t currently suggest using the synthetic tree (but for getting a sense for a group, making a tree for a class, it can be useful; also see the <a href="http://www.phylotastic.org">Phylotastic</a> project for ways to use trees in teaching or other purposes). However, the Open Tree project also has a cache of thousands of trees that have been hand curated (taxonomic names resolved, ingroups specified, tree type recorded, etc.). The <code>rotl</code> package lets you download these, too. For most analyses, you want trees with branch lengths, and so you can download just chronograms. For example,</p>
-<pre class="sourceCode r" id="cb25"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">#rotl::_________________</span></a></code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">#rotl::_________________</span></a></code></pre></div>
 <p>Two important notes about reusing trees:</p>
 <ul>
 <li><strong>Give credit</strong>: If your entire paper is based on the tree from one other paper, you <strong>must</strong> cite that paper (and also the ways you got the tree, including the packages and/or repositories). If it’s based on trees from around a dozen papers, you should cite them, too. If you’re getting into the hundreds, many editors will object to properly citing them all, but one compromise approach until a better way of giving credit appears is to have supplemental info or an appendix with citations for all the relevant papers (including DOIs to make these easier to parse later)</li>

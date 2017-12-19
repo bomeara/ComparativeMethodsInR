@@ -18,10 +18,10 @@ Many interesting questions hinge on parameter estimation. How much worse is it l
 
 There are many books and articles written about phylogenetic analysis. Some of the key books for readers of this one:
 
-* *Tree Thinking* [@baum2013tree]
-* *Inferring Phylogenies*  [@felsenstein2004inferring]
-* *Computational Molecular Evolution* [@yang2006computational]
-* *Phylogenetics* [@semple2003phylogenetics]
+* *Tree Thinking* [@BaumTreethinkingintroduction2013]
+* *Inferring Phylogenies*  [@FelsensteinInferringphylogenies2004]
+* *Computational Molecular Evolution* [@YangComputationalmolecularevolution2006]
+* *Phylogenetics* [@SemplePhylogenetics2003]
+* *Analysis of Phylogenetics and Evolution with R* [@ParadisAnalysisPhylogeneticsEvolution2011]
 
-An important resource for learning about phylogenetics in R is Emmanuel Paradis' book, [Analysis of Phylogenetics and Evolution with R](http://www.springer.com/us/book/9781461417422). This is written by the same person who is the lead author of the essential `ape` package [@R-ape] for phylogenetics in R.
 

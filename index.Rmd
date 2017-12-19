@@ -3,9 +3,9 @@ title: "Comparative Methods"
 author: "Brian O'Meara"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-bibliography: [book.bib, packages.bib]
+output:
+  bookdown::html_book:
+    theme: darkly
 biblio-style: apalike
 link-citations: yes
 github-repo: bomeara/ComparativeMethodsInR
