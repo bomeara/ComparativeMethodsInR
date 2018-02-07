@@ -19,9 +19,11 @@ Many interesting questions hinge on parameter estimation. How much worse is it l
 There are many books and articles written about phylogenetic analysis. Some of the key books for readers of this one:
 
 * *Tree Thinking* [@BaumTreethinkingintroduction2013]
-* *Inferring Phylogenies*  [@FelsensteinInferringphylogenies2004]
+* *Inferring Phylogenies*  [@felsenstein_inferring_2004]
 * *Computational Molecular Evolution* [@YangComputationalmolecularevolution2006]
 * *Phylogenetics* [@SemplePhylogenetics2003]
 * *Analysis of Phylogenetics and Evolution with R* [@ParadisAnalysisPhylogeneticsEvolution2011]
+
+As well as a draft of a [book by Luke Harmon](https://lukejharmon.github.io/pcm/chapters/).
 
 

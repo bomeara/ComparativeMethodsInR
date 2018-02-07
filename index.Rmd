@@ -6,7 +6,7 @@ site: bookdown::bookdown_site
 output:
   bookdown::html_book:
     theme: darkly
-biblio-style: apalike
+bibliography: ["packages.bib", "zotero.bib"]
 link-citations: yes
 github-repo: bomeara/ComparativeMethodsInR
 description: "How to do comparative methods for evolution and ecology"

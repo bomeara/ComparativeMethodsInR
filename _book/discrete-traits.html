@@ -203,7 +203,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="17" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>17</b> Appendix</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -233,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Be able to explain how to test hypotheses about univariate trait evolution.</li>
 </ul>
 <p>Many traits can be thought of as discrete traits: a DNA site comes in ATGC, protein have one of 20 amino acids, some animals have functional eyes and others do not, some plants are woody and others are herbaceous. This is nearly always an approximation. Think of something like limbs: they seem distinct enough that we even name some groups by their count: tetrapods, hexapods. Except that when we look closely enough, it becomes fuzzy: insect mouthparts are derived from limbs, for example, so should we count these highly modified limbs as limbs (and if not, where in evolution have they become sufficiently modified to no longer count? And are nymphalid butterflies tetrapods under that definition yet?). Are modern whales thought to have four limbs, even though two are extremely vestigial? Often for neontologists problematic organisms with intermediate counts are conveniently extinct (so long, <em>Basilosaurus</em>), so we can ignore this fuzziness, but it is often there (and paleontologists are confronted with it more often). Think about the details of a species changing from one discrete state to another, even for something like a seemingly perfectly discrete character like a base changing from an A to a T. At first this is present in just a single individual (for a multicellular diploid, on one DNA strand in one cell in the germ line). Even if under selection, it will take generations to sweep through to fixation: during that time, what is “the” state of the species? It is even harder to discretize characters like woodiness (how much wood is required?), eyes (when does a fish population evolving in a cave finally “lose” its eyes?), biogeography (how finely do you divide the range: by continent? biome? state?), and so forth.</p>
-<p>As for many decisions, this comes back to the biological hypotheses being tested and the size of the study. For example, one question could be does a complex trait like wings ever re-evolve once lost? <span class="citation">@Whiting2003</span> examined this in stick insects: some species have wings in both sexes, some in one only, and some lack wings in both sexes. If the question hinges on whether loss of wing genes in a species prevents re-evolution, then as long as one sex in a species has wings the species should be coded as having wings. If the question hinges on the effect of loss of wings on ability to settle new areas, it could be that having either sex lack wings is enough to prevent effective colonization, and thus a species with only one sex with wings should be coded as being wingless. If the study system is large enough to have sufficient power, one could code this as a four state character, instead: <strong>A</strong>: both males and females have wings; <strong>B</strong>: males have, females lack wings; <strong>C</strong>: males lack, females have wings; and <strong>D</strong>: both males and females lack wings.</p>
+<p>As for many decisions, this comes back to the biological hypotheses being tested and the size of the study. For example, one question could be does a complex trait like wings ever re-evolve once lost? <span class="citation">(<span class="citeproc-not-found" data-reference-id="Whiting2003"><strong>???</strong></span>)</span> examined this in stick insects: some species have wings in both sexes, some in one only, and some lack wings in both sexes. If the question hinges on whether loss of wing genes in a species prevents re-evolution, then as long as one sex in a species has wings the species should be coded as having wings. If the question hinges on the effect of loss of wings on ability to settle new areas, it could be that having either sex lack wings is enough to prevent effective colonization, and thus a species with only one sex with wings should be coded as being wingless. If the study system is large enough to have sufficient power, one could code this as a four state character, instead: <strong>A</strong>: both males and females have wings; <strong>B</strong>: males have, females lack wings; <strong>C</strong>: males lack, females have wings; and <strong>D</strong>: both males and females lack wings.</p>
 <p>One way to deal with this is to gather discrete data as finely divided as reasonable and then aggregate. For example, in the stick insect example, code it as a four state character as above and then, depending on the biological question, group them. If the question is whether wings can reappear after being entirely lost, for example, one would group <strong>A</strong>, <strong>B</strong>, and <strong>C</strong> as having wings (in at least some members of the species, so the genes remain under selection for functionality) and <strong>D</strong> as wingless, but for the dispersal question one could lump <strong>B</strong>, <strong>C</strong>, and <strong>D</strong>, leaving <strong>A</strong> as the other state, or even lump <strong>B</strong> and <strong>C</strong> only.</p>
 <table>
 <thead>
@@ -282,8 +281,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>But, let’s assume we can discretize traits and carry on. The simplest discretization is binary: 0 or 1, often absence or presence (but could be yellow or blue, etc.). Most models are like our commonly used DNA models: continuous time with discrete changes, using the same rates throughout. It is like a model for when an autonomous car will have an accident: assuming the car works perfectly (gives a whole new meaning to “blue screen of death”) there’s still a chance that at some point a human is going to run into it. There’s a per hour chance of an accident: let’s assume in each hour there’s a 0.03% chance of our autonomous car having an accident (very roughly based on Google’s experience, assuming a 40 MPH average speed). So the probability of having no accident in the first hour of driving is 99.97%; the probability of having no accidents in the first 40 hours of driving is 99.97% ^ 40 = 98.8%. The number of accidents is Poisson-distributed; the wait time between accidents is exponentially distributed. This is the model commonly used in phylogenetics for discrete traits, though sometimes with more complexity: one could move (with some rate) between two different rates, as in a covarion model, for example. A very different model is Felsenstein’s threshold model, which we will discuss in a few weeks. For now, though, just envision models with a fixed rate of change between states as long as other characters don’t change; it’s possible, though, that the state of other characters do affect these rates (which is what correlation tests investigate). For example, the probability of switching from clawed feet to flippers for forelimbs is probably much higher for species that live in water than on land.</p>
-<p>(btw, note the spelling here: having one, two or eight eyes is a <em>discrete</em> trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a <em>discreet</em> trait. The former is generally far more biologically relevant)</p>
+<p>(btw, note the spelling here: having one, two or eight eyes is a <em>discrete</em> trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a <em>discreet</em> trait. The former is generally far more biologically relevant).</p>
+<p>Discrete trait models typically assume that change from one state to another happens in one step. Time is continuous (per instant, rather than change per generation, per year, etc.). Usually the process is memoryless: there’s no cooling-off period during which a trait can’t change back, for example (there are seeming exceptions, like the threshold model <span class="citation">(Felsenstein <a href="#ref-felsenstein_comparative_2012">2012</a>)</span>, though these often are memoryless when you look more deeply (like in the liability in the threshold model)). This memoryless property makes this a Markovian model. So, overall, these are discrete state continuous time Markov chain models (DSCTMC) <span class="citation">(O’Meara <a href="#ref-omeara_evolutionary_2012-1">2012</a>)</span>. When in one state, there’s an exponentially distributed wait time until a change to some other state. An example of this is radioactive decay: an atom of carbon-14 sitting patiently in a sugar molecule, until at some point it decays to form a nitrogen atom. It might happen in a second, it may happen in 100 years, it may happen in 10,000 years. The faster the decay rate, the less time on average until it changes. For atomic decay, we often talk about half life (1/rate): this can be done for phylogenetics, too [note this is distinct from phylogenetic half life for Ornstein-Uhlenbeck models – see that chapter]. This can give an intuitive sense of time to a change: is there a 50:50 chance the trait has changed after 10 MY (reasonable) or after 0.0001 years (seems a bit fast for most traits)?</p>
+<p>It’s possible a trait can have more than two states. Take DNA: an A could change to a T, to a G, or to a C. There could be three rates: r<sub>AT</sub>, r<sub>AG</sub>, r<sub>AC</sub> for changes from A to T, A to G, and A to C respectively. The rate it changes at all is the sum of these: r<sub>A_</sub> = r<sub>AT</sub> + r<sub>AG</sub> + r<sub>AC</sub>. The probability that the change is A to T when it does change is just r<sub>AT</sub> / (r<sub>AT</sub> + r<sub>AG</sub> + r<sub>AC</sub>).</p>
+<p>It is often convenient to arrange the instantaneous rates into a table. Each row represents a starting state, and each column represents an ending state. Each cell is the instantaneous rate of going from the row state to the column state:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">A</th>
+<th align="left">T</th>
+<th align="left">G</th>
+<th align="left">C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td align="left">-</td>
+<td align="left">r<sub>AT</sub></td>
+<td align="left">r<sub>AG</sub></td>
+<td align="left">r<sub>AC</sub></td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td align="left">r<sub>TA</sub></td>
+<td align="left">-</td>
+<td align="left">r<sub>TG</sub></td>
+<td align="left">r<sub>TC</sub></td>
+</tr>
+<tr class="odd">
+<td>G</td>
+<td align="left">r<sub>GA</sub></td>
+<td align="left">r<sub>GT</sub></td>
+<td align="left">-</td>
+<td align="left">r<sub>GC</sub></td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td align="left">r<sub>CA</sub></td>
+<td align="left">r<sub>CT</sub></td>
+<td align="left">r<sub>CG</sub></td>
+<td align="left">-</td>
+</tr>
+</tbody>
+</table>
+<p>Though the above example is for DNA, one could do the same with amino acids, ability to fly, having eyes, growth form, trophic level, etc.</p>
+<p>Once we have this matrix, we can do a few cool things with it. One is to calculate the probability of starting in one state and ending in a particular state over some time <em>t</em>. This is frankly amazing: think of the ways one could start in A and end in T. One could change from A to T exactly at the middle of the time interval. Or, this could happen 10% of the way along the branch. Or, one could change from A to G a third of the way up and then G to T a bit further along. Or could go from A to T to A to T. Etc. There are an infinite number of paths one could take to get from A to T. However, by simply taking the instantaneous rate matrix, <strong>Q</strong>, multiplying each cell by <em>t</em>, and taking the matrix exponential of this, we can integrate over <em>all</em> these paths to get the probability matrix <strong>P</strong>, where the entry for row <em>i</em>, column <em>j</em> is the probability of starting in state <em>i</em> and ending in state <em>j</em> over time <em>t</em>.</p>
+<p>With a way to calculate probability, all manner of wondrous things become available. For example, take this very simple tree:</p>
+<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-18-1.png" width="672" /></p>
+<p>What is the probability of the data (the likelihood) of this tree? Well, we have two paths: from A at the root of the tree to A over a time of 0.7, and from A at the root of the tree to G, also over a time of 0.7. If we know the instantaneous rates, we can take the matrix <strong>Q</strong>, do <strong>P</strong> = expm(<strong>Q</strong> times <em>t</em>), and calculate the probability of A to A and A to G paths. Multiply those two probabilities together than that is the probability of seeing A and G at the tips and A at the root given the instantneous rates: that is, we’ve calculated the likelihood of the tree. We could try changing the branch length from 0.7 to 0.71 or 0.69, repeat, and continue trying branch lengths until we find a branch length that maximizes this probability: that’s finding the maximum likelihood optimum branch length. If we do not want to assume an A at the root, we could calculate the probability of the data assuming a T at the root, assuming an A, assuming a G, and assuming a C, weight each probability by our expectation of seeing each root state (for example, if we assume we know nothing a 1/4 chance of each state) and get the weighted sum. This is how likelihoods of trees are calculated in general. For larger trees, we essentially do the same thing, trying all possible combinations of states at each node (there’s actually a faster but equivalent algorithm, known as tree pruning or tree peeling, developed by Felsenstein that’s used in practice). If we want to estimate the state at one particular node (the marginal ancestral state estimate), we integrate (add) over all possible combinations of states at other nodes but trying each possible state at our focal node to find the likelihood of the data given each state – this is ancestral state estimation. If we want to compare two different trees, we calculate the probability of the data on each tree and compare them. Combined with a way of proposing new trees, this is a likelihood tree search algorithm.</p>
+<p>In the same way we can try different branch lengths and get different likelihoods to find the optimal branch length, we can try different rates and try to get the ones that maximize the probability of the data. Many questions relate to these rates. Is the rate of gaining eyes lower then the rate of losing eyes? Find the values that maximize the likelihood, see if the gaining eyes rate is lower. It can be helpful to compare rates under a model where they are allowed to vary with models where they are forced to be the same: for example, we can set the gain rate to equal the loss rate and see how much worse that is. This is also one way we simplify models: either by forcing some paramter values to have the same rates or by forcing some rates to be a fixed value (usually zero). For example, for DNA models, a common one is to assume that the rate of going from state <em>i</em> to <em>j</em> is the same as going from <em>j</em> to <em>i</em>: this is known as a general time reversible model. This often fits almost as well as a model with all transition rates allowed to vary, but has half the number of parameters to fit. An even simpler model, the Jukes-Cantor model, forces all rates from one nucleotide to another to be equal.</p>
 
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-felsenstein_comparative_2012">
+<p>Felsenstein, Joseph. 2012. “A Comparative Method for Both Discrete and Continuous Characters Using the Threshold Model.” <em>The American Naturalist</em> 179 (2):145–56. <a href="https://doi.org/10.1086/663681" class="uri">https://doi.org/10.1086/663681</a>.</p>
+</div>
+<div id="ref-omeara_evolutionary_2012-1">
+<p>O’Meara, B.C. 2012. <em>Evolutionary Inferences from Phylogenies: A Review of Methods</em>. Vol. 43. <a href="https://doi.org/10.1146/annurev-ecolsys-110411-160331" class="uri">https://doi.org/10.1146/annurev-ecolsys-110411-160331</a>.</p>
+</div>
 </div>
             </section>
 

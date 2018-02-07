@@ -22,4 +22,46 @@ kable(characters)
 
 But, let's assume we can discretize traits and carry on. The simplest discretization is binary: 0 or 1, often absence or presence (but could be yellow or blue, etc.). Most models are like our commonly used DNA models: continuous time with discrete changes, using the same rates throughout. It is like a model for when an autonomous car will have an accident: assuming the car works perfectly (gives a whole new meaning to "blue screen of death") there's still a chance that at some point a human is going to run into it. There's a per hour chance of an accident: let's assume in each hour there's a 0.03% chance of our autonomous car having an accident (very roughly based on Google's experience, assuming a 40 MPH average speed). So the probability of having no accident in the first hour of driving is 99.97%; the probability of having no accidents in the first 40 hours of driving is 99.97% ^ 40 = 98.8%. The number of accidents is Poisson-distributed; the wait time between accidents is exponentially distributed. This is the model commonly used in phylogenetics for discrete traits, though sometimes with more complexity: one could move (with some rate) between two different rates, as in a covarion model, for example. A very different model is Felsenstein's threshold model, which we will discuss in a few weeks. For now, though, just envision models with a fixed rate of change between states as long as other characters don't change; it's possible, though, that the state of other characters do affect these rates (which is what correlation tests investigate). For example, the probability of switching from clawed feet to flippers for forelimbs is probably much higher for species that live in water than on land.
 
-(btw, note the spelling here: having one, two or eight eyes is a *discrete* trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a *discreet* trait. The former is generally far more biologically relevant)
+(btw, note the spelling here: having one, two or eight eyes is a *discrete* trait: individually separate and distinct. Forming an enclosed bower for hidden mating is a *discreet* trait. The former is generally far more biologically relevant).
+
+Discrete trait models typically assume that change from one state to another happens in one step. Time is continuous (per instant, rather than change per generation, per year, etc.). Usually the process is memoryless: there's no cooling-off period during which a trait can't change back, for example (there are seeming exceptions, like the threshold model [@felsenstein_comparative_2012], though these often are memoryless when you look more deeply (like in the liability in the threshold model)). This memoryless property makes this a Markovian model. So, overall, these are discrete state continuous time Markov chain models (DSCTMC) [@omeara_evolutionary_2012-1]. When in one state, there's an exponentially distributed wait time until a change to some other state. An example of this is radioactive decay: an atom of carbon-14 sitting patiently in a sugar molecule, until at some point it decays to form a nitrogen atom. It might happen in a second, it may happen in 100 years, it may happen in 10,000 years. The faster the decay rate, the less time on average until it changes. For atomic decay, we often talk about half life (1/rate): this can be done for phylogenetics, too [note this is distinct from phylogenetic half life for Ornstein-Uhlenbeck models -- see that chapter]. This can give an intuitive sense of time to a change: is there a 50:50 chance the trait has changed after 10 MY (reasonable) or after 0.0001 years (seems a bit fast for most traits)?
+
+It's possible a trait can have more than two states. Take DNA: an A could change to a T, to a G, or to a C. There could be three rates: r~AT~, r~AG~, r~AC~ for changes from A to T, A to G, and A to C respectively. The rate it changes at all is the sum of these: r~A_~ = r~AT~ + r~AG~ + r~AC~. The probability that the change is A to T when it does change is just r~AT~  / (r~AT~ + r~AG~ + r~AC~). 
+
+It is often convenient to arrange the instantaneous rates into a table. Each row represents a starting state, and each column represents an ending state. Each cell is the instantaneous rate of going from the row state to the column state:
+
+```{r echo=FALSE, results="asis"}
+library(knitr)
+Q <- data.frame(matrix("-", nrow=4, ncol=4), stringsAsFactors = FALSE)
+states <- c("A", "T", "G", "C")
+rownames(Q) <- states
+colnames(Q) <- states
+for (i in sequence(nrow(Q))) {
+  for (j in sequence(ncol(Q))) {
+    if(i!=j) {
+      Q[i,j] <- paste0('r~',states[i], states[j], '~')
+    }
+  }
+}
+
+kable(Q)
+```
+
+Though the above example is for DNA, one could do the same with amino acids, ability to fly, having eyes, growth form, trophic level, etc. 
+
+Once we have this matrix, we can do a few cool things with it. One is to calculate the probability of starting in one state and ending in a particular state over some time *t*. This is frankly amazing: think of the ways one could start in A and end in T. One could change from A to T exactly at the middle of the time interval. Or, this could happen 10% of the way along the branch. Or, one could change from A to G a third of the way up and then G to T a bit further along. Or could go from A to T to A to T. Etc. There are an infinite number of paths one could take to get from A to T. However, by simply taking the instantaneous rate matrix, **Q**, multiplying each cell by *t*, and taking the matrix exponential of this, we can integrate over *all* these paths to get the probability matrix **P**, where the entry for row *i*, column *j* is the probability of starting in state *i* and ending in state *j* over time *t*. 
+
+With a way to calculate probability, all manner of wondrous things become available. For example, take this very simple tree:
+
+```{r echo=FALSE, results="asis"}
+ape::plot.phylo(ape::read.tree(text="(A:0.7,G:0.7)Root;"))
+ape::nodelabels("A", bg="white", bty="n",frame="c")
+ape::axisPhylo(backward=FALSE)
+```
+
+What is the probability of the data (the likelihood) of this tree? Well, we have two paths: from A at the root of the tree to A over a time of 0.7, and from A at the root of the tree to G, also over a time of 0.7. If we know the instantaneous rates, we can take the matrix **Q**, do **P** = expm(**Q** times *t*), and calculate the probability of A to A and A to G paths. Multiply those two probabilities together than that is the probability of seeing A and G at the tips and A at the root given the instantneous rates: that is, we've calculated the likelihood of the tree. We could try changing the branch length from 0.7 to 0.71 or 0.69, repeat, and continue trying branch lengths until we find a branch length that maximizes this probability: that's finding the maximum likelihood optimum branch length. If we do not want to assume an A at the root, we could calculate the probability of the data assuming a T at the root, assuming an A, assuming a G, and assuming a C, weight each probability by our expectation of seeing each root state (for example, if we assume we know nothing a 1/4 chance of each state) and get the weighted sum. This is how likelihoods of trees are calculated in general. For larger trees, we essentially do the same thing, trying all possible combinations of states at each node (there's actually a faster but equivalent algorithm, known as tree pruning or tree peeling, developed by Felsenstein that's used in practice). If we want to estimate the state at one particular node (the marginal ancestral state estimate), we integrate (add) over all possible combinations of states at other nodes but trying each possible state at our focal node to find the likelihood of the data given each state -- this is ancestral state estimation. If we want to compare two different trees, we calculate the probability of the data on each tree and compare them. Combined with a way of proposing new trees, this is a likelihood tree search algorithm.
+
+In the same way we can try different branch lengths and get different likelihoods to find the optimal branch length, we can try different rates and try to get the ones that maximize the probability of the data. Many questions relate to these rates. Is the rate of gaining eyes lower then the rate of losing eyes? Find the values that maximize the likelihood, see if the gaining eyes rate is lower. It can be helpful to compare rates under a model where they are allowed to vary with models where they are forced to be the same: for example, we can set the gain rate to equal the loss rate and see how much worse that is. This is also one way we simplify models: either by forcing some paramter values to have the same rates or by forcing some rates to be a fixed value (usually zero). For example, for DNA models, a common one is to assume that the rate of going from state *i* to *j* is the same as going from *j* to *i*: this is known as a general time reversible model. This often fits almost as well as a model with all transition rates allowed to vary, but has half the number of parameters to fit. An even simpler model, the Jukes-Cantor model, forces all rates from one nucleotide to another to be equal.
+
+
+
