@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
 
   <meta property="og:title" content="Comparative Methods" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2017-12-19">
+<meta name="date" content="2018-02-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -202,6 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html"><i class="fa fa-check"></i><b>16</b> Visualizing trees and trees with data</a><ul>
 <li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="17" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>17</b> Appendix</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -241,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/evo.12614/abstract">Beaulieu and O’Meara (2015)</a> “Extinction rates can be estimated from moderately sized molecular phylogenies”</li>
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/evo.12820/full">Rabosky (2015)</a> “Challenges in the estimation of extinction from molecular phylogenies: A response to Beaulieu and O’Meara”</li>
 </ul>
-<p>And that probably isn’t the last word on this (no, I’m not planning something at the moment). However, despite all the hemming and hawing over what people <em>should</em> do, people still keep using methods: folks using <code>diversitree</code>, <code>BAMM</code>, <code>geiger</code>, or many other approaches merrily estimate extinction rates as a necessary part of their analyses, though they usually don’t focus on them in their studies, instead focusing on diversification (speciation - extinction) or speciation alone. (Note: it is possible to do diversification approaches without estimating extinction rates: one could fix extinction rate at a known value (perhaps using the average duration of fossil “species” to get a fixed estimate), though what is usually done is to fix extinction at 0 (this is called a Yule model, if speciation is constant). This is a bit weird when you think about it: one of the few things we truly know in biology without a doubt is that extinction is far, far from zero in general (though this wasn’t <a href="http://www.ucmp.berkeley.edu/mammal/artio/irishelk.html">really discovered in Western science until the 19th century</a>)). But as skeptical scientists, we should aim higher. It’s often tempting, especially as students or postdocs facing a difficult job market, to focus on what we can get out: is there an exciting result that can get past peer review and build our fame (maybe, in our tiny circle) and fortune (ha!). But it’s important to take a step back: are we confident enough, truly (not just based on the p-value) that our results are actually discoveries about nature? Diversification is an area (ancestral state estimation is another) where the reality of results is especially worrisome. Take, for example, <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12565/abstract">Etienne et al. (2016)</a>, who as part of a broader simulation study, analyzed a dataset of 25 <em>Dendroica</em> warbler species, which is a classic dataset for these studies, fitting a logistic growth model. They found that depending on how the model was conditioned<a href="appendix.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, something most users would ignore, the estimated carrying capacity (in this model, the number of warbler species at which speciation equals extinction; in other models, this would be the number of species at which speciation is zero, with extinction <em>always</em> set to zero) for warblers is 24.59 or 6.09 or 0.656 species. That means, depending on how one conditions, we should expect the number of <em>Dendroica</em> warblers to stay exactly where it is, crash to around six species, or crash to half a species [and of course, in the latter two cases, stochastic change in number of species will lead to them hitting zero species fairly quickly, which is an absorbing state]. Given the sensitivity of the model to factors like conditioning, any result has to be taken with a great deal of skepticism.</p>
+<p>And that probably isn’t the last word on this (no, I’m not planning something at the moment). However, despite all the hemming and hawing over what people <em>should</em> do, people still keep using methods: folks using <code>diversitree</code>, <code>BAMM</code>, <code>geiger</code>, or many other approaches merrily estimate extinction rates as a necessary part of their analyses, though they usually don’t focus on them in their studies, instead focusing on diversification (speciation - extinction) or speciation alone. (Note: it is possible to do diversification approaches without estimating extinction rates: one could fix extinction rate at a known value (perhaps using the average duration of fossil “species” to get a fixed estimate), though what is usually done is to fix extinction at 0 (this is called a Yule model, if speciation is constant). This is a bit weird when you think about it: one of the few things we truly know in biology without a doubt is that extinction is far, far from zero in general (though this wasn’t <a href="http://www.ucmp.berkeley.edu/mammal/artio/irishelk.html">really discovered in Western science until the 19th century</a>)). But as skeptical scientists, we should aim higher. It’s often tempting, especially as students or postdocs facing a difficult job market, to focus on what we can get out: is there an exciting result that can get past peer review and build our fame (maybe, in our tiny circle) and fortune (ha!). But it’s important to take a step back: are we confident enough, truly (not just based on the p-value) that our results are actually discoveries about nature? Diversification is an area (ancestral state estimation is another) where the reality of results is especially worrisome. Take, for example, <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12565/abstract">Etienne et al. (2016)</a>, who as part of a broader simulation study, analyzed a dataset of 25 <em>Dendroica</em> warbler species, which is a classic dataset for these studies, fitting a logistic growth model. They found that depending on how the model was conditioned<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, something most users would ignore, the estimated carrying capacity (in this model, the number of warbler species at which speciation equals extinction; in other models, this would be the number of species at which speciation is zero, with extinction <em>always</em> set to zero) for warblers is 24.59 or 6.09 or 0.656 species. That means, depending on how one conditions, we should expect the number of <em>Dendroica</em> warblers to stay exactly where it is, crash to around six species, or crash to half a species [and of course, in the latter two cases, stochastic change in number of species will lead to them hitting zero species fairly quickly, which is an absorbing state]. Given the sensitivity of the model to factors like conditioning, any result has to be taken with a great deal of skepticism.</p>
 <p>For trait based models, the same history of finding problems and the solutions (or partial solutions) has arisen (there is a paper coming out in the <em>American Journal of Botany</em> in May 2016 that goes into this in more detail). The most relevant parts:</p>
 <p><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.0014-3820.2006.tb00517.x/abstract">Maddison (2006)</a> (and there were similar points made by others earlier) showed that transition rates and diversification rates can be hard to distinguish. Oversimplifying a bit, but if the rate of going from state 0 to state 1 is higher than the reverse rate, then over time there should be many more taxa in state 1 than 0. If the diversification rate in state 1 is higher than in state 0, there will tend to be more taxa in state 1 than 0. So if you see a tree with more state 1 than 0, is it higher transition rate to 1, or higher diversification in 1? Or is it lower transition to 1 but a high enough diversification rate that it overwhelms it? Or just chance? The paper identified the problem but not the solution: the last line of the abstract is “Studies of biased diversification and biased character change need to be unified by joint models and estimation methods, although how successfully the two processes can be teased apart remains to be seen.”</p>
 <p>This was followed up by <a href="http://sysbio.oxfordjournals.org/content/56/5/701.short">Maddison et al. (2007)</a> who figured out a method to deal with this: BiSSE. And systematists looked at it, and it was good. There is now a bestiary of similar *SSE models for different kinds of data: QuaSSE, GeoSSE, MuSSE, ClaSSE, and more.</p>
@@ -272,6 +273,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Conditional probability is the probability of an event given that some other event has occurred. For example, you could use past information from your department to estimate <code>Prob(getting tenure)</code>, but it is different if you use information that another event has occurred: <code>Prob(getting tenure | made major discovery in evolution)</code> is different from <code>Prob(getting tenure | four years since last publication)</code>. In this domain (diversification alone and diversification plus trait models), we condition on actually having a tree to look at: if the true model is speciation rate equals extinction rate, there’s a good chance that most clades starting X million years ago will have gone extinct, so the ones we see diversified unusually quickly, and this has to be taken into account. The example I usually use for this is the idea that dolphins rescue drowning sailors. It’s known dolphins push interesting objects in the ocean. We could interview previously drowning sailors that dolphins pushed towards shore, and they’ll all say that dolphins saved them, but it’s very hard to interview sailors the dolphins pushed the other way. As always, Randall Munroe’s XKCD explains conditional probability best
+<img src="images/seashell.png" alt="Seashell XKCD" /><a href="sse-methods.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
@@ -296,10 +304,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -310,7 +319,7 @@ gitbook.start({
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/91_SSE.Rmd",
 "text": "Edit"
 },
-"download": ["comparative-methods.pdf"],
+"download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {
 "collapse": "subsection"
 }

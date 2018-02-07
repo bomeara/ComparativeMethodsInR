@@ -12,7 +12,7 @@ Make sure to **read the relevant papers**: https://www.mendeley.com/groups/81119
 
 To do this week's assignments, you will have to:
 
-* **Download and install r8s** from http://loco.biosci.arizona.edu/r8s/
+* **Download and install r8s** from http://ceiba.biosci.arizona.edu/r8s/index.html
 * **Download BEAST2 and Beauti** (come together), **TreeAnnotator**, and **Tracer** from http://beast2.org and http://beast.bio.ed.ac.uk/tracer.
 * **Install a tweaked version of Geiger**
     - `library(devtools)`
