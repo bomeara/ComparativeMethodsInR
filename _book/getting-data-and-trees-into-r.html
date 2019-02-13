@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Comparative Methods</title>
+  <title>Chapter 3 Getting data and trees into R | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:title" content="Chapter 3 Getting data and trees into R | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 3 Getting data and trees into R | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2019-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="visualizing-data-before-use.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +66,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -228,35 +227,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-and-tree-object-types" class="section level2">
 <h2><span class="header-section-number">3.1</span> Data and tree object types</h2>
 <p>In R, there are many kinds of objects. These kinds are called “classes”. For example, take the text string “Darwin”.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span>(<span class="st">&quot;Darwin&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="st">&quot;Darwin&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>It is a <code>character</code> class. <code>pi</code> is a defined constant in R:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">print</span>(pi)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(pi)</code></pre>
 <pre><code>## [1] 3.141593</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">class</span>(pi)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(pi)</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>Its class is <code>numeric</code> [and note that its value is stored with more precision than is printed on screen].</p>
 <p>Objects can sometimes be converted from one class to another, often using an <code>as.*</code> function:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">example<span class="fl">.1</span> &lt;-<span class="st"> &quot;6&quot;</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">print</span>(example<span class="fl">.1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">example<span class="fl">.1</span> &lt;-<span class="st"> &quot;6&quot;</span>
+<span class="kw">print</span>(example<span class="fl">.1</span>)</code></pre>
 <pre><code>## [1] &quot;6&quot;</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span>(example<span class="fl">.1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(example<span class="fl">.1</span>)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">example<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(example<span class="fl">.1</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">print</span>(example<span class="fl">.2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">example<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(example<span class="fl">.1</span>)
+<span class="kw">print</span>(example<span class="fl">.2</span>)</code></pre>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">class</span>(example<span class="fl">.2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(example<span class="fl">.2</span>)</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">example<span class="fl">.2</span> <span class="op">*</span><span class="st"> </span><span class="dv">7</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">example<span class="fl">.2</span> <span class="op">*</span><span class="st"> </span><span class="dv">7</span></code></pre>
 <pre><code>## [1] 42</code></pre>
 <p>Trying to multiply example.1 by seven results in an error: you are trying to multiply a character string by a number, and R does not automatically convert classes. Classes have many uses in R; for example, one can write a different <code>plot()</code> function for each class, so that a tree is plotted one way, while a result from a regression model is plotted a different way, but users just have to call <code>plot()</code> on each and R knows what to do.</p>
 <p>In phylogenetics, we mostly care about classes for trees, for data, and for things to hold trees and data.</p>
 <div id="tree-classes" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Tree classes</h3>
 <p>The main tree class in R is <code>phylo</code> and is defined in the <code>ape</code> package. Let’s look at one in the wild:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(ape)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">rcoal</span>(<span class="dv">5</span>) <span class="co">#to make a random five taxon tree</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">print</span>(phy)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ape)
+phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">rcoal</span>(<span class="dv">5</span>) <span class="co">#to make a random five taxon tree</span>
+<span class="kw">print</span>(phy)</code></pre>
 <pre><code>## 
 ## Phylogenetic tree with 5 tips and 4 internal nodes.
 ## 
@@ -264,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1] &quot;t4&quot; &quot;t1&quot; &quot;t2&quot; &quot;t5&quot; &quot;t3&quot;
 ## 
 ## Rooted; includes branch lengths.</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">str</span>(phy)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(phy)</code></pre>
 <pre><code>## List of 4
 ##  $ edge       : int [1:8, 1:2] 6 7 9 9 7 6 8 8 7 9 ...
 ##  $ edge.length: num [1:8] 0.8398 0.9268 0.0806 0.0806 1.0074 ...
@@ -287,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>phy &lt;- ape::read.tree(file=&#39;treefile.phy&#39;)</code></pre>
 <p>To get a tree in <a href="http://evolution.genetics.washington.edu/phylip/newicktree.html">Newick format</a> (sometimes called Phylip format): essentially a series of parenthetical statements. An example (from <code>ape</code>’s documentation) is <code>((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);</code>. The format name comes from the name of the <a href="http://newicks.com">lobster house</a> where several major phylogenetic software developers met to agree on a tree format.</p>
 <p>You can use the same function to enter tree strings directly, changing the argument from the <code>file</code> containing the tree to <code>text</code> containing the tree string:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&#39;((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">phy &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&#39;((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);&#39;</span>)</code></pre>
 <p>Note the trailing semicolon.</p>
 <p>One thing that can trip users up with <code>read.tree()</code> (and the <code>read.nexus()</code> function, below) is that the output class depends on the input. If you read from a file with one tree, the returned output is a single tree object with class <code>phylo</code>. You can then use <code>plot()</code> on this object to draw the tree, pass this object into a comparative methods package to estimate rates, and so forth. If the file has more than one tree, the returned class is <code>multiphylo</code>: <code>plot()</code> will automatically cycle through plots as you type return, most comparative method implementations will fail (they are written to expect one tree of class <code>phylo</code>, not a vector of trees in a different class). <code>read.tree()</code> has an optional <code>keep.multi</code> function: if set to TRUE, the class is always <code>multiphylo</code>, and you can always get the first tree by getting the first element in the returned object:</p>
 <pre><code>phy.multi &lt;- ape::read.tree(file=&#39;treefile.phy&#39;, keep.multi = TRUE)
@@ -297,7 +296,7 @@ phy &lt;- phy.multi[[1]]</code></pre>
 <h3><span class="header-section-number">3.4.1</span> Great scientists steal</h3>
 <p>Scientists have been creating trait-based phylogenetic trees for decades. These scientists are often experts in their group, in potential problems in their data, in how to use relevant software. In other words, their trees are likely to be better than any you make. Traditionally, these trees are published as a figure in a paper, largely unavailable for reuse. This hurts reproducibility, makes it less likely for the work to be cited, and stymies scientific progress in general. However, the field is increasingly moving to more frequent deposition of trees in reusable form: sometimes based on author initiative, sometimes based on journal requirements. The main repository for this is <a href="http://treebase.org">TreeBase</a>: if you are reading a paper, and want to use its tree, that’s the first place to look. You can also use their website to search for taxa. The trees can be downloaded and loaded into R using <code>phylobase</code> (the NEXUS format used by TreeBase is hard for <code>ape</code> to load).</p>
 <p>Another approach that is growing in importance is <a href="http://otol.org">Open Tree of Life</a>. It seeks to synthesize thousands of trees to create a single tree of life. The <code>rotl</code> package can download this synthetic tree or components of it (the tree for a particular genus, for example). For most groups, however, the synthetic tree is largely based on taxonomy, so it is not very resolved. This is improving as the database of trees available for Open Tree’s synthesis grows (to add to it, go to ___________________), but for most scientific studies, I wouldn’t currently suggest using the synthetic tree (but for getting a sense for a group, making a tree for a class, it can be useful; also see the <a href="http://www.phylotastic.org">Phylotastic</a> project for ways to use trees in teaching or other purposes). However, the Open Tree project also has a cache of thousands of trees that have been hand curated (taxonomic names resolved, ingroups specified, tree type recorded, etc.). The <code>rotl</code> package lets you download these, too. For most analyses, you want trees with branch lengths, and so you can download just chronograms. For example,</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">#rotl::_________________</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#rotl::_________________</span></code></pre>
 <p>Two important notes about reusing trees:</p>
 <ul>
 <li><strong>Give credit</strong>: If your entire paper is based on the tree from one other paper, you <strong>must</strong> cite that paper (and also the ways you got the tree, including the packages and/or repositories). If it’s based on trees from around a dozen papers, you should cite them, too. If you’re getting into the hundreds, many editors will object to properly citing them all, but one compromise approach until a better way of giving credit appears is to have supplemental info or an appendix with citations for all the relevant papers (including DOIs to make these easier to parse later)</li>
@@ -344,7 +343,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -356,6 +355,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/20_gettingdata.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {

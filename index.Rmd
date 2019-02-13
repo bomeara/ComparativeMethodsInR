@@ -16,7 +16,7 @@ description: "How to do comparative methods for evolution and ecology"
 
 # Introduction
 
-This book was created as part of my [PhyloMeth](http://www.phylometh.org) class, which focuses on sensibly using and developing comparative methods. It will be actively developed over the course of Spring 2017, so if you don't like this version (see date above), check back soon! The book is available [here](https://bookdown.org/bomeara/comparative-methods/) but you can fork it, add issues, and look at raw source code at https://github.com/bomeara/ComparativeMethodsInR. [Note I'll be changing the name of the repo eventually; the course is largely in R (not entirely) but of course many key methods appear in other languages.]
+This book was created as part of my [PhyloMeth](http://phylometh.info) class, which focuses on sensibly using and developing comparative methods. It will be actively developed over the course of Spring 2017, so if you don't like this version (see date above), check back soon! The book is available [here](https://bookdown.org/bomeara/comparative-methods/) but you can fork it, add issues, and look at raw source code at https://github.com/bomeara/ComparativeMethodsInR. [Note I'll be changing the name of the repo eventually; the course is largely in R (not entirely) but of course many key methods appear in other languages.]
 
 ## Learning objectives
 
@@ -26,7 +26,7 @@ Readers of this book will be able to:
 * Identify the appropriate methods to answer these questions
 * Where methods do not yet exist, be able to work on potential new methods
 * Understand limtations of methods and how to evaluate these limits
-* Draw sensible biological conclusions 
+* Draw sensible biological conclusions
 
 ## Prerequisites
 
@@ -60,7 +60,7 @@ Change `/Path/To/My/Folder` to the absolute path to the folder you want access t
 
 ### Other
 
-RevBayes, BEAST, RAxML, and much other key software implement important methods in phylogenetics but are not in R. Readers will need to install these and many more, but fortunately the authors of much of this software have excellent tutorials already. 
+RevBayes, BEAST, RAxML, and much other key software implement important methods in phylogenetics but are not in R. Readers will need to install these and many more, but fortunately the authors of much of this software have excellent tutorials already.
 
 
 

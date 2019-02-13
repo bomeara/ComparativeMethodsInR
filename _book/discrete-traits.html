@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Comparative Methods</title>
+  <title>Chapter 10 Discrete Traits | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:title" content="Chapter 10 Discrete Traits | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 10 Discrete Traits | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2019-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="diversification.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +66,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -329,18 +328,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Though the above example is for DNA, one could do the same with amino acids, ability to fly, having eyes, growth form, trophic level, etc.</p>
 <p>Once we have this matrix, we can do a few cool things with it. One is to calculate the probability of starting in one state and ending in a particular state over some time <em>t</em>. This is frankly amazing: think of the ways one could start in A and end in T. One could change from A to T exactly at the middle of the time interval. Or, this could happen 10% of the way along the branch. Or, one could change from A to G a third of the way up and then G to T a bit further along. Or could go from A to T to A to T. Etc. There are an infinite number of paths one could take to get from A to T. However, by simply taking the instantaneous rate matrix, <strong>Q</strong>, multiplying each cell by <em>t</em>, and taking the matrix exponential of this, we can integrate over <em>all</em> these paths to get the probability matrix <strong>P</strong>, where the entry for row <em>i</em>, column <em>j</em> is the probability of starting in state <em>i</em> and ending in state <em>j</em> over time <em>t</em>.</p>
 <p>With a way to calculate probability, all manner of wondrous things become available. For example, take this very simple tree:</p>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>What is the probability of the data (the likelihood) of this tree? Well, we have two paths: from A at the root of the tree to A over a time of 0.7, and from A at the root of the tree to G, also over a time of 0.7. If we know the instantaneous rates, we can take the matrix <strong>Q</strong>, do <strong>P</strong> = expm(<strong>Q</strong> times <em>t</em>), and calculate the probability of A to A and A to G paths. Multiply those two probabilities together than that is the probability of seeing A and G at the tips and A at the root given the instantneous rates: that is, we’ve calculated the likelihood of the tree. We could try changing the branch length from 0.7 to 0.71 or 0.69, repeat, and continue trying branch lengths until we find a branch length that maximizes this probability: that’s finding the maximum likelihood optimum branch length. If we do not want to assume an A at the root, we could calculate the probability of the data assuming a T at the root, assuming an A, assuming a G, and assuming a C, weight each probability by our expectation of seeing each root state (for example, if we assume we know nothing a 1/4 chance of each state) and get the weighted sum. This is how likelihoods of trees are calculated in general. For larger trees, we essentially do the same thing, trying all possible combinations of states at each node (there’s actually a faster but equivalent algorithm, known as tree pruning or tree peeling, developed by Felsenstein that’s used in practice). If we want to estimate the state at one particular node (the marginal ancestral state estimate), we integrate (add) over all possible combinations of states at other nodes but trying each possible state at our focal node to find the likelihood of the data given each state – this is ancestral state estimation. If we want to compare two different trees, we calculate the probability of the data on each tree and compare them. Combined with a way of proposing new trees, this is a likelihood tree search algorithm.</p>
-<p>In the same way we can try different branch lengths and get different likelihoods to find the optimal branch length, we can try different rates and try to get the ones that maximize the probability of the data. Many questions relate to these rates. Is the rate of gaining eyes lower then the rate of losing eyes? Find the values that maximize the likelihood, see if the gaining eyes rate is lower. It can be helpful to compare rates under a model where they are allowed to vary with models where they are forced to be the same: for example, we can set the gain rate to equal the loss rate and see how much worse that is. This is also one way we simplify models: either by forcing some paramter values to have the same rates or by forcing some rates to be a fixed value (usually zero). For example, for DNA models, a common one is to assume that the rate of going from state <em>i</em> to <em>j</em> is the same as going from <em>j</em> to <em>i</em>: this is known as a general time reversible model. This often fits almost as well as a model with all transition rates allowed to vary, but has half the number of parameters to fit. An even simpler model, the Jukes-Cantor model, forces all rates from one nucleotide to another to be equal.</p>
+<p>In the same way we can try different branch lengths and get different likelihoods to find the optimal branch length, we can try different rates and try to get the ones that maximize the probability of the data. Many questions relate to these rates. Is the rate of gaining eyes lower than the rate of losing eyes? To answer, find the values that maximize the likelihood, see if the gaining eyes rate is lower. It can be helpful to compare rates under a model where they are allowed to vary with models where they are forced to be the same: for example, we can set the gain rate to equal the loss rate and see how much worse that is. This is also one way we simplify models: either by forcing some paramter values to have the same rates or by forcing some rates to be a fixed value (usually zero). For example, for DNA models, a common one is to assume that the rate of going from state <em>i</em> to <em>j</em> is the same as going from <em>j</em> to <em>i</em>: this is known as a general time reversible model. This often fits almost as well as a model with all transition rates allowed to vary, but has half the number of parameters to fit. An even simpler model, the Jukes-Cantor model, forces all rates from one nucleotide to another to be equal. One can also ask about direction of transitions: is it always 0 -&gt; 1 -&gt; 2, or are 0 -&gt; 2 changes possible directly? To examine this, compare models with r<sub>02</sub> forced to be zero and see how much worse they are than models with unconstrained rates.</p>
+<p>Ancestral state estimation is a common desire for biologists. There are multiple ways to estimate these states. The first question is where the states are estimated (adopting the jargon of <span class="citation">Steel and Penny (<a href="#ref-steel_parsimony_2000">2000</a>)</span>). The likelihood calculated by averaging across all states everywhere (except terminals), as we do when finding the best tree, is known as maximum average likelihood. For ancestral state estimation, it is typical to estimate states at nodes: this is known as most-parsimonious likelihood. Note that estimating states at the nodes takes two forms. The less common, but which is the one matching the most-parsimonious likelihood approach, is a joint reconstruction: find the set of states across all nodes that together maximize the likelihood. It’s like asking what your favorite meal is: maybe a hot dog, with mustard, on a grilled bun with a side of potato salad and a side of baked beans. More common is a marginal reconstruction: estimate the best state at each node, averaging across all other states at other nodes. It’s equivalent to asking about your favorite food: perhaps cheddar cheese. One can do this at every node, and plot them all on the tree, but there’s no guarantee that they will all be the best combined meal (cheese at one node, chocolate at another…), only that each is best at its own node. In practice the two reconstructions are often very similar. A third way, which is what many of us want but which is hard in practice, is pathway likelihood: get the best state at every time point (including along branches) along the tree. That’d be great: we could see if a trait in a mammal lineage evolved before or after nonavian dinodaurs went extinct, for example. However, we don’t do it in practice (one reason could be that the maximum likelihood estimates are fairly boring: depending on rates, a change will happen at the very beginning, very end, or equally likely anywhere). Instead, stochastic character mapping is often used <span class="citation">(Huelsenbeck et al. <a href="#ref-huelsenbeck_stochastic_2003">2003</a>)</span></p>
 
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-felsenstein_comparative_2012">
-<p>Felsenstein, Joseph. 2012. “A Comparative Method for Both Discrete and Continuous Characters Using the Threshold Model.” <em>The American Naturalist</em> 179 (2):145–56. <a href="https://doi.org/10.1086/663681" class="uri">https://doi.org/10.1086/663681</a>.</p>
+<p>Felsenstein, Joseph. 2012. “A Comparative Method for Both Discrete and Continuous Characters Using the Threshold Model.” <em>The American Naturalist</em> 179 (2): 145–56. <a href="https://doi.org/10.1086/663681">https://doi.org/10.1086/663681</a>.</p>
 </div>
 <div id="ref-omeara_evolutionary_2012-1">
-<p>O’Meara, B.C. 2012. <em>Evolutionary Inferences from Phylogenies: A Review of Methods</em>. Vol. 43. <a href="https://doi.org/10.1146/annurev-ecolsys-110411-160331" class="uri">https://doi.org/10.1146/annurev-ecolsys-110411-160331</a>.</p>
+<p>O’Meara, B.C. 2012. <em>Evolutionary Inferences from Phylogenies: A Review of Methods</em>. Vol. 43. <a href="https://doi.org/10.1146/annurev-ecolsys-110411-160331">https://doi.org/10.1146/annurev-ecolsys-110411-160331</a>.</p>
+</div>
+<div id="ref-steel_parsimony_2000">
+<p>Steel, Mike, and David Penny. 2000. “Parsimony, Likelihood, and the Role of Models in Molecular Phylogenetics.” <em>Molecular Biology and Evolution</em> 17 (6): 839–50. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026364">https://doi.org/10.1093/oxfordjournals.molbev.a026364</a>.</p>
+</div>
+<div id="ref-huelsenbeck_stochastic_2003">
+<p>Huelsenbeck, John P., Rasmus Nielsen, Jonathan P. Bollback, and Ted Schultz. 2003. “Stochastic Mapping of Morphological Characters.” <em>Systematic Biology</em> 52 (2): 131–58. <a href="https://doi.org/10.1080/10635150390192780">https://doi.org/10.1080/10635150390192780</a>.</p>
 </div>
 </div>
             </section>
@@ -369,7 +375,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -381,6 +387,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/80_Discrete.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {

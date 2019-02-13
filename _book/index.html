@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Comparative Methods" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2019-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="first-steps.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +66,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -225,12 +224,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Comparative Methods</h1>
-<h4 class="author"><em>Brian O’Meara</em></h4>
-<h4 class="date"><em>2018-02-07</em></h4>
+<p class="author"><em>Brian O’Meara</em></p>
+<p class="date"><em>2019-02-13</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>This book was created as part of my <a href="http://www.phylometh.org">PhyloMeth</a> class, which focuses on sensibly using and developing comparative methods. It will be actively developed over the course of Spring 2017, so if you don’t like this version (see date above), check back soon! The book is available <a href="https://bookdown.org/bomeara/comparative-methods/">here</a> but you can fork it, add issues, and look at raw source code at <a href="https://github.com/bomeara/ComparativeMethodsInR" class="uri">https://github.com/bomeara/ComparativeMethodsInR</a>. [Note I’ll be changing the name of the repo eventually; the course is largely in R (not entirely) but of course many key methods appear in other languages.]</p>
+<p>This book was created as part of my <a href="http://phylometh.info">PhyloMeth</a> class, which focuses on sensibly using and developing comparative methods. It will be actively developed over the course of Spring 2017, so if you don’t like this version (see date above), check back soon! The book is available <a href="https://bookdown.org/bomeara/comparative-methods/">here</a> but you can fork it, add issues, and look at raw source code at <a href="https://github.com/bomeara/ComparativeMethodsInR" class="uri">https://github.com/bomeara/ComparativeMethodsInR</a>. [Note I’ll be changing the name of the repo eventually; the course is largely in R (not entirely) but of course many key methods appear in other languages.]</p>
 <div id="learning-objectives" class="section level2">
 <h2><span class="header-section-number">1.1</span> Learning objectives</h2>
 <p>Readers of this book will be able to:</p>
@@ -247,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>These are mostly prereqs for doing exercises associated with the class, but will help readers of the book, too.</p>
 <div id="r" class="section level3">
 <h3><span class="header-section-number">1.2.1</span> R</h3>
-<p>Many methods are now implemented in R <span class="citation">(R Core Team <a href="#ref-R-base">2017</a>)</span>: the <a href="http://cran.r-project.org/web/views/Phylogenetics.html">phylogenetics task view</a> has a brief overview. You can also install the relevant packages that are on CRAN and R-Forge using the task view itself:</p>
+<p>Many methods are now implemented in R <span class="citation">(R Core Team <a href="#ref-R-base">2018</a>)</span>: the <a href="http://cran.r-project.org/web/views/Phylogenetics.html">phylogenetics task view</a> has a brief overview. You can also install the relevant packages that are on CRAN and R-Forge using the task view itself:</p>
 <pre><code>install.packages(&quot;ctv&quot;)
 library(ctv)
 install.views(&quot;Phylogenetics&quot;)</code></pre>
@@ -260,7 +259,7 @@ install.views(&quot;Phylogenetics&quot;)</code></pre>
 <p>to run it as an RStudio Server.</p>
 <p>If you want to use a local folder, you can use</p>
 <p><code>docker run -it -v /Path/To/My/Folder:/data -p 8787:8787 bomeara/phydocker</code></p>
-<p>Change <code>/Path/To/My/Folder</code> to the absolute path to the folder you want access to (any subfolders will also be accessible). You can read and write to this in RStudio as the <code>/data</code> directory. In your web browser, go to <code>localhost:8787</code>, enter username and password (both are <code>rstudio</code>), to launch a version of RStudio that will run in your browser and have everything you might need. You might want to do <code>setwd(&quot;/data&quot;)</code> to make sure you’re in the right directory. You can save any results or figures to this directory and it will still exist when you quit this instance.</p>
+<p>Change <code>/Path/To/My/Folder</code> to the absolute path to the folder you want access to (any subfolders will also be accessible). You can read and write to this in RStudio as the <code>/data</code> directory. In your web browser, go to <code>localhost:8787</code>, enter username and password (both are <code>rstudio</code>), to launch a version of RStudio that will run in your browser and have everything you might need. You might want to do <code>setwd("/data")</code> to make sure you’re in the right directory. You can save any results or figures to this directory and it will still exist when you quit this instance.</p>
 </div>
 <div id="other" class="section level3">
 <h3><span class="header-section-number">1.2.3</span> Other</h3>
@@ -272,7 +271,7 @@ install.views(&quot;Phylogenetics&quot;)</code></pre>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-base">
-<p>R Core Team. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
 </div>
 </div>
             </section>
@@ -301,7 +300,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -313,6 +312,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {

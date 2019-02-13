@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Comparative Methods</title>
+  <title>Chapter 14 Gene Tree Species Tree | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:title" content="Chapter 14 Gene Tree Species Tree | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 14 Gene Tree Species Tree | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2019-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="dating.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +66,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -238,55 +237,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 install_github(&quot;bomeara/phybase&quot;)</code></pre>
 <p>For real science, Liang’s is the canonical one (and definitely cite his) but this will be easier for us to use for class.</p>
 <p>First, get a tree from Open Tree of Life. We’ll get a recent plant tree from Beaulieu et al:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">library</span>(rotl)</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">library</span>(ape)</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.3</span>)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rotl)
+<span class="kw">library</span>(ape)
+phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)
+<span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.3</span>)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Let’s simplify by dropping some taxa:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">library</span>(geiger)</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">phy &lt;-<span class="st"> </span><span class="kw">drop.random</span>(phy, <span class="kw">Ntip</span>(phy) <span class="op">-</span><span class="st"> </span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="kw">plot</span>(phy)</a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="kw">axisPhylo</span>()</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(geiger)
+phy &lt;-<span class="st"> </span><span class="kw">drop.random</span>(phy, <span class="kw">Ntip</span>(phy) <span class="op">-</span><span class="st"> </span><span class="dv">10</span>)
+<span class="kw">plot</span>(phy)
+<span class="kw">axisPhylo</span>()</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>We can simulate gene trees on this tree:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(phybase)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">gene.tree &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(phy, <span class="dt">pop.size=</span><span class="fl">1e-12</span>)</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="kw">plot</span>(gene.tree)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-21-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(phybase)
+gene.tree &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(phy, <span class="dt">pop.size=</span><span class="fl">1e-12</span>)
+<span class="kw">plot</span>(gene.tree)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>And it probably looks very similar to the initial tree:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">library</span>(phytools)</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">cophylo</span>(phy, gene.tree, <span class="kw">cbind</span>(<span class="kw">sort</span>(phy<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree<span class="op">$</span>tip.label))))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(phytools)
+<span class="kw">plot</span>(<span class="kw">cophylo</span>(phy, gene.tree, <span class="kw">cbind</span>(<span class="kw">sort</span>(phy<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree<span class="op">$</span>tip.label))))</code></pre>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>[Note I’m being a bit sloppy here: the initial branch lengths of the tree we used are in millions of years (i.e., 5 = 5 MY) while the coalescent sim is treating these as coalescent time units: there would be even lower chance of incongruence if we converted the former into the latter. Unfortunately, the simulator fails with branch lengths that are realistically long for this tree.]</p>
 <p>So, does this mean gene tree species tree issues aren’t a problem?</p>
 <p>Well, it depends on the details of the tree. One common misconception is that gene tree species tree issues only relate to trees for recent events. This problem can happen any time there are short, fat branches, where lack of coalescence of copies can occur.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">species.tree &lt;-<span class="st"> </span><span class="kw">rcoal</span>(<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">species.tree<span class="op">$</span>edge.length &lt;-<span class="st"> </span>species.tree<span class="op">$</span>edge.length <span class="op">/</span><span class="st"> </span>(<span class="dv">10</span><span class="op">*</span><span class="kw">max</span>(<span class="kw">branching.times</span>(species.tree)))</a>
-<a class="sourceLine" id="cb45-3" data-line-number="3">gene.tree &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(species.tree)</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4"><span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree, gene.tree, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree<span class="op">$</span>tip.label))))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">species.tree &lt;-<span class="st"> </span><span class="kw">rcoal</span>(<span class="dv">7</span>)
+species.tree<span class="op">$</span>edge.length &lt;-<span class="st"> </span>species.tree<span class="op">$</span>edge.length <span class="op">/</span><span class="st"> </span>(<span class="dv">10</span><span class="op">*</span><span class="kw">max</span>(<span class="kw">branching.times</span>(species.tree)))
+gene.tree &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(species.tree)
+<span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree, gene.tree, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree<span class="op">$</span>tip.label))))</code></pre>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>You should see (in most iterations), the above code giving a mismatch between the gene tree and the species tree (the species tree has little height). Now, let’s lengthen the tips of the species tree:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">tip.rows &lt;-<span class="st"> </span><span class="kw">which</span>(species.tree<span class="op">$</span>edge[,<span class="dv">2</span>]<span class="op">&lt;=</span><span class="kw">Ntip</span>(species.tree))</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">species.tree2 &lt;-<span class="st"> </span>species.tree</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">species.tree2<span class="op">$</span>edge.length[tip.rows] &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">+</span><span class="st"> </span>species.tree2<span class="op">$</span>edge.length[tip.rows]</a>
-<a class="sourceLine" id="cb47-4" data-line-number="4">gene.tree2 &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(species.tree2)</a>
-<a class="sourceLine" id="cb47-5" data-line-number="5"><span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree2, gene.tree2, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree2<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree2<span class="op">$</span>tip.label))))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tip.rows &lt;-<span class="st"> </span><span class="kw">which</span>(species.tree<span class="op">$</span>edge[,<span class="dv">2</span>]<span class="op">&lt;=</span><span class="kw">Ntip</span>(species.tree))
+species.tree2 &lt;-<span class="st"> </span>species.tree
+species.tree2<span class="op">$</span>edge.length[tip.rows] &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">+</span><span class="st"> </span>species.tree2<span class="op">$</span>edge.length[tip.rows]
+gene.tree2 &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(species.tree2)
+<span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree2, gene.tree2, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree2<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree2<span class="op">$</span>tip.label))))</code></pre>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>It looks like a mismatch, but it’s hard to see, since the tips are so long. So plot the cladogram instead [we need to manually change branch lengths to do this, though note we do not resimulate the gene tree].</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">species.tree2.clado &lt;-<span class="st"> </span><span class="kw">compute.brlen</span>(species.tree2)</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">gene.tree2.clado &lt;-<span class="st"> </span><span class="kw">compute.brlen</span>(gene.tree2)</a>
-<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree2.clado, gene.tree2.clado, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree2.clado<span class="op">$</span>tip.label),</a>
-<a class="sourceLine" id="cb49-4" data-line-number="4"><span class="kw">sort</span>(gene.tree2.clado<span class="op">$</span>tip.label))))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">species.tree2.clado &lt;-<span class="st"> </span><span class="kw">compute.brlen</span>(species.tree2)
+gene.tree2.clado &lt;-<span class="st"> </span><span class="kw">compute.brlen</span>(gene.tree2)
+<span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree2.clado, gene.tree2.clado, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree2.clado<span class="op">$</span>tip.label),
+<span class="kw">sort</span>(gene.tree2.clado<span class="op">$</span>tip.label))))</code></pre>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>So we can see that even though the relevant divergences happened long ago, gene tree species tree issues are still a problem.</p>
 
 </div>
@@ -317,7 +316,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -329,6 +328,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/95_GeneTreeSpeciesTree.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {

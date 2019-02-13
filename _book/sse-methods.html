@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Comparative Methods</title>
+  <title>Chapter 12 SSE methods | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:title" content="Chapter 12 SSE methods | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 12 SSE methods | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2019-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="raxml.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +66,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -236,15 +235,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Make sure to <strong>read the relevant papers</strong>: <a href="https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/sse/" class="uri">https://www.mendeley.com/groups/8111971/phylometh/papers/added/0/tag/sse/</a></p>
 <p>At this point in the course, you should be familiar with working through getting software running. If you want more practice, you could use the <a href="https://cran.r-project.org/web/packages/hisse/vignettes/hisse-vignette.html">vignette</a> written by Jeremy Beaulieu for hisse; running diversitree is similar. However, I think a bigger thing to discuss is how we understand a method is working well, and how we assess whether results are believable. This is especially prominent in discussions of diversification. One great example of this discussion in the literature:</p>
 <ul>
-<li><a href="http://rstb.royalsocietypublishing.org/content/344/1307/77">Nee et al. (1994)</a> “Extinction rates can be estimated from molecular phylogenies”</li>
+<li><a href="http://rstb.royalsocietypublishing.org/content/344/1307/77">Nee et al. (1994)</a> “Extinction rates can be estimated from molecular phylogenies”</li>
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1558-5646.2009.00926.x/abstract">Rabosky (2009)</a> “Extinction rates should not be estimated from molecular phylogenies”</li>
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/evo.12614/abstract">Beaulieu and O’Meara (2015)</a> “Extinction rates can be estimated from moderately sized molecular phylogenies”</li>
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/evo.12820/full">Rabosky (2015)</a> “Challenges in the estimation of extinction from molecular phylogenies: A response to Beaulieu and O’Meara”</li>
 </ul>
-<p>And that probably isn’t the last word on this (no, I’m not planning something at the moment). However, despite all the hemming and hawing over what people <em>should</em> do, people still keep using methods: folks using <code>diversitree</code>, <code>BAMM</code>, <code>geiger</code>, or many other approaches merrily estimate extinction rates as a necessary part of their analyses, though they usually don’t focus on them in their studies, instead focusing on diversification (speciation - extinction) or speciation alone. (Note: it is possible to do diversification approaches without estimating extinction rates: one could fix extinction rate at a known value (perhaps using the average duration of fossil “species” to get a fixed estimate), though what is usually done is to fix extinction at 0 (this is called a Yule model, if speciation is constant). This is a bit weird when you think about it: one of the few things we truly know in biology without a doubt is that extinction is far, far from zero in general (though this wasn’t <a href="http://www.ucmp.berkeley.edu/mammal/artio/irishelk.html">really discovered in Western science until the 19th century</a>)). But as skeptical scientists, we should aim higher. It’s often tempting, especially as students or postdocs facing a difficult job market, to focus on what we can get out: is there an exciting result that can get past peer review and build our fame (maybe, in our tiny circle) and fortune (ha!). But it’s important to take a step back: are we confident enough, truly (not just based on the p-value) that our results are actually discoveries about nature? Diversification is an area (ancestral state estimation is another) where the reality of results is especially worrisome. Take, for example, <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12565/abstract">Etienne et al. (2016)</a>, who as part of a broader simulation study, analyzed a dataset of 25 <em>Dendroica</em> warbler species, which is a classic dataset for these studies, fitting a logistic growth model. They found that depending on how the model was conditioned<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, something most users would ignore, the estimated carrying capacity (in this model, the number of warbler species at which speciation equals extinction; in other models, this would be the number of species at which speciation is zero, with extinction <em>always</em> set to zero) for warblers is 24.59 or 6.09 or 0.656 species. That means, depending on how one conditions, we should expect the number of <em>Dendroica</em> warblers to stay exactly where it is, crash to around six species, or crash to half a species [and of course, in the latter two cases, stochastic change in number of species will lead to them hitting zero species fairly quickly, which is an absorbing state]. Given the sensitivity of the model to factors like conditioning, any result has to be taken with a great deal of skepticism.</p>
+<p>And that probably isn’t the last word on this (no, I’m not planning something at the moment). However, despite all the hemming and hawing over what people <em>should</em> do, people still keep using methods: folks using <code>diversitree</code>, <code>BAMM</code>, <code>geiger</code>, or many other approaches merrily estimate extinction rates as a necessary part of their analyses, though they usually don’t focus on them in their studies, instead focusing on diversification (speciation - extinction) or speciation alone. (Note: it is possible to do diversification approaches without estimating extinction rates: one could fix extinction rate at a known value (perhaps using the average duration of fossil “species” to get a fixed estimate), though what is usually done is to fix extinction at 0 (this is called a Yule model, if speciation is constant). This is a bit weird when you think about it: one of the few things we truly know in biology without a doubt is that extinction is far, far from zero in general (though this wasn’t <a href="http://www.ucmp.berkeley.edu/mammal/artio/irishelk.html">really discovered in Western science until the 19th century</a>)). But as skeptical scientists, we should aim higher. It’s often tempting, especially as students or postdocs facing a difficult job market, to focus on what we can get out: is there an exciting result that can get past peer review and build our fame (maybe, in our tiny circle) and fortune (ha!). But it’s important to take a step back: are we confident enough, truly (not just based on the p-value) that our results are actually discoveries about nature? Diversification is an area (ancestral state estimation is another) where the reality of results is especially worrisome. Take, for example, <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12565/abstract">Etienne et al. (2016)</a>, who as part of a broader simulation study, analyzed a dataset of 25 <em>Dendroica</em> warbler species, which is a classic dataset for these studies, fitting a logistic growth model. They found that depending on how the model was conditioned<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, something most users would ignore, the estimated carrying capacity (in this model, the number of warbler species at which speciation equals extinction; in other models, this would be the number of species at which speciation is zero, with extinction <em>always</em> set to zero) for warblers is 24.59 or 6.09 or 0.656 species. That means, depending on how one conditions, we should expect the number of <em>Dendroica</em> warblers to stay exactly where it is, crash to around six species, or crash to half a species [and of course, in the latter two cases, stochastic change in number of species will lead to them hitting zero species fairly quickly, which is an absorbing state]. Given the sensitivity of the model to factors like conditioning, any result has to be taken with a great deal of skepticism.</p>
 <p>For trait based models, the same history of finding problems and the solutions (or partial solutions) has arisen (there is a paper coming out in the <em>American Journal of Botany</em> in May 2016 that goes into this in more detail). The most relevant parts:</p>
 <p><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.0014-3820.2006.tb00517.x/abstract">Maddison (2006)</a> (and there were similar points made by others earlier) showed that transition rates and diversification rates can be hard to distinguish. Oversimplifying a bit, but if the rate of going from state 0 to state 1 is higher than the reverse rate, then over time there should be many more taxa in state 1 than 0. If the diversification rate in state 1 is higher than in state 0, there will tend to be more taxa in state 1 than 0. So if you see a tree with more state 1 than 0, is it higher transition rate to 1, or higher diversification in 1? Or is it lower transition to 1 but a high enough diversification rate that it overwhelms it? Or just chance? The paper identified the problem but not the solution: the last line of the abstract is “Studies of biased diversification and biased character change need to be unified by joint models and estimation methods, although how successfully the two processes can be teased apart remains to be seen.”</p>
-<p>This was followed up by <a href="http://sysbio.oxfordjournals.org/content/56/5/701.short">Maddison et al. (2007)</a> who figured out a method to deal with this: BiSSE. And systematists looked at it, and it was good. There is now a bestiary of similar *SSE models for different kinds of data: QuaSSE, GeoSSE, MuSSE, ClaSSE, and more.</p>
+<p>This was followed up by <a href="http://sysbio.oxfordjournals.org/content/56/5/701.short">Maddison et al. (2007)</a> who figured out a method to deal with this: BiSSE. And systematists looked at it, and it was good. There is now a bestiary of similar *SSE models for different kinds of data: QuaSSE, GeoSSE, MuSSE, ClaSSE, and more.</p>
 <p>However, there are concerns. The original paper showed that estimating extinction was hard to do accurately, and other papers (Davis et al, 2013) showed that you needed a hundreds of species to find significant results (sorry, <em>Dendroica</em> – you will forever remain a mystery). However, a particular scary paper (and talk at Evolution, where it was presented) was <a href="https://sysbio.oxfordjournals.org/content/early/2014/10/23/sysbio.syu070.full">Maddison &amp; FitzJohn (2014)</a>. Their paper mostly discussed correlated characters, but has relevance to SSE approaches. If you have a single change on a tree, you don’t know if a higher rate in the clade descended from that branch is due to that trait, some other trait changing on that branch, or some other trait changing on the tree but in a way that makes it mostly on one part of the tree. <a href="http://sysbio.oxfordjournals.org/content/early/2015/01/18/sysbio.syu131">Rabosky &amp; Goldberg (2015)</a> showed that the way many people interpret BiSSE results, as a testing of a null hypothesis, can be misled if part of the null hypothesis is wrong but not the part you’re interested in. <a href="http://sysbio.oxfordjournals.org/content/early/2016/03/25/sysbio.syw022.abstract">Beaulieu &amp; O’Meara (2016)</a> address some of the Maddison &amp; FitzJohn issues (a character changing elsewhere on the tree driving a result) but not all the issues (a single change being sufficient to give substantial support for an idea that that trait is driving diversification).</p>
 <div id="discussion-prompts" class="section level3">
 <h3><span class="header-section-number">12.1.1</span> Discussion prompts</h3>
@@ -305,7 +304,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -317,6 +316,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/91_SSE.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {

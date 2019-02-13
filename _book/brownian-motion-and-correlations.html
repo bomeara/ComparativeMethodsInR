@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Comparative Methods</title>
+  <title>Chapter 9 Brownian Motion and Correlations | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology">
-  <meta name="generator" content="bookdown 0.6.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Comparative Methods" />
+  <meta property="og:title" content="Chapter 9 Brownian Motion and Correlations | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 9 Brownian Motion and Correlations | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Brian O’Meara">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2019-02-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="discrete-traits.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -65,13 +66,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -239,72 +238,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="brownian-motion" class="section level2">
 <h2><span class="header-section-number">9.2</span> Brownian motion</h2>
 <p>First, let’s get a tree:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">library</span>(rotl)</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw">library</span>(ape)</a>
-<a class="sourceLine" id="cb26-3" data-line-number="3">phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)</a>
-<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="kw">axisPhylo</span>(<span class="dt">backward=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rotl)
+<span class="kw">library</span>(ape)
+phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)
+<span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.5</span>)
+<span class="kw">axisPhylo</span>(<span class="dt">backward=</span><span class="ot">TRUE</span>)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Note that this tree is a chronogram.</p>
 <p>Let’s simulate data on this tree. But what model to use? For now, let’s assume we are looking at continuous traits, things like body size. Over evolutionary time, these probably undergo a series of changes that then get added up. A species has an average mass of 15 kg, then it goes to 15.1 kg, then 14.8 kg, and so forth. But how could those changes be distributed?</p>
 <p>Start with a uniform distribution. Take a starting value of 0, then pick a number from -1 to 1 to add to it (in other words, <code>runif(n=1, min=-1, max=1)</code>). There are efficient ways to do this for many generations, but let’s do the obvious way: a simple <code>for</code> loop. Do it for 100 generations.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">ngen &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4">  positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="kw">plot</span>(<span class="dt">x=</span>positions, <span class="dt">y=</span><span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
+positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {
+  positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)
+}
+<span class="kw">plot</span>(<span class="dt">x=</span>positions, <span class="dt">y=</span><span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>We can repeat this simulation many times and see what the pattern looks like:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">ngen &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">nsims &lt;-<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)</a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co"># make a plot to hold our lines</span></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="op">*</span>ngen, <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {</a>
-<a class="sourceLine" id="cb28-7" data-line-number="7">  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))</a>
-<a class="sourceLine" id="cb28-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {</a>
-<a class="sourceLine" id="cb28-9" data-line-number="9">    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb28-10" data-line-number="10">  }</a>
-<a class="sourceLine" id="cb28-11" data-line-number="11">  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))</a>
-<a class="sourceLine" id="cb28-12" data-line-number="12">  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]</a>
-<a class="sourceLine" id="cb28-13" data-line-number="13">}</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
+nsims &lt;-<span class="st"> </span><span class="dv">500</span>
+final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)
+<span class="co"># make a plot to hold our lines</span>
+<span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="op">*</span>ngen, <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
+<span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {
+  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {
+    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)
+  }
+  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))
+  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]
+}</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Well, that may seem odd: we’re adding a bunch of uniform random values between -1 and 1 (so, a flat distribution) and we get something that definitely has more lines ending up in the middle than further out. Look just at the distribution of final points:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Which looks almost normal. Ok, let’s try a weird distribution:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">rweird &lt;-<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">  displacement &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">  <span class="cf">if</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">.1</span>) {</a>
-<a class="sourceLine" id="cb30-4" data-line-number="4">    displacement &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb30-6" data-line-number="6">    displacement &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="fl">0.3</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb30-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb30-8" data-line-number="8">  displacement &lt;-<span class="st"> </span>displacement <span class="op">+</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">100</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb30-9" data-line-number="9">  <span class="kw">return</span>(displacement)  </a>
-<a class="sourceLine" id="cb30-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb30-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb30-12" data-line-number="12"><span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">replicate</span>(<span class="dv">100000</span>, <span class="kw">rweird</span>())), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">rweird &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  displacement &lt;-<span class="st"> </span><span class="dv">0</span>
+  <span class="cf">if</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">.1</span>) {
+    displacement &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>)
+  } <span class="cf">else</span> {
+    displacement &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1</span>, <span class="fl">0.3</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+  }
+  displacement &lt;-<span class="st"> </span>displacement <span class="op">+</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">100</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span>)
+  <span class="kw">return</span>(displacement)  
+}
+
+<span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">replicate</span>(<span class="dv">100000</span>, <span class="kw">rweird</span>())), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>When we ask <code>rweird()</code> for a number it sometimes gives us a normally distributed number multiplied by a unifor distribution, other times it gives us an exponentially distributed number, and then adds the remainder that comes when you divide a random number by 7. So, not exactly a simple distribution like uniform, normal, or Poisson. So, repeating the simulation above but using this funky distribution:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">ngen &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">nsims &lt;-<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)</a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="co"># make a plot to hold our lines</span></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>,<span class="dv">1200</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6"><span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {</a>
-<a class="sourceLine" id="cb31-7" data-line-number="7">  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))</a>
-<a class="sourceLine" id="cb31-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {</a>
-<a class="sourceLine" id="cb31-9" data-line-number="9">    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">rweird</span>()</a>
-<a class="sourceLine" id="cb31-10" data-line-number="10">  }</a>
-<a class="sourceLine" id="cb31-11" data-line-number="11">  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))</a>
-<a class="sourceLine" id="cb31-12" data-line-number="12">  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]</a>
-<a class="sourceLine" id="cb31-13" data-line-number="13">}</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">ngen &lt;-<span class="st"> </span><span class="dv">100</span>
+nsims &lt;-<span class="st"> </span><span class="dv">500</span>
+final.positions &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsims)
+<span class="co"># make a plot to hold our lines</span>
+<span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>,<span class="dv">1200</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">+</span>ngen), <span class="dt">xlab=</span><span class="st">&quot;trait value&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;generation&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
+<span class="cf">for</span> (sim.index <span class="cf">in</span> <span class="kw">sequence</span>(nsims)) {
+  positions &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">rep</span>(<span class="ot">NA</span>,ngen))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">sequence</span>(ngen)) {
+    positions[i<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span>positions[i] <span class="op">+</span><span class="st"> </span><span class="kw">rweird</span>()
+  }
+  <span class="kw">lines</span>(positions, <span class="kw">sequence</span>(<span class="kw">length</span>(positions)), <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.1</span>))
+  final.positions[sim.index] &lt;-<span class="st"> </span>positions[<span class="kw">length</span>(positions)]
+}</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>And now let’s look at final positions again:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</a></code></pre></div>
-<p><img src="comparative-methods_files/figure-html4/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(final.positions), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</code></pre>
+<p><img src="comparative-methods_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Again, it looks pretty much like a normal distribution. You can try with your own wacky distribution, and this will almost always happen (as long as the distribution has finite variance).</p>
 <p>Why?</p>
 <p>Well, think back to stats: why do we use the normal distribution for so much?</p>
@@ -350,7 +349,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -362,6 +361,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/70_Correlations.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["comparative-methods.pdf", "comparative-methods.epub"],
 "toc": {
