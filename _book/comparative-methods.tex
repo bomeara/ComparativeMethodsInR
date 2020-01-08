@@ -1,36 +1,47 @@
-\documentclass[]{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Comparative Methods},
+  pdfauthor={Brian O'Meara},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Comparative Methods},
-            pdfauthor={Brian O'Meara},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{plainnat}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -72,7 +83,15 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-\usepackage{graphicx,grffile}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -81,55 +100,23 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Comparative Methods}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Brian O'Meara}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2019-02-13}
-
 \usepackage{booktabs}
 \usepackage{makeidx}
 \makeindex
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+
+\title{Comparative Methods}
+\author{Brian O'Meara}
+\date{2020-01-08}
 
 \begin{document}
 \maketitle
@@ -285,7 +272,7 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example}\FloatTok{.1}\NormalTok{ <-}\StringTok{ "6"}
+\NormalTok{example}\FloatTok{.1}\NormalTok{ <{-}}\StringTok{ "6"}
 \KeywordTok{print}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -306,7 +293,7 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example}\FloatTok{.2}\NormalTok{ <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
+\NormalTok{example}\FloatTok{.2}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
 \KeywordTok{print}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -347,7 +334,7 @@ The main tree class in R is \texttt{phylo} and is defined in the \texttt{ape} pa
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ape)}
-\NormalTok{phy <-}\StringTok{ }\NormalTok{ape}\OperatorTok{::}\KeywordTok{rcoal}\NormalTok{(}\DecValTok{5}\NormalTok{) }\CommentTok{#to make a random five taxon tree}
+\NormalTok{phy <{-}}\StringTok{ }\NormalTok{ape}\OperatorTok{::}\KeywordTok{rcoal}\NormalTok{(}\DecValTok{5}\NormalTok{) }\CommentTok{\#to make a random five taxon tree}
 \KeywordTok{print}\NormalTok{(phy)}
 \end{Highlighting}
 \end{Shaded}
@@ -357,7 +344,7 @@ The main tree class in R is \texttt{phylo} and is defined in the \texttt{ape} pa
 ## Phylogenetic tree with 5 tips and 4 internal nodes.
 ## 
 ## Tip labels:
-## [1] "t4" "t1" "t2" "t5" "t3"
+## [1] "t2" "t3" "t5" "t1" "t4"
 ## 
 ## Rooted; includes branch lengths.
 \end{verbatim}
@@ -370,9 +357,9 @@ The main tree class in R is \texttt{phylo} and is defined in the \texttt{ape} pa
 
 \begin{verbatim}
 ## List of 4
-##  $ edge       : int [1:8, 1:2] 6 7 9 9 7 6 8 8 7 9 ...
-##  $ edge.length: num [1:8] 0.8398 0.9268 0.0806 0.0806 1.0074 ...
-##  $ tip.label  : chr [1:5] "t4" "t1" "t2" "t5" ...
+##  $ edge       : int [1:8, 1:2] 6 8 9 9 8 6 7 7 8 9 ...
+##  $ edge.length: num [1:8] 1.6235 0.1432 0.0806 0.0806 0.2238 ...
+##  $ tip.label  : chr [1:5] "t2" "t3" "t5" "t1" ...
 ##  $ Nnode      : int 4
 ##  - attr(*, "class")= chr "phylo"
 ##  - attr(*, "order")= chr "cladewise"
@@ -401,7 +388,7 @@ You can use the same function to enter tree strings directly, changing the argum
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{phy <-}\StringTok{ }\NormalTok{ape}\OperatorTok{::}\KeywordTok{read.tree}\NormalTok{(}\DataTypeTok{text =} \StringTok{'((Strix_aluco:4.2,Asio_otus:4.2):3.1,Athene_noctua:7.3);'}\NormalTok{)}
+\NormalTok{phy <{-}}\StringTok{ }\NormalTok{ape}\OperatorTok{::}\KeywordTok{read.tree}\NormalTok{(}\DataTypeTok{text =} \StringTok{\textquotesingle{}((Strix\_aluco:4.2,Asio\_otus:4.2):3.1,Athene\_noctua:7.3);\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -425,7 +412,7 @@ Another approach that is growing in importance is \href{http://otol.org}{Open Tr
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#rotl::_________________}
+\CommentTok{\#rotl::\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
 \end{Highlighting}
 \end{Shaded}
 
@@ -537,9 +524,9 @@ When we use models to understand biology, it helps if they are appropriate for t
 \hline
   & deltaAIC & birth.rate & carrying.capacity\\
 \hline
-Yule & 55.772 & 0.044 & NA\\
+Yule & 60.385 & 0.044 & NA\\
 \hline
-Logistic & 0.000 & 0.063 & 1000\\
+Logistic & 0.000 & 0.064 & 1000\\
 \hline
 \end{tabular}
 \end{table}
@@ -657,7 +644,7 @@ First, let's get a tree:
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(rotl)}
 \KeywordTok{library}\NormalTok{(ape)}
-\NormalTok{phy <-}\StringTok{ }\KeywordTok{get_study_tree}\NormalTok{(}\StringTok{"ot_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
+\NormalTok{phy <{-}}\StringTok{ }\KeywordTok{get\_study\_tree}\NormalTok{(}\StringTok{"ot\_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
 \KeywordTok{plot}\NormalTok{(phy, }\DataTypeTok{cex=}\FloatTok{0.5}\NormalTok{)}
 \KeywordTok{axisPhylo}\NormalTok{(}\DataTypeTok{backward=}\OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
@@ -673,10 +660,10 @@ Start with a uniform distribution. Take a starting value of 0, then pick a numbe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ngen <-}\StringTok{ }\DecValTok{100}
-\NormalTok{positions <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
+\NormalTok{ngen <{-}}\StringTok{ }\DecValTok{100}
+\NormalTok{positions <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(ngen)) \{}
-\NormalTok{  positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{  positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <{-}}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 \NormalTok{\}}
 \KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\NormalTok{positions, }\DataTypeTok{y=}\KeywordTok{sequence}\NormalTok{(}\KeywordTok{length}\NormalTok{(positions)), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{)}
 \end{Highlighting}
@@ -688,18 +675,18 @@ We can repeat this simulation many times and see what the pattern looks like:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ngen <-}\StringTok{ }\DecValTok{100}
-\NormalTok{nsims <-}\StringTok{ }\DecValTok{500}
-\NormalTok{final.positions <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, nsims)}
-\CommentTok{# make a plot to hold our lines}
-\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{ngen, }\DataTypeTok{y=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{+}\NormalTok{ngen), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"n"}\NormalTok{)}
+\NormalTok{ngen <{-}}\StringTok{ }\DecValTok{100}
+\NormalTok{nsims <{-}}\StringTok{ }\DecValTok{500}
+\NormalTok{final.positions <{-}}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, nsims)}
+\CommentTok{\# make a plot to hold our lines}
+\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{ngen, }\DataTypeTok{y=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{+}\NormalTok{ngen), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"n"}\NormalTok{)}
 \ControlFlowTok{for}\NormalTok{ (sim.index }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(nsims)) \{}
-\NormalTok{  positions <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
+\NormalTok{  positions <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(ngen)) \{}
-\NormalTok{    positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{    positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <{-}}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 \NormalTok{  \}}
   \KeywordTok{lines}\NormalTok{(positions, }\KeywordTok{sequence}\NormalTok{(}\KeywordTok{length}\NormalTok{(positions)), }\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
-\NormalTok{  final.positions[sim.index] <-}\StringTok{ }\NormalTok{positions[}\KeywordTok{length}\NormalTok{(positions)]}
+\NormalTok{  final.positions[sim.index] <{-}}\StringTok{ }\NormalTok{positions[}\KeywordTok{length}\NormalTok{(positions)]}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -720,14 +707,14 @@ Which looks almost normal. Ok, let's try a weird distribution:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rweird <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
-\NormalTok{  displacement <-}\StringTok{ }\DecValTok{0}
-  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{) }\OperatorTok{<}\StringTok{ }\FloatTok{.1}\NormalTok{) \{}
-\NormalTok{    displacement <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+\NormalTok{rweird <{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{  displacement <{-}}\StringTok{ }\DecValTok{0}
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{{-}}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{) }\OperatorTok{<}\StringTok{ }\FloatTok{.1}\NormalTok{) \{}
+\NormalTok{    displacement <{-}}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{    displacement <-}\StringTok{ }\FloatTok{0.5} \OperatorTok{*}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\OperatorTok{-}\StringTok{ }\DecValTok{1}
+\NormalTok{    displacement <{-}}\StringTok{ }\FloatTok{0.5} \OperatorTok{*}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\DecValTok{1}
 \NormalTok{  \}}
-\NormalTok{  displacement <-}\StringTok{ }\NormalTok{displacement }\OperatorTok{+}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{) }\OperatorTok{%%}\StringTok{ }\DecValTok{7}\NormalTok{)}
+\NormalTok{  displacement <{-}}\StringTok{ }\NormalTok{displacement }\OperatorTok{+}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{) }\OperatorTok{\%\%}\StringTok{ }\DecValTok{7}\NormalTok{)}
   \KeywordTok{return}\NormalTok{(displacement)  }
 \NormalTok{\}}
 
@@ -741,18 +728,18 @@ When we ask \texttt{rweird()} for a number it sometimes gives us a normally dist
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ngen <-}\StringTok{ }\DecValTok{100}
-\NormalTok{nsims <-}\StringTok{ }\DecValTok{500}
-\NormalTok{final.positions <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, nsims)}
-\CommentTok{# make a plot to hold our lines}
-\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{100}\NormalTok{,}\DecValTok{1200}\NormalTok{), }\DataTypeTok{y=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{+}\NormalTok{ngen), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"n"}\NormalTok{)}
+\NormalTok{ngen <{-}}\StringTok{ }\DecValTok{100}
+\NormalTok{nsims <{-}}\StringTok{ }\DecValTok{500}
+\NormalTok{final.positions <{-}}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, nsims)}
+\CommentTok{\# make a plot to hold our lines}
+\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{100}\NormalTok{,}\DecValTok{1200}\NormalTok{), }\DataTypeTok{y=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{+}\NormalTok{ngen), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"n"}\NormalTok{)}
 \ControlFlowTok{for}\NormalTok{ (sim.index }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(nsims)) \{}
-\NormalTok{  positions <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
+\NormalTok{  positions <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(ngen)) \{}
-\NormalTok{    positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{rweird}\NormalTok{()}
+\NormalTok{    positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <{-}}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{rweird}\NormalTok{()}
 \NormalTok{  \}}
   \KeywordTok{lines}\NormalTok{(positions, }\KeywordTok{sequence}\NormalTok{(}\KeywordTok{length}\NormalTok{(positions)), }\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
-\NormalTok{  final.positions[sim.index] <-}\StringTok{ }\NormalTok{positions[}\KeywordTok{length}\NormalTok{(positions)]}
+\NormalTok{  final.positions[sim.index] <{-}}\StringTok{ }\NormalTok{positions[}\KeywordTok{length}\NormalTok{(positions)]}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -867,7 +854,7 @@ What is the probability of the data (the likelihood) of this tree? Well, we have
 
 In the same way we can try different branch lengths and get different likelihoods to find the optimal branch length, we can try different rates and try to get the ones that maximize the probability of the data. Many questions relate to these rates. Is the rate of gaining eyes lower than the rate of losing eyes? To answer, find the values that maximize the likelihood, see if the gaining eyes rate is lower. It can be helpful to compare rates under a model where they are allowed to vary with models where they are forced to be the same: for example, we can set the gain rate to equal the loss rate and see how much worse that is. This is also one way we simplify models: either by forcing some paramter values to have the same rates or by forcing some rates to be a fixed value (usually zero). For example, for DNA models, a common one is to assume that the rate of going from state \emph{i} to \emph{j} is the same as going from \emph{j} to \emph{i}: this is known as a general time reversible model. This often fits almost as well as a model with all transition rates allowed to vary, but has half the number of parameters to fit. An even simpler model, the Jukes-Cantor model, forces all rates from one nucleotide to another to be equal. One can also ask about direction of transitions: is it always 0 -\textgreater{} 1 -\textgreater{} 2, or are 0 -\textgreater{} 2 changes possible directly? To examine this, compare models with r\textsubscript{02} forced to be zero and see how much worse they are than models with unconstrained rates.
 
-Ancestral state estimation is a common desire for biologists. There are multiple ways to estimate these states. The first question is where the states are estimated (adopting the jargon of \citet{steel_parsimony_2000}). The likelihood calculated by averaging across all states everywhere (except terminals), as we do when finding the best tree, is known as maximum average likelihood. For ancestral state estimation, it is typical to estimate states at nodes: this is known as most-parsimonious likelihood. Note that estimating states at the nodes takes two forms. The less common, but which is the one matching the most-parsimonious likelihood approach, is a joint reconstruction: find the set of states across all nodes that together maximize the likelihood. It's like asking what your favorite meal is: maybe a hot dog, with mustard, on a grilled bun with a side of potato salad and a side of baked beans. More common is a marginal reconstruction: estimate the best state at each node, averaging across all other states at other nodes. It's equivalent to asking about your favorite food: perhaps cheddar cheese. One can do this at every node, and plot them all on the tree, but there's no guarantee that they will all be the best combined meal (cheese at one node, chocolate at another\ldots{}), only that each is best at its own node. In practice the two reconstructions are often very similar. A third way, which is what many of us want but which is hard in practice, is pathway likelihood: get the best state at every time point (including along branches) along the tree. That'd be great: we could see if a trait in a mammal lineage evolved before or after nonavian dinodaurs went extinct, for example. However, we don't do it in practice (one reason could be that the maximum likelihood estimates are fairly boring: depending on rates, a change will happen at the very beginning, very end, or equally likely anywhere). Instead, stochastic character mapping is often used \citep{huelsenbeck_stochastic_2003}
+Ancestral state estimation is a common desire for biologists. There are multiple ways to estimate these states. The first question is where the states are estimated (adopting the jargon of \citet{steel_parsimony_2000}). The likelihood calculated by averaging across all states everywhere (except terminals), as we do when finding the best tree, is known as maximum average likelihood. For ancestral state estimation, it is typical to estimate states at nodes: this is known as most-parsimonious likelihood. Note that estimating states at the nodes takes two forms. The less common, but which is the one matching the most-parsimonious likelihood approach, is a joint reconstruction: find the set of states across all nodes that together maximize the likelihood. It's like asking what your favorite meal is: maybe a hot dog, with mustard, on a grilled bun with a side of potato salad and a side of baked beans. More common is a marginal reconstruction: estimate the best state at each node, averaging across all other states at other nodes. It's equivalent to asking about your favorite food: perhaps cheddar cheese. One can do this at every node, and plot them all on the tree, but there's no guarantee that they will all be the best combined meal (cheese at one node, chocolate at another\ldots), only that each is best at its own node. In practice the two reconstructions are often very similar. A third way, which is what many of us want but which is hard in practice, is pathway likelihood: get the best state at every time point (including along branches) along the tree. That'd be great: we could see if a trait in a mammal lineage evolved before or after nonavian dinodaurs went extinct, for example. However, we don't do it in practice (one reason could be that the maximum likelihood estimates are fairly boring: depending on rates, a change will happen at the very beginning, very end, or equally likely anywhere). Instead, stochastic character mapping is often used \citep{huelsenbeck_stochastic_2003}
 
 \hypertarget{diversification}{%
 \section{Diversification}\label{diversification}}
@@ -1119,7 +1106,7 @@ First, get a tree from Open Tree of Life. We'll get a recent plant tree from Bea
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(rotl)}
 \KeywordTok{library}\NormalTok{(ape)}
-\NormalTok{phy <-}\StringTok{ }\KeywordTok{get_study_tree}\NormalTok{(}\StringTok{"ot_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
+\NormalTok{phy <{-}}\StringTok{ }\KeywordTok{get\_study\_tree}\NormalTok{(}\StringTok{"ot\_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
 \KeywordTok{plot}\NormalTok{(phy, }\DataTypeTok{cex=}\FloatTok{0.3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1131,7 +1118,7 @@ Let's simplify by dropping some taxa:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(geiger)}
-\NormalTok{phy <-}\StringTok{ }\KeywordTok{drop.random}\NormalTok{(phy, }\KeywordTok{Ntip}\NormalTok{(phy) }\OperatorTok{-}\StringTok{ }\DecValTok{10}\NormalTok{)}
+\NormalTok{phy <{-}}\StringTok{ }\KeywordTok{drop.random}\NormalTok{(phy, }\KeywordTok{Ntip}\NormalTok{(phy) }\OperatorTok{{-}}\StringTok{ }\DecValTok{10}\NormalTok{)}
 \KeywordTok{plot}\NormalTok{(phy)}
 \KeywordTok{axisPhylo}\NormalTok{()}
 \end{Highlighting}
@@ -1144,7 +1131,7 @@ We can simulate gene trees on this tree:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(phybase)}
-\NormalTok{gene.tree <-}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(phy, }\DataTypeTok{pop.size=}\FloatTok{1e-12}\NormalTok{)}
+\NormalTok{gene.tree <{-}}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(phy, }\DataTypeTok{pop.size=}\FloatTok{1e{-}12}\NormalTok{)}
 \KeywordTok{plot}\NormalTok{(gene.tree)}
 \end{Highlighting}
 \end{Shaded}
@@ -1175,9 +1162,9 @@ Well, it depends on the details of the tree. One common misconception is that ge
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species.tree <-}\StringTok{ }\KeywordTok{rcoal}\NormalTok{(}\DecValTok{7}\NormalTok{)}
-\NormalTok{species.tree}\OperatorTok{$}\NormalTok{edge.length <-}\StringTok{ }\NormalTok{species.tree}\OperatorTok{$}\NormalTok{edge.length }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{10}\OperatorTok{*}\KeywordTok{max}\NormalTok{(}\KeywordTok{branching.times}\NormalTok{(species.tree)))}
-\NormalTok{gene.tree <-}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(species.tree)}
+\NormalTok{species.tree <{-}}\StringTok{ }\KeywordTok{rcoal}\NormalTok{(}\DecValTok{7}\NormalTok{)}
+\NormalTok{species.tree}\OperatorTok{$}\NormalTok{edge.length <{-}}\StringTok{ }\NormalTok{species.tree}\OperatorTok{$}\NormalTok{edge.length }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{10}\OperatorTok{*}\KeywordTok{max}\NormalTok{(}\KeywordTok{branching.times}\NormalTok{(species.tree)))}
+\NormalTok{gene.tree <{-}}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(species.tree)}
 \KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(species.tree, gene.tree, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(species.tree}\OperatorTok{$}\NormalTok{tip.label), }\KeywordTok{sort}\NormalTok{(gene.tree}\OperatorTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1193,10 +1180,10 @@ You should see (in most iterations), the above code giving a mismatch between th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tip.rows <-}\StringTok{ }\KeywordTok{which}\NormalTok{(species.tree}\OperatorTok{$}\NormalTok{edge[,}\DecValTok{2}\NormalTok{]}\OperatorTok{<=}\KeywordTok{Ntip}\NormalTok{(species.tree))}
-\NormalTok{species.tree2 <-}\StringTok{ }\NormalTok{species.tree}
-\NormalTok{species.tree2}\OperatorTok{$}\NormalTok{edge.length[tip.rows] <-}\StringTok{ }\DecValTok{100} \OperatorTok{+}\StringTok{ }\NormalTok{species.tree2}\OperatorTok{$}\NormalTok{edge.length[tip.rows]}
-\NormalTok{gene.tree2 <-}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(species.tree2)}
+\NormalTok{tip.rows <{-}}\StringTok{ }\KeywordTok{which}\NormalTok{(species.tree}\OperatorTok{$}\NormalTok{edge[,}\DecValTok{2}\NormalTok{]}\OperatorTok{<=}\KeywordTok{Ntip}\NormalTok{(species.tree))}
+\NormalTok{species.tree2 <{-}}\StringTok{ }\NormalTok{species.tree}
+\NormalTok{species.tree2}\OperatorTok{$}\NormalTok{edge.length[tip.rows] <{-}}\StringTok{ }\DecValTok{100} \OperatorTok{+}\StringTok{ }\NormalTok{species.tree2}\OperatorTok{$}\NormalTok{edge.length[tip.rows]}
+\NormalTok{gene.tree2 <{-}}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(species.tree2)}
 \KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(species.tree2, gene.tree2, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(species.tree2}\OperatorTok{$}\NormalTok{tip.label), }\KeywordTok{sort}\NormalTok{(gene.tree2}\OperatorTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
 \end{Shaded}
@@ -1212,8 +1199,8 @@ It looks like a mismatch, but it's hard to see, since the tips are so long. So p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species.tree2.clado <-}\StringTok{ }\KeywordTok{compute.brlen}\NormalTok{(species.tree2)}
-\NormalTok{gene.tree2.clado <-}\StringTok{ }\KeywordTok{compute.brlen}\NormalTok{(gene.tree2)}
+\NormalTok{species.tree2.clado <{-}}\StringTok{ }\KeywordTok{compute.brlen}\NormalTok{(species.tree2)}
+\NormalTok{gene.tree2.clado <{-}}\StringTok{ }\KeywordTok{compute.brlen}\NormalTok{(gene.tree2)}
 \KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(species.tree2.clado, gene.tree2.clado, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(species.tree2.clado}\OperatorTok{$}\NormalTok{tip.label),}
 \KeywordTok{sort}\NormalTok{(gene.tree2.clado}\OperatorTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
@@ -1322,7 +1309,7 @@ BEAST uses XML files for commands, rather than NEXUS files (though it does use N
   \item
     Call the Taxon set label ``human-chimp''
   \item
-    Click on Homo\_sapiens and then the ``\textgreater{}\textgreater{}'' button
+    Click on Homo\_sapiens and then the ``\textgreater\textgreater{}'' button
   \item
     Do the same for Pan
   \item
@@ -1467,7 +1454,6 @@ Sometimes for just seeing the tree structure itself, once can remove branch leng
 
 \includegraphics{comparative-methods_files/figure-latex/unnamed-chunk-31-1.pdf}
 
-\bibliography{packages.bib,zotero.bib}
-
+  \bibliography{packages.bib,zotero.bib}
 
 \end{document}
