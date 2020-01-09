@@ -48,12 +48,14 @@ This is the one used in most packages. However, it has some technical disadvanta
 
 ## Sequence data
 
-
+The [BioConductor](https://www.bioconductor.org/) community has put a lot of effort into making R work with high throughput data, though python is still likely more popular (just remember that python 3.x is the only currently supported version -- python 2.x should not be used any longer). The [seqinr](http://seqinr.r-forge.r-project.org/) package has some useful functionality for handling sequences. [ape](https://www.rdocumentation.org/packages/ape/) and [phangorn](https://github.com/KlausVigo/phangorn) have functions for handling data, including reading FASTA and NEXUS files in ape.
 
 ## Other character data
 
+This can include data such as discrete traits (has wings / wingless), continuous traits (body mass), geographic traits (latitudes and longitudes, which continents they occur on), and many more. These are typically loaded either as csv files from some other source or directly from an R package. This is a rapidly developing field, but many of the most useful packages are supported by [rOpenSci](https://ropensci.org/packages/) -- there are packages for getting information from GBIF, eBIRD, iNaturalist, NCBI, and many more sources.
 
 ## Phylogenies
+
 The most common way to load trees is to use `ape`'s functions:
 
 ```
@@ -78,6 +80,8 @@ phy <- phy.multi[[1]]
 ```
 
 For NEXUS formatted files (Maddison et al., 2007), `ape`'s `read.nexus()` function can pull in the trees (and its `read.nexus.data()` function can pull in data from a NEXUS file). NEXUS is a very flexible format, and there are valid NEXUS files that still cause errors with `ape`'s function. A more robust function to read in NEXUS trees is the package `phylobase`'s `readNexus()` function (note the lack of a period and different capitalization of Nexus from `ape`'s similar function). `phylobase` uses a different structure to store trees than `ape` does.
+
+[tidytree](https://github.com/YuLab-SMU/tidytree) is still fairly new, but it is a popular way for dealing with trees for those who have been converted to the [tidyverse](https://www.tidyverse.org/).
 
 ### Great scientists steal
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Brian O’Meara" />
 
 
-<meta name="date" content="2020-01-08" />
+<meta name="date" content="2020-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -297,9 +297,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="sequence-data" class="section level2" number="3.2">
 <h2 number="3.2"><span class="header-section-number">3.2</span> Sequence data</h2>
+<p>The <a href="https://www.bioconductor.org/">BioConductor</a> community has put a lot of effort into making R work with high throughput data, though python is still likely more popular (just remember that python 3.x is the only currently supported version – python 2.x should not be used any longer). The <a href="http://seqinr.r-forge.r-project.org/">seqinr</a> package has some useful functionality for handling sequences. <a href="https://www.rdocumentation.org/packages/ape/">ape</a> and <a href="https://github.com/KlausVigo/phangorn">phangorn</a> have functions for handling data, including reading FASTA and NEXUS files in ape.</p>
 </div>
 <div id="other-character-data" class="section level2" number="3.3">
 <h2 number="3.3"><span class="header-section-number">3.3</span> Other character data</h2>
+<p>This can include data such as discrete traits (has wings / wingless), continuous traits (body mass), geographic traits (latitudes and longitudes, which continents they occur on), and many more. These are typically loaded either as csv files from some other source or directly from an R package. This is a rapidly developing field, but many of the most useful packages are supported by <a href="https://ropensci.org/packages/">rOpenSci</a> – there are packages for getting information from GBIF, eBIRD, iNaturalist, NCBI, and many more sources.</p>
 </div>
 <div id="phylogenies" class="section level2" number="3.4">
 <h2 number="3.4"><span class="header-section-number">3.4</span> Phylogenies</h2>
@@ -313,6 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>phy.multi &lt;- ape::read.tree(file=&#39;treefile.phy&#39;, keep.multi = TRUE)
 phy &lt;- phy.multi[[1]]</code></pre>
 <p>For NEXUS formatted files (Maddison et al., 2007), <code>ape</code>’s <code>read.nexus()</code> function can pull in the trees (and its <code>read.nexus.data()</code> function can pull in data from a NEXUS file). NEXUS is a very flexible format, and there are valid NEXUS files that still cause errors with <code>ape</code>’s function. A more robust function to read in NEXUS trees is the package <code>phylobase</code>’s <code>readNexus()</code> function (note the lack of a period and different capitalization of Nexus from <code>ape</code>’s similar function). <code>phylobase</code> uses a different structure to store trees than <code>ape</code> does.</p>
+<p><a href="https://github.com/YuLab-SMU/tidytree">tidytree</a> is still fairly new, but it is a popular way for dealing with trees for those who have been converted to the <a href="https://www.tidyverse.org/">tidyverse</a>.</p>
 <div id="great-scientists-steal" class="section level3" number="3.4.1">
 <h3 number="3.4.1"><span class="header-section-number">3.4.1</span> Great scientists steal</h3>
 <p>Scientists have been creating trait-based phylogenetic trees for decades. These scientists are often experts in their group, in potential problems in their data, in how to use relevant software. In other words, their trees are likely to be better than any you make. Traditionally, these trees are published as a figure in a paper, largely unavailable for reuse. This hurts reproducibility, makes it less likely for the work to be cited, and stymies scientific progress in general. However, the field is increasingly moving to more frequent deposition of trees in reusable form: sometimes based on author initiative, sometimes based on journal requirements. The main repository for this is <a href="http://treebase.org">TreeBase</a>: if you are reading a paper, and want to use its tree, that’s the first place to look. You can also use their website to search for taxa. The trees can be downloaded and loaded into R using <code>phylobase</code> (the NEXUS format used by TreeBase is hard for <code>ape</code> to load).</p>
@@ -386,7 +389,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["comparative-methods.pdf", "comparative-methods.epub"],
+"download": ["comparative-methods.pdf"],
 "toc": {
 "collapse": "subsection"
 }
