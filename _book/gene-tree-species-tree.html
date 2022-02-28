@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14 Gene Tree Species Tree | Comparative Methods</title>
+  <title>Chapter 14 Gene Tree Species Tree | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology" />
-  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14 Gene Tree Species Tree | Comparative Methods" />
+  <meta property="og:title" content="Chapter 14 Gene Tree Species Tree | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14 Gene Tree Species Tree | Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 14 Gene Tree Species Tree | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Brian O’Meara" />
 
 
-<meta name="date" content="2020-01-09" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="raxml.html"/>
 <link rel="next" href="dating.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,13 +50,16 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -117,6 +120,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -133,96 +159,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Comparative Methods</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites<span></span></a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R</a></li>
-<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker</a></li>
-<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other</a></li>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R<span></span></a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker<span></span></a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps</a>
+<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions</a>
+<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources</a></li>
+<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R</a>
+<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types</a>
+<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes</a></li>
+<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data</a></li>
-<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data</a></li>
-<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies</a>
+<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies<span></span></a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal</a></li>
+<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets</a></li>
+<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use</a></li>
-<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing</a></li>
-<li class="chapter" data-level="6" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html"><i class="fa fa-check"></i><b>6</b> Testing models and methods</a>
+<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use<span></span></a></li>
+<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing<span></span></a></li>
+<li class="chapter" data-level="6" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html"><i class="fa fa-check"></i><b>6</b> Testing models and methods<span></span></a>
 <ul>
-<li class="chapter" data-level="6.0.1" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#objectives"><i class="fa fa-check"></i><b>6.0.1</b> Objectives</a></li>
-<li class="chapter" data-level="6.0.2" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#model-fit-and-accuracy"><i class="fa fa-check"></i><b>6.0.2</b> Model fit and accuracy</a></li>
+<li class="chapter" data-level="6.0.1" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#objectives"><i class="fa fa-check"></i><b>6.0.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="6.0.2" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#model-fit-and-accuracy"><i class="fa fa-check"></i><b>6.0.2</b> Model fit and accuracy<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="testing-methods.html"><a href="testing-methods.html"><i class="fa fa-check"></i><b>7</b> Testing methods</a>
+<li class="chapter" data-level="7" data-path="testing-methods.html"><a href="testing-methods.html"><i class="fa fa-check"></i><b>7</b> Testing methods<span></span></a>
 <ul>
-<li class="chapter" data-level="7.0.1" data-path="testing-methods.html"><a href="testing-methods.html#objectives-1"><i class="fa fa-check"></i><b>7.0.1</b> Objectives</a></li>
-<li class="chapter" data-level="7.0.2" data-path="testing-methods.html"><a href="testing-methods.html#kinds-of-testing"><i class="fa fa-check"></i><b>7.0.2</b> Kinds of testing</a></li>
-<li class="chapter" data-level="7.0.3" data-path="testing-methods.html"><a href="testing-methods.html#type-i-error"><i class="fa fa-check"></i><b>7.0.3</b> Type I error</a></li>
-<li class="chapter" data-level="7.0.4" data-path="testing-methods.html"><a href="testing-methods.html#type-ii-error"><i class="fa fa-check"></i><b>7.0.4</b> Type II error</a></li>
-<li class="chapter" data-level="7.0.5" data-path="testing-methods.html"><a href="testing-methods.html#getting-rid-of-typological-thinking"><i class="fa fa-check"></i><b>7.0.5</b> Getting rid of typological thinking</a></li>
+<li class="chapter" data-level="7.0.1" data-path="testing-methods.html"><a href="testing-methods.html#objectives-1"><i class="fa fa-check"></i><b>7.0.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="7.0.2" data-path="testing-methods.html"><a href="testing-methods.html#kinds-of-testing"><i class="fa fa-check"></i><b>7.0.2</b> Kinds of testing<span></span></a></li>
+<li class="chapter" data-level="7.0.3" data-path="testing-methods.html"><a href="testing-methods.html#type-i-error"><i class="fa fa-check"></i><b>7.0.3</b> Type I error<span></span></a></li>
+<li class="chapter" data-level="7.0.4" data-path="testing-methods.html"><a href="testing-methods.html#type-ii-error"><i class="fa fa-check"></i><b>7.0.4</b> Type II error<span></span></a></li>
+<li class="chapter" data-level="7.0.5" data-path="testing-methods.html"><a href="testing-methods.html#getting-rid-of-typological-thinking"><i class="fa fa-check"></i><b>7.0.5</b> Getting rid of typological thinking<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>8</b> Continuous traits</a>
+<li class="chapter" data-level="8" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>8</b> Continuous traits<span></span></a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+<li class="chapter" data-level="8.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>9</b> Brownian Motion and Correlations</a>
+<li class="chapter" data-level="9" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>9</b> Brownian Motion and Correlations<span></span></a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>9.2</b> Brownian motion</a></li>
-<li class="chapter" data-level="9.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>9.3</b> Correlation</a></li>
+<li class="chapter" data-level="9.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>9.2</b> Brownian motion<span></span></a></li>
+<li class="chapter" data-level="9.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>9.3</b> Correlation<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits</a></li>
-<li class="chapter" data-level="11" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>11</b> Diversification</a>
+<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits<span></span></a></li>
+<li class="chapter" data-level="11" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>11</b> Diversification<span></span></a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-4"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-4"><i class="fa fa-check"></i><b>11.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>12</b> SSE methods</a>
+<li class="chapter" data-level="12" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>12</b> SSE methods<span></span></a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-5"><i class="fa fa-check"></i><b>12.1</b> Objectives</a>
+<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-5"><i class="fa fa-check"></i><b>12.1</b> Objectives<span></span></a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>12.1.1</b> Discussion prompts</a></li>
+<li class="chapter" data-level="12.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>12.1.1</b> Discussion prompts<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>13</b> RAxML</a>
+<li class="chapter" data-level="13" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>13</b> RAxML<span></span></a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-6"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
-<li class="chapter" data-level="13.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>13.2</b> Install RAxML</a></li>
-<li class="chapter" data-level="13.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>13.3</b> Morphology search</a></li>
-<li class="chapter" data-level="13.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>13.4</b> DNA</a></li>
+<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-6"><i class="fa fa-check"></i><b>13.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="13.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>13.2</b> Install RAxML<span></span></a></li>
+<li class="chapter" data-level="13.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>13.3</b> Morphology search<span></span></a></li>
+<li class="chapter" data-level="13.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>13.4</b> DNA<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>14</b> Gene Tree Species Tree</a>
+<li class="chapter" data-level="14" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>14</b> Gene Tree Species Tree<span></span></a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-7"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-7"><i class="fa fa-check"></i><b>14.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>15</b> Dating</a>
+<li class="chapter" data-level="15" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>15</b> Dating<span></span></a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-8"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
-<li class="chapter" data-level="15.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>15.2</b> BEAST</a></li>
-<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.3</b> Applying to your own work</a></li>
+<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-8"><i class="fa fa-check"></i><b>15.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="15.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>15.2</b> BEAST<span></span></a></li>
+<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.3</b> Applying to your own work<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html"><i class="fa fa-check"></i><b>16</b> Visualizing trees and trees with data</a>
+<li class="chapter" data-level="16" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html"><i class="fa fa-check"></i><b>16</b> Visualizing trees and trees with data<span></span></a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
+<li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li><a href="references.html#references">References<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -243,10 +269,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gene-tree-species-tree" class="section level1" number="14">
-<h1 number="14"><span class="header-section-number">14</span> Gene Tree Species Tree</h1>
-<div id="objectives-7" class="section level2" number="14.1">
-<h2 number="14.1"><span class="header-section-number">14.1</span> Objectives</h2>
+<div id="gene-tree-species-tree" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Gene Tree Species Tree<a href="gene-tree-species-tree.html#gene-tree-species-tree" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="objectives-7" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Objectives<a href="gene-tree-species-tree.html#objectives-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>By the end of this chapter, you will:</p>
 <ul>
 <li>Understand why gene trees and species trees may not always agree</li>
@@ -258,52 +284,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 install_github(&quot;bomeara/phybase&quot;)</code></pre>
 <p>For real science, Liang’s is the canonical one (and definitely cite his) but this will be easier for us to use for class.</p>
 <p>First, get a tree from Open Tree of Life. We’ll get a recent plant tree from Beaulieu et al:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="gene-tree-species-tree.html#cb40-1"></a><span class="kw">library</span>(rotl)</span>
-<span id="cb40-2"><a href="gene-tree-species-tree.html#cb40-2"></a><span class="kw">library</span>(ape)</span>
-<span id="cb40-3"><a href="gene-tree-species-tree.html#cb40-3"></a>phy &lt;-<span class="st"> </span><span class="kw">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)</span>
-<span id="cb40-4"><a href="gene-tree-species-tree.html#cb40-4"></a><span class="kw">plot</span>(phy, <span class="dt">cex=</span><span class="fl">0.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="gene-tree-species-tree.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rotl)</span>
+<span id="cb40-2"><a href="gene-tree-species-tree.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb40-3"><a href="gene-tree-species-tree.html#cb40-3" aria-hidden="true" tabindex="-1"></a>phy <span class="ot">&lt;-</span> <span class="fu">get_study_tree</span>(<span class="st">&quot;ot_485&quot;</span>, <span class="st">&quot;tree1&quot;</span>)</span>
+<span id="cb40-4"><a href="gene-tree-species-tree.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(phy, <span class="at">cex=</span><span class="fl">0.3</span>)</span></code></pre></div>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Let’s simplify by dropping some taxa:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gene-tree-species-tree.html#cb41-1"></a><span class="kw">library</span>(geiger)</span>
-<span id="cb41-2"><a href="gene-tree-species-tree.html#cb41-2"></a>phy &lt;-<span class="st"> </span><span class="kw">drop.random</span>(phy, <span class="kw">Ntip</span>(phy) <span class="op">-</span><span class="st"> </span><span class="dv">10</span>)</span>
-<span id="cb41-3"><a href="gene-tree-species-tree.html#cb41-3"></a><span class="kw">plot</span>(phy)</span>
-<span id="cb41-4"><a href="gene-tree-species-tree.html#cb41-4"></a><span class="kw">axisPhylo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gene-tree-species-tree.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geiger)</span>
+<span id="cb41-2"><a href="gene-tree-species-tree.html#cb41-2" aria-hidden="true" tabindex="-1"></a>phy <span class="ot">&lt;-</span> <span class="fu">drop.random</span>(phy, <span class="fu">Ntip</span>(phy) <span class="sc">-</span> <span class="dv">10</span>)</span>
+<span id="cb41-3"><a href="gene-tree-species-tree.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(phy)</span>
+<span id="cb41-4"><a href="gene-tree-species-tree.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axisPhylo</span>()</span></code></pre></div>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>We can simulate gene trees on this tree:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="gene-tree-species-tree.html#cb42-1"></a><span class="kw">library</span>(phybase)</span>
-<span id="cb42-2"><a href="gene-tree-species-tree.html#cb42-2"></a>gene.tree &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(phy, <span class="dt">pop.size=</span><span class="fl">1e-12</span>)</span>
-<span id="cb42-3"><a href="gene-tree-species-tree.html#cb42-3"></a><span class="kw">plot</span>(gene.tree)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="gene-tree-species-tree.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phybase)</span>
+<span id="cb42-2"><a href="gene-tree-species-tree.html#cb42-2" aria-hidden="true" tabindex="-1"></a>gene.tree <span class="ot">&lt;-</span> <span class="fu">sim.coaltree.phylo</span>(phy, <span class="at">pop.size=</span><span class="fl">1e-12</span>)</span>
+<span id="cb42-3"><a href="gene-tree-species-tree.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gene.tree)</span></code></pre></div>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>And it probably looks very similar to the initial tree:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="gene-tree-species-tree.html#cb43-1"></a><span class="kw">library</span>(phytools)</span>
-<span id="cb43-2"><a href="gene-tree-species-tree.html#cb43-2"></a><span class="kw">plot</span>(<span class="kw">cophylo</span>(phy, gene.tree, <span class="kw">cbind</span>(<span class="kw">sort</span>(phy<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree<span class="op">$</span>tip.label))))</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="gene-tree-species-tree.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phytools)</span>
+<span id="cb43-2"><a href="gene-tree-species-tree.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cophylo</span>(phy, gene.tree, <span class="fu">cbind</span>(<span class="fu">sort</span>(phy<span class="sc">$</span>tip.label), <span class="fu">sort</span>(gene.tree<span class="sc">$</span>tip.label))))</span></code></pre></div>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>[Note I’m being a bit sloppy here: the initial branch lengths of the tree we used are in millions of years (i.e., 5 = 5 MY) while the coalescent sim is treating these as coalescent time units: there would be even lower chance of incongruence if we converted the former into the latter. Unfortunately, the simulator fails with branch lengths that are realistically long for this tree.]</p>
 <p>So, does this mean gene tree species tree issues aren’t a problem?</p>
 <p>Well, it depends on the details of the tree. One common misconception is that gene tree species tree issues only relate to trees for recent events. This problem can happen any time there are short, fat branches, where lack of coalescence of copies can occur.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="gene-tree-species-tree.html#cb45-1"></a>species.tree &lt;-<span class="st"> </span><span class="kw">rcoal</span>(<span class="dv">7</span>)</span>
-<span id="cb45-2"><a href="gene-tree-species-tree.html#cb45-2"></a>species.tree<span class="op">$</span>edge.length &lt;-<span class="st"> </span>species.tree<span class="op">$</span>edge.length <span class="op">/</span><span class="st"> </span>(<span class="dv">10</span><span class="op">*</span><span class="kw">max</span>(<span class="kw">branching.times</span>(species.tree)))</span>
-<span id="cb45-3"><a href="gene-tree-species-tree.html#cb45-3"></a>gene.tree &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(species.tree)</span>
-<span id="cb45-4"><a href="gene-tree-species-tree.html#cb45-4"></a><span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree, gene.tree, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree<span class="op">$</span>tip.label))))</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="gene-tree-species-tree.html#cb45-1" aria-hidden="true" tabindex="-1"></a>species.tree <span class="ot">&lt;-</span> <span class="fu">rcoal</span>(<span class="dv">7</span>)</span>
+<span id="cb45-2"><a href="gene-tree-species-tree.html#cb45-2" aria-hidden="true" tabindex="-1"></a>species.tree<span class="sc">$</span>edge.length <span class="ot">&lt;-</span> species.tree<span class="sc">$</span>edge.length <span class="sc">/</span> (<span class="dv">10</span><span class="sc">*</span><span class="fu">max</span>(<span class="fu">branching.times</span>(species.tree)))</span>
+<span id="cb45-3"><a href="gene-tree-species-tree.html#cb45-3" aria-hidden="true" tabindex="-1"></a>gene.tree <span class="ot">&lt;-</span> <span class="fu">sim.coaltree.phylo</span>(species.tree)</span>
+<span id="cb45-4"><a href="gene-tree-species-tree.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cophylo</span>(species.tree, gene.tree, <span class="fu">cbind</span>(<span class="fu">sort</span>(species.tree<span class="sc">$</span>tip.label), <span class="fu">sort</span>(gene.tree<span class="sc">$</span>tip.label))))</span></code></pre></div>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>You should see (in most iterations), the above code giving a mismatch between the gene tree and the species tree (the species tree has little height). Now, let’s lengthen the tips of the species tree:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="gene-tree-species-tree.html#cb47-1"></a>tip.rows &lt;-<span class="st"> </span><span class="kw">which</span>(species.tree<span class="op">$</span>edge[,<span class="dv">2</span>]<span class="op">&lt;=</span><span class="kw">Ntip</span>(species.tree))</span>
-<span id="cb47-2"><a href="gene-tree-species-tree.html#cb47-2"></a>species.tree2 &lt;-<span class="st"> </span>species.tree</span>
-<span id="cb47-3"><a href="gene-tree-species-tree.html#cb47-3"></a>species.tree2<span class="op">$</span>edge.length[tip.rows] &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">+</span><span class="st"> </span>species.tree2<span class="op">$</span>edge.length[tip.rows]</span>
-<span id="cb47-4"><a href="gene-tree-species-tree.html#cb47-4"></a>gene.tree2 &lt;-<span class="st"> </span><span class="kw">sim.coaltree.phylo</span>(species.tree2)</span>
-<span id="cb47-5"><a href="gene-tree-species-tree.html#cb47-5"></a><span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree2, gene.tree2, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree2<span class="op">$</span>tip.label), <span class="kw">sort</span>(gene.tree2<span class="op">$</span>tip.label))))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="gene-tree-species-tree.html#cb47-1" aria-hidden="true" tabindex="-1"></a>tip.rows <span class="ot">&lt;-</span> <span class="fu">which</span>(species.tree<span class="sc">$</span>edge[,<span class="dv">2</span>]<span class="sc">&lt;=</span><span class="fu">Ntip</span>(species.tree))</span>
+<span id="cb47-2"><a href="gene-tree-species-tree.html#cb47-2" aria-hidden="true" tabindex="-1"></a>species.tree2 <span class="ot">&lt;-</span> species.tree</span>
+<span id="cb47-3"><a href="gene-tree-species-tree.html#cb47-3" aria-hidden="true" tabindex="-1"></a>species.tree2<span class="sc">$</span>edge.length[tip.rows] <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">+</span> species.tree2<span class="sc">$</span>edge.length[tip.rows]</span>
+<span id="cb47-4"><a href="gene-tree-species-tree.html#cb47-4" aria-hidden="true" tabindex="-1"></a>gene.tree2 <span class="ot">&lt;-</span> <span class="fu">sim.coaltree.phylo</span>(species.tree2)</span>
+<span id="cb47-5"><a href="gene-tree-species-tree.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cophylo</span>(species.tree2, gene.tree2, <span class="fu">cbind</span>(<span class="fu">sort</span>(species.tree2<span class="sc">$</span>tip.label), <span class="fu">sort</span>(gene.tree2<span class="sc">$</span>tip.label))))</span></code></pre></div>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>It looks like a mismatch, but it’s hard to see, since the tips are so long. So plot the cladogram instead [we need to manually change branch lengths to do this, though note we do not resimulate the gene tree].</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="gene-tree-species-tree.html#cb49-1"></a>species.tree2.clado &lt;-<span class="st"> </span><span class="kw">compute.brlen</span>(species.tree2)</span>
-<span id="cb49-2"><a href="gene-tree-species-tree.html#cb49-2"></a>gene.tree2.clado &lt;-<span class="st"> </span><span class="kw">compute.brlen</span>(gene.tree2)</span>
-<span id="cb49-3"><a href="gene-tree-species-tree.html#cb49-3"></a><span class="kw">plot</span>(<span class="kw">cophylo</span>(species.tree2.clado, gene.tree2.clado, <span class="kw">cbind</span>(<span class="kw">sort</span>(species.tree2.clado<span class="op">$</span>tip.label),</span>
-<span id="cb49-4"><a href="gene-tree-species-tree.html#cb49-4"></a><span class="kw">sort</span>(gene.tree2.clado<span class="op">$</span>tip.label))))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="gene-tree-species-tree.html#cb49-1" aria-hidden="true" tabindex="-1"></a>species.tree2.clado <span class="ot">&lt;-</span> <span class="fu">compute.brlen</span>(species.tree2)</span>
+<span id="cb49-2"><a href="gene-tree-species-tree.html#cb49-2" aria-hidden="true" tabindex="-1"></a>gene.tree2.clado <span class="ot">&lt;-</span> <span class="fu">compute.brlen</span>(gene.tree2)</span>
+<span id="cb49-3"><a href="gene-tree-species-tree.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cophylo</span>(species.tree2.clado, gene.tree2.clado, <span class="fu">cbind</span>(<span class="fu">sort</span>(species.tree2.clado<span class="sc">$</span>tip.label),</span>
+<span id="cb49-4"><a href="gene-tree-species-tree.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(gene.tree2.clado<span class="sc">$</span>tip.label))))</span></code></pre></div>
 <pre><code>## Rotating nodes to optimize matching...
 ## Done.</code></pre>
 <p><img src="comparative-methods_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
@@ -321,7 +347,6 @@ install_github(&quot;bomeara/phybase&quot;)</code></pre>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -340,6 +365,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -360,6 +386,10 @@ gitbook.start({
 "text": null
 },
 "download": ["comparative-methods.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

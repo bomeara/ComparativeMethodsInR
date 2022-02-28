@@ -4,10 +4,10 @@
 %
 \documentclass[
 ]{article}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -82,7 +82,8 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -111,12 +112,15 @@
 \usepackage{booktabs}
 \usepackage{makeidx}
 \makeindex
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
 \title{Comparative Methods}
 \author{Brian O'Meara}
-\date{2020-01-09}
+\date{2022-02-28}
 
 \begin{document}
 \maketitle
@@ -236,7 +240,7 @@ In R, there are many kinds of objects. These kinds are called ``classes''. For e
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(}\StringTok{"Darwin"}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(}\StringTok{"Darwin"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -248,7 +252,7 @@ It is a \texttt{character} class. \texttt{pi} is a defined constant in R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{print}\NormalTok{(pi)}
+\FunctionTok{print}\NormalTok{(pi)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -258,7 +262,7 @@ It is a \texttt{character} class. \texttt{pi} is a defined constant in R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(pi)}
+\FunctionTok{class}\NormalTok{(pi)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -272,8 +276,8 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example}\FloatTok{.1}\NormalTok{ <{-}}\StringTok{ "6"}
-\KeywordTok{print}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
+\NormalTok{example}\FloatTok{.1} \OtherTok{\textless{}{-}} \StringTok{"6"}
+\FunctionTok{print}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -283,7 +287,7 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -293,8 +297,8 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example}\FloatTok{.2}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
-\KeywordTok{print}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
+\NormalTok{example}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(example}\FloatTok{.1}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -304,7 +308,7 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(example}\FloatTok{.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -314,7 +318,7 @@ Objects can sometimes be converted from one class to another, often using an \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{example}\FloatTok{.2} \OperatorTok{*}\StringTok{ }\DecValTok{7}
+\NormalTok{example}\FloatTok{.2} \SpecialCharTok{*} \DecValTok{7}
 \end{Highlighting}
 \end{Shaded}
 
@@ -333,9 +337,9 @@ The main tree class in R is \texttt{phylo} and is defined in the \texttt{ape} pa
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ape)}
-\NormalTok{phy <{-}}\StringTok{ }\NormalTok{ape}\OperatorTok{::}\KeywordTok{rcoal}\NormalTok{(}\DecValTok{5}\NormalTok{) }\CommentTok{\#to make a random five taxon tree}
-\KeywordTok{print}\NormalTok{(phy)}
+\FunctionTok{library}\NormalTok{(ape)}
+\NormalTok{phy }\OtherTok{\textless{}{-}}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{rcoal}\NormalTok{(}\DecValTok{5}\NormalTok{) }\CommentTok{\#to make a random five taxon tree}
+\FunctionTok{print}\NormalTok{(phy)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -344,14 +348,14 @@ The main tree class in R is \texttt{phylo} and is defined in the \texttt{ape} pa
 ## Phylogenetic tree with 5 tips and 4 internal nodes.
 ## 
 ## Tip labels:
-## [1] "t2" "t3" "t5" "t1" "t4"
+##   t2, t3, t5, t1, t4
 ## 
 ## Rooted; includes branch lengths.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{str}\NormalTok{(phy)}
+\FunctionTok{str}\NormalTok{(phy)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -392,7 +396,7 @@ You can use the same function to enter tree strings directly, changing the argum
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{phy <{-}}\StringTok{ }\NormalTok{ape}\OperatorTok{::}\KeywordTok{read.tree}\NormalTok{(}\DataTypeTok{text =} \StringTok{\textquotesingle{}((Strix\_aluco:4.2,Asio\_otus:4.2):3.1,Athene\_noctua:7.3);\textquotesingle{}}\NormalTok{)}
+\NormalTok{phy }\OtherTok{\textless{}{-}}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{read.tree}\NormalTok{(}\AttributeTok{text =} \StringTok{\textquotesingle{}((Strix\_aluco:4.2,Asio\_otus:4.2):3.1,Athene\_noctua:7.3);\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -648,11 +652,11 @@ First, let's get a tree:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(rotl)}
-\KeywordTok{library}\NormalTok{(ape)}
-\NormalTok{phy <{-}}\StringTok{ }\KeywordTok{get\_study\_tree}\NormalTok{(}\StringTok{"ot\_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(phy, }\DataTypeTok{cex=}\FloatTok{0.5}\NormalTok{)}
-\KeywordTok{axisPhylo}\NormalTok{(}\DataTypeTok{backward=}\OtherTok{TRUE}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(rotl)}
+\FunctionTok{library}\NormalTok{(ape)}
+\NormalTok{phy }\OtherTok{\textless{}{-}} \FunctionTok{get\_study\_tree}\NormalTok{(}\StringTok{"ot\_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(phy, }\AttributeTok{cex=}\FloatTok{0.5}\NormalTok{)}
+\FunctionTok{axisPhylo}\NormalTok{(}\AttributeTok{backward=}\ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -666,12 +670,12 @@ Start with a uniform distribution. Take a starting value of 0, then pick a numbe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ngen <{-}}\StringTok{ }\DecValTok{100}
-\NormalTok{positions <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(ngen)) \{}
-\NormalTok{  positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <{-}}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{ngen }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{positions }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{,ngen))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{sequence}\NormalTok{(ngen)) \{}
+\NormalTok{  positions[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ positions[i] }\SpecialCharTok{+} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 \NormalTok{\}}
-\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\NormalTok{positions, }\DataTypeTok{y=}\KeywordTok{sequence}\NormalTok{(}\KeywordTok{length}\NormalTok{(positions)), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\NormalTok{positions, }\AttributeTok{y=}\FunctionTok{sequence}\NormalTok{(}\FunctionTok{length}\NormalTok{(positions)), }\AttributeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -681,18 +685,18 @@ We can repeat this simulation many times and see what the pattern looks like:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ngen <{-}}\StringTok{ }\DecValTok{100}
-\NormalTok{nsims <{-}}\StringTok{ }\DecValTok{500}
-\NormalTok{final.positions <{-}}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, nsims)}
+\NormalTok{ngen }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{nsims }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{final.positions }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, nsims)}
 \CommentTok{\# make a plot to hold our lines}
-\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{ngen, }\DataTypeTok{y=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{+}\NormalTok{ngen), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"n"}\NormalTok{)}
-\ControlFlowTok{for}\NormalTok{ (sim.index }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(nsims)) \{}
-\NormalTok{  positions <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(ngen)) \{}
-\NormalTok{    positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <{-}}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{ngen, }\AttributeTok{y=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{+}\NormalTok{ngen), }\AttributeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{, }\AttributeTok{type=}\StringTok{"n"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (sim.index }\ControlFlowTok{in} \FunctionTok{sequence}\NormalTok{(nsims)) \{}
+\NormalTok{  positions }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{,ngen))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{sequence}\NormalTok{(ngen)) \{}
+\NormalTok{    positions[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ positions[i] }\SpecialCharTok{+} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 \NormalTok{  \}}
-  \KeywordTok{lines}\NormalTok{(positions, }\KeywordTok{sequence}\NormalTok{(}\KeywordTok{length}\NormalTok{(positions)), }\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
-\NormalTok{  final.positions[sim.index] <{-}}\StringTok{ }\NormalTok{positions[}\KeywordTok{length}\NormalTok{(positions)]}
+  \FunctionTok{lines}\NormalTok{(positions, }\FunctionTok{sequence}\NormalTok{(}\FunctionTok{length}\NormalTok{(positions)), }\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
+\NormalTok{  final.positions[sim.index] }\OtherTok{\textless{}{-}}\NormalTok{ positions[}\FunctionTok{length}\NormalTok{(positions)]}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -703,7 +707,7 @@ Well, that may seem odd: we're adding a bunch of uniform random values between -
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{density}\NormalTok{(final.positions), }\DataTypeTok{col=}\StringTok{"black"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(final.positions), }\AttributeTok{col=}\StringTok{"black"}\NormalTok{, }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -713,18 +717,18 @@ Which looks almost normal. Ok, let's try a weird distribution:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rweird <{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
-\NormalTok{  displacement <{-}}\StringTok{ }\DecValTok{0}
-  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{{-}}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{) }\OperatorTok{<}\StringTok{ }\FloatTok{.1}\NormalTok{) \{}
-\NormalTok{    displacement <{-}}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+\NormalTok{rweird }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{  displacement }\OtherTok{\textless{}{-}} \DecValTok{0}
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{1}\NormalTok{) \{}
+\NormalTok{    displacement }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{)}
 \NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
-\NormalTok{    displacement <{-}}\StringTok{ }\FloatTok{0.5} \OperatorTok{*}\StringTok{ }\KeywordTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\DecValTok{1}
+\NormalTok{    displacement }\OtherTok{\textless{}{-}} \FloatTok{0.5} \SpecialCharTok{*} \FunctionTok{rexp}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\SpecialCharTok{{-}} \DecValTok{1}
 \NormalTok{  \}}
-\NormalTok{  displacement <{-}}\StringTok{ }\NormalTok{displacement }\OperatorTok{+}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{) }\OperatorTok{\%\%}\StringTok{ }\DecValTok{7}\NormalTok{)}
-  \KeywordTok{return}\NormalTok{(displacement)  }
+\NormalTok{  displacement }\OtherTok{\textless{}{-}}\NormalTok{ displacement }\SpecialCharTok{+} \FunctionTok{round}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\%} \DecValTok{7}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(displacement)  }
 \NormalTok{\}}
 
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{density}\NormalTok{(}\KeywordTok{replicate}\NormalTok{(}\DecValTok{100000}\NormalTok{, }\KeywordTok{rweird}\NormalTok{())), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(}\FunctionTok{replicate}\NormalTok{(}\DecValTok{100000}\NormalTok{, }\FunctionTok{rweird}\NormalTok{())), }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -734,18 +738,18 @@ When we ask \texttt{rweird()} for a number it sometimes gives us a normally dist
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ngen <{-}}\StringTok{ }\DecValTok{100}
-\NormalTok{nsims <{-}}\StringTok{ }\DecValTok{500}
-\NormalTok{final.positions <{-}}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, nsims)}
+\NormalTok{ngen }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{nsims }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{final.positions }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, nsims)}
 \CommentTok{\# make a plot to hold our lines}
-\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{100}\NormalTok{,}\DecValTok{1200}\NormalTok{), }\DataTypeTok{y=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{+}\NormalTok{ngen), }\DataTypeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{type=}\StringTok{"n"}\NormalTok{)}
-\ControlFlowTok{for}\NormalTok{ (sim.index }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(nsims)) \{}
-\NormalTok{  positions <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,ngen))}
-  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{sequence}\NormalTok{(ngen)) \{}
-\NormalTok{    positions[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] <{-}}\StringTok{ }\NormalTok{positions[i] }\OperatorTok{+}\StringTok{ }\KeywordTok{rweird}\NormalTok{()}
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{100}\NormalTok{,}\DecValTok{1200}\NormalTok{), }\AttributeTok{y=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{+}\NormalTok{ngen), }\AttributeTok{xlab=}\StringTok{"trait value"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"generation"}\NormalTok{, }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{, }\AttributeTok{type=}\StringTok{"n"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (sim.index }\ControlFlowTok{in} \FunctionTok{sequence}\NormalTok{(nsims)) \{}
+\NormalTok{  positions }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{,ngen))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{sequence}\NormalTok{(ngen)) \{}
+\NormalTok{    positions[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ positions[i] }\SpecialCharTok{+} \FunctionTok{rweird}\NormalTok{()}
 \NormalTok{  \}}
-  \KeywordTok{lines}\NormalTok{(positions, }\KeywordTok{sequence}\NormalTok{(}\KeywordTok{length}\NormalTok{(positions)), }\DataTypeTok{col=}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
-\NormalTok{  final.positions[sim.index] <{-}}\StringTok{ }\NormalTok{positions[}\KeywordTok{length}\NormalTok{(positions)]}
+  \FunctionTok{lines}\NormalTok{(positions, }\FunctionTok{sequence}\NormalTok{(}\FunctionTok{length}\NormalTok{(positions)), }\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
+\NormalTok{  final.positions[sim.index] }\OtherTok{\textless{}{-}}\NormalTok{ positions[}\FunctionTok{length}\NormalTok{(positions)]}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -756,7 +760,7 @@ And now let's look at final positions again:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{density}\NormalTok{(final.positions), }\DataTypeTok{col=}\StringTok{"black"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(final.positions), }\AttributeTok{col=}\StringTok{"black"}\NormalTok{, }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1110,10 +1114,10 @@ First, get a tree from Open Tree of Life. We'll get a recent plant tree from Bea
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(rotl)}
-\KeywordTok{library}\NormalTok{(ape)}
-\NormalTok{phy <{-}}\StringTok{ }\KeywordTok{get\_study\_tree}\NormalTok{(}\StringTok{"ot\_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(phy, }\DataTypeTok{cex=}\FloatTok{0.3}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(rotl)}
+\FunctionTok{library}\NormalTok{(ape)}
+\NormalTok{phy }\OtherTok{\textless{}{-}} \FunctionTok{get\_study\_tree}\NormalTok{(}\StringTok{"ot\_485"}\NormalTok{, }\StringTok{"tree1"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(phy, }\AttributeTok{cex=}\FloatTok{0.3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1123,10 +1127,10 @@ Let's simplify by dropping some taxa:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(geiger)}
-\NormalTok{phy <{-}}\StringTok{ }\KeywordTok{drop.random}\NormalTok{(phy, }\KeywordTok{Ntip}\NormalTok{(phy) }\OperatorTok{{-}}\StringTok{ }\DecValTok{10}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(phy)}
-\KeywordTok{axisPhylo}\NormalTok{()}
+\FunctionTok{library}\NormalTok{(geiger)}
+\NormalTok{phy }\OtherTok{\textless{}{-}} \FunctionTok{drop.random}\NormalTok{(phy, }\FunctionTok{Ntip}\NormalTok{(phy) }\SpecialCharTok{{-}} \DecValTok{10}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(phy)}
+\FunctionTok{axisPhylo}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1136,9 +1140,9 @@ We can simulate gene trees on this tree:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(phybase)}
-\NormalTok{gene.tree <{-}}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(phy, }\DataTypeTok{pop.size=}\FloatTok{1e{-}12}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(gene.tree)}
+\FunctionTok{library}\NormalTok{(phybase)}
+\NormalTok{gene.tree }\OtherTok{\textless{}{-}} \FunctionTok{sim.coaltree.phylo}\NormalTok{(phy, }\AttributeTok{pop.size=}\FloatTok{1e{-}12}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(gene.tree)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1148,8 +1152,8 @@ And it probably looks very similar to the initial tree:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(phytools)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(phy, gene.tree, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(phy}\OperatorTok{$}\NormalTok{tip.label), }\KeywordTok{sort}\NormalTok{(gene.tree}\OperatorTok{$}\NormalTok{tip.label))))}
+\FunctionTok{library}\NormalTok{(phytools)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cophylo}\NormalTok{(phy, gene.tree, }\FunctionTok{cbind}\NormalTok{(}\FunctionTok{sort}\NormalTok{(phy}\SpecialCharTok{$}\NormalTok{tip.label), }\FunctionTok{sort}\NormalTok{(gene.tree}\SpecialCharTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1168,10 +1172,10 @@ Well, it depends on the details of the tree. One common misconception is that ge
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species.tree <{-}}\StringTok{ }\KeywordTok{rcoal}\NormalTok{(}\DecValTok{7}\NormalTok{)}
-\NormalTok{species.tree}\OperatorTok{$}\NormalTok{edge.length <{-}}\StringTok{ }\NormalTok{species.tree}\OperatorTok{$}\NormalTok{edge.length }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{10}\OperatorTok{*}\KeywordTok{max}\NormalTok{(}\KeywordTok{branching.times}\NormalTok{(species.tree)))}
-\NormalTok{gene.tree <{-}}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(species.tree)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(species.tree, gene.tree, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(species.tree}\OperatorTok{$}\NormalTok{tip.label), }\KeywordTok{sort}\NormalTok{(gene.tree}\OperatorTok{$}\NormalTok{tip.label))))}
+\NormalTok{species.tree }\OtherTok{\textless{}{-}} \FunctionTok{rcoal}\NormalTok{(}\DecValTok{7}\NormalTok{)}
+\NormalTok{species.tree}\SpecialCharTok{$}\NormalTok{edge.length }\OtherTok{\textless{}{-}}\NormalTok{ species.tree}\SpecialCharTok{$}\NormalTok{edge.length }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{max}\NormalTok{(}\FunctionTok{branching.times}\NormalTok{(species.tree)))}
+\NormalTok{gene.tree }\OtherTok{\textless{}{-}} \FunctionTok{sim.coaltree.phylo}\NormalTok{(species.tree)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cophylo}\NormalTok{(species.tree, gene.tree, }\FunctionTok{cbind}\NormalTok{(}\FunctionTok{sort}\NormalTok{(species.tree}\SpecialCharTok{$}\NormalTok{tip.label), }\FunctionTok{sort}\NormalTok{(gene.tree}\SpecialCharTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1186,11 +1190,11 @@ You should see (in most iterations), the above code giving a mismatch between th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tip.rows <{-}}\StringTok{ }\KeywordTok{which}\NormalTok{(species.tree}\OperatorTok{$}\NormalTok{edge[,}\DecValTok{2}\NormalTok{]}\OperatorTok{<=}\KeywordTok{Ntip}\NormalTok{(species.tree))}
-\NormalTok{species.tree2 <{-}}\StringTok{ }\NormalTok{species.tree}
-\NormalTok{species.tree2}\OperatorTok{$}\NormalTok{edge.length[tip.rows] <{-}}\StringTok{ }\DecValTok{100} \OperatorTok{+}\StringTok{ }\NormalTok{species.tree2}\OperatorTok{$}\NormalTok{edge.length[tip.rows]}
-\NormalTok{gene.tree2 <{-}}\StringTok{ }\KeywordTok{sim.coaltree.phylo}\NormalTok{(species.tree2)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(species.tree2, gene.tree2, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(species.tree2}\OperatorTok{$}\NormalTok{tip.label), }\KeywordTok{sort}\NormalTok{(gene.tree2}\OperatorTok{$}\NormalTok{tip.label))))}
+\NormalTok{tip.rows }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(species.tree}\SpecialCharTok{$}\NormalTok{edge[,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textless{}=}\FunctionTok{Ntip}\NormalTok{(species.tree))}
+\NormalTok{species.tree2 }\OtherTok{\textless{}{-}}\NormalTok{ species.tree}
+\NormalTok{species.tree2}\SpecialCharTok{$}\NormalTok{edge.length[tip.rows] }\OtherTok{\textless{}{-}} \DecValTok{100} \SpecialCharTok{+}\NormalTok{ species.tree2}\SpecialCharTok{$}\NormalTok{edge.length[tip.rows]}
+\NormalTok{gene.tree2 }\OtherTok{\textless{}{-}} \FunctionTok{sim.coaltree.phylo}\NormalTok{(species.tree2)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cophylo}\NormalTok{(species.tree2, gene.tree2, }\FunctionTok{cbind}\NormalTok{(}\FunctionTok{sort}\NormalTok{(species.tree2}\SpecialCharTok{$}\NormalTok{tip.label), }\FunctionTok{sort}\NormalTok{(gene.tree2}\SpecialCharTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1205,10 +1209,10 @@ It looks like a mismatch, but it's hard to see, since the tips are so long. So p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{species.tree2.clado <{-}}\StringTok{ }\KeywordTok{compute.brlen}\NormalTok{(species.tree2)}
-\NormalTok{gene.tree2.clado <{-}}\StringTok{ }\KeywordTok{compute.brlen}\NormalTok{(gene.tree2)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{cophylo}\NormalTok{(species.tree2.clado, gene.tree2.clado, }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{sort}\NormalTok{(species.tree2.clado}\OperatorTok{$}\NormalTok{tip.label),}
-\KeywordTok{sort}\NormalTok{(gene.tree2.clado}\OperatorTok{$}\NormalTok{tip.label))))}
+\NormalTok{species.tree2.clado }\OtherTok{\textless{}{-}} \FunctionTok{compute.brlen}\NormalTok{(species.tree2)}
+\NormalTok{gene.tree2.clado }\OtherTok{\textless{}{-}} \FunctionTok{compute.brlen}\NormalTok{(gene.tree2)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cophylo}\NormalTok{(species.tree2.clado, gene.tree2.clado, }\FunctionTok{cbind}\NormalTok{(}\FunctionTok{sort}\NormalTok{(species.tree2.clado}\SpecialCharTok{$}\NormalTok{tip.label),}
+\FunctionTok{sort}\NormalTok{(gene.tree2.clado}\SpecialCharTok{$}\NormalTok{tip.label))))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1246,7 +1250,7 @@ To do this week's assignments, you will have to:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Download and install r8s} from \url{http://ceiba.biosci.arizona.edu/r8s/index.html}
+  \textbf{Download and install r8s} from \url{https://sourceforge.net/projects/r8s/}
 \item
   \textbf{Download BEAST2 and Beauti} (come together), \textbf{TreeAnnotator}, and \textbf{Tracer} from \url{http://beast2.org} and \url{http://beast.bio.ed.ac.uk/tracer}.
 \item
@@ -1425,7 +1429,7 @@ The natural way you'd plot this in R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ape}\OperatorTok{::}\KeywordTok{plot.phylo}\NormalTok{(small.phy)}
+\NormalTok{ape}\SpecialCharTok{::}\FunctionTok{plot.phylo}\NormalTok{(small.phy)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1435,7 +1439,7 @@ Plotting it with tips to the right is most common, but there are other options, 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ape}\OperatorTok{::}\KeywordTok{plot.phylo}\NormalTok{(small.phy, }\DataTypeTok{direction=}\StringTok{"upwards"}\NormalTok{)}
+\NormalTok{ape}\SpecialCharTok{::}\FunctionTok{plot.phylo}\NormalTok{(small.phy, }\AttributeTok{direction=}\StringTok{"upwards"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1445,7 +1449,7 @@ Especially for big trees, fan (circle trees) can also be popular:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ape}\OperatorTok{::}\KeywordTok{plot.phylo}\NormalTok{(small.phy, }\DataTypeTok{type=}\StringTok{"fan"}\NormalTok{)}
+\NormalTok{ape}\SpecialCharTok{::}\FunctionTok{plot.phylo}\NormalTok{(small.phy, }\AttributeTok{type=}\StringTok{"fan"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1454,7 +1458,7 @@ Sometimes for just seeing the tree structure itself, once can remove branch leng
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ape}\OperatorTok{::}\KeywordTok{plot.phylo}\NormalTok{(small.phy, }\DataTypeTok{type=}\StringTok{"cladogram"}\NormalTok{)}
+\NormalTok{ape}\SpecialCharTok{::}\FunctionTok{plot.phylo}\NormalTok{(small.phy, }\AttributeTok{type=}\StringTok{"cladogram"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

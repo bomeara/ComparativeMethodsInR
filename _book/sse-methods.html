@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12 SSE methods | Comparative Methods</title>
+  <title>Chapter 12 SSE methods | Comparative Methods</title>
   <meta name="description" content="How to do comparative methods for evolution and ecology" />
-  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12 SSE methods | Comparative Methods" />
+  <meta property="og:title" content="Chapter 12 SSE methods | Comparative Methods" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="bomeara/ComparativeMethodsInR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12 SSE methods | Comparative Methods" />
+  <meta name="twitter:title" content="Chapter 12 SSE methods | Comparative Methods" />
   
   <meta name="twitter:description" content="How to do comparative methods for evolution and ecology" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Brian O’Meara" />
 
 
-<meta name="date" content="2020-01-09" />
+<meta name="date" content="2022-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="diversification.html"/>
 <link rel="next" href="raxml.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,13 +50,16 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -117,6 +120,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -133,96 +159,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Comparative Methods</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites</a>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites<span></span></a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R</a></li>
-<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker</a></li>
-<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other</a></li>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#r"><i class="fa fa-check"></i><b>1.2.1</b> R<span></span></a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#docker"><i class="fa fa-check"></i><b>1.2.2</b> Docker<span></span></a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.2.3</b> Other<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps</a>
+<li class="chapter" data-level="2" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>2</b> First steps<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions</a>
+<li class="chapter" data-level="2.1" data-path="first-steps.html"><a href="first-steps.html#questions"><i class="fa fa-check"></i><b>2.1</b> Questions<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources</a></li>
+<li class="chapter" data-level="2.1.1" data-path="first-steps.html"><a href="first-steps.html#other-resources"><i class="fa fa-check"></i><b>2.1.1</b> Other resources<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R</a>
+<li class="chapter" data-level="3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html"><i class="fa fa-check"></i><b>3</b> Getting data and trees into R<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types</a>
+<li class="chapter" data-level="3.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#data-and-tree-object-types"><i class="fa fa-check"></i><b>3.1</b> Data and tree object types<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes</a></li>
+<li class="chapter" data-level="3.1.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#tree-classes"><i class="fa fa-check"></i><b>3.1.1</b> Tree classes<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data</a></li>
-<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data</a></li>
-<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies</a>
+<li class="chapter" data-level="3.2" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#sequence-data"><i class="fa fa-check"></i><b>3.2</b> Sequence data<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#other-character-data"><i class="fa fa-check"></i><b>3.3</b> Other character data<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#phylogenies"><i class="fa fa-check"></i><b>3.4</b> Phylogenies<span></span></a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal</a></li>
+<li class="chapter" data-level="3.4.1" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#great-scientists-steal"><i class="fa fa-check"></i><b>3.4.1</b> Great scientists steal<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets</a></li>
+<li class="chapter" data-level="3.5" data-path="getting-data-and-trees-into-r.html"><a href="getting-data-and-trees-into-r.html#reconciling-datasets"><i class="fa fa-check"></i><b>3.5</b> Reconciling datasets<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use</a></li>
-<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing</a></li>
-<li class="chapter" data-level="6" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html"><i class="fa fa-check"></i><b>6</b> Testing models and methods</a>
+<li class="chapter" data-level="4" data-path="visualizing-data-before-use.html"><a href="visualizing-data-before-use.html"><i class="fa fa-check"></i><b>4</b> Visualizing data before use<span></span></a></li>
+<li class="chapter" data-level="5" data-path="dull-model-testing.html"><a href="dull-model-testing.html"><i class="fa fa-check"></i><b>5</b> Dull model testing<span></span></a></li>
+<li class="chapter" data-level="6" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html"><i class="fa fa-check"></i><b>6</b> Testing models and methods<span></span></a>
 <ul>
-<li class="chapter" data-level="6.0.1" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#objectives"><i class="fa fa-check"></i><b>6.0.1</b> Objectives</a></li>
-<li class="chapter" data-level="6.0.2" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#model-fit-and-accuracy"><i class="fa fa-check"></i><b>6.0.2</b> Model fit and accuracy</a></li>
+<li class="chapter" data-level="6.0.1" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#objectives"><i class="fa fa-check"></i><b>6.0.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="6.0.2" data-path="testing-models-and-methods.html"><a href="testing-models-and-methods.html#model-fit-and-accuracy"><i class="fa fa-check"></i><b>6.0.2</b> Model fit and accuracy<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="testing-methods.html"><a href="testing-methods.html"><i class="fa fa-check"></i><b>7</b> Testing methods</a>
+<li class="chapter" data-level="7" data-path="testing-methods.html"><a href="testing-methods.html"><i class="fa fa-check"></i><b>7</b> Testing methods<span></span></a>
 <ul>
-<li class="chapter" data-level="7.0.1" data-path="testing-methods.html"><a href="testing-methods.html#objectives-1"><i class="fa fa-check"></i><b>7.0.1</b> Objectives</a></li>
-<li class="chapter" data-level="7.0.2" data-path="testing-methods.html"><a href="testing-methods.html#kinds-of-testing"><i class="fa fa-check"></i><b>7.0.2</b> Kinds of testing</a></li>
-<li class="chapter" data-level="7.0.3" data-path="testing-methods.html"><a href="testing-methods.html#type-i-error"><i class="fa fa-check"></i><b>7.0.3</b> Type I error</a></li>
-<li class="chapter" data-level="7.0.4" data-path="testing-methods.html"><a href="testing-methods.html#type-ii-error"><i class="fa fa-check"></i><b>7.0.4</b> Type II error</a></li>
-<li class="chapter" data-level="7.0.5" data-path="testing-methods.html"><a href="testing-methods.html#getting-rid-of-typological-thinking"><i class="fa fa-check"></i><b>7.0.5</b> Getting rid of typological thinking</a></li>
+<li class="chapter" data-level="7.0.1" data-path="testing-methods.html"><a href="testing-methods.html#objectives-1"><i class="fa fa-check"></i><b>7.0.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="7.0.2" data-path="testing-methods.html"><a href="testing-methods.html#kinds-of-testing"><i class="fa fa-check"></i><b>7.0.2</b> Kinds of testing<span></span></a></li>
+<li class="chapter" data-level="7.0.3" data-path="testing-methods.html"><a href="testing-methods.html#type-i-error"><i class="fa fa-check"></i><b>7.0.3</b> Type I error<span></span></a></li>
+<li class="chapter" data-level="7.0.4" data-path="testing-methods.html"><a href="testing-methods.html#type-ii-error"><i class="fa fa-check"></i><b>7.0.4</b> Type II error<span></span></a></li>
+<li class="chapter" data-level="7.0.5" data-path="testing-methods.html"><a href="testing-methods.html#getting-rid-of-typological-thinking"><i class="fa fa-check"></i><b>7.0.5</b> Getting rid of typological thinking<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>8</b> Continuous traits</a>
+<li class="chapter" data-level="8" data-path="continuous-traits.html"><a href="continuous-traits.html"><i class="fa fa-check"></i><b>8</b> Continuous traits<span></span></a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives</a></li>
+<li class="chapter" data-level="8.1" data-path="continuous-traits.html"><a href="continuous-traits.html#objectives-2"><i class="fa fa-check"></i><b>8.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>9</b> Brownian Motion and Correlations</a>
+<li class="chapter" data-level="9" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html"><i class="fa fa-check"></i><b>9</b> Brownian Motion and Correlations<span></span></a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives</a></li>
-<li class="chapter" data-level="9.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>9.2</b> Brownian motion</a></li>
-<li class="chapter" data-level="9.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>9.3</b> Correlation</a></li>
+<li class="chapter" data-level="9.1" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#objectives-3"><i class="fa fa-check"></i><b>9.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#brownian-motion"><i class="fa fa-check"></i><b>9.2</b> Brownian motion<span></span></a></li>
+<li class="chapter" data-level="9.3" data-path="brownian-motion-and-correlations.html"><a href="brownian-motion-and-correlations.html#correlation"><i class="fa fa-check"></i><b>9.3</b> Correlation<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits</a></li>
-<li class="chapter" data-level="11" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>11</b> Diversification</a>
+<li class="chapter" data-level="10" data-path="discrete-traits.html"><a href="discrete-traits.html"><i class="fa fa-check"></i><b>10</b> Discrete Traits<span></span></a></li>
+<li class="chapter" data-level="11" data-path="diversification.html"><a href="diversification.html"><i class="fa fa-check"></i><b>11</b> Diversification<span></span></a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-4"><i class="fa fa-check"></i><b>11.1</b> Objectives</a></li>
+<li class="chapter" data-level="11.1" data-path="diversification.html"><a href="diversification.html#objectives-4"><i class="fa fa-check"></i><b>11.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>12</b> SSE methods</a>
+<li class="chapter" data-level="12" data-path="sse-methods.html"><a href="sse-methods.html"><i class="fa fa-check"></i><b>12</b> SSE methods<span></span></a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-5"><i class="fa fa-check"></i><b>12.1</b> Objectives</a>
+<li class="chapter" data-level="12.1" data-path="sse-methods.html"><a href="sse-methods.html#objectives-5"><i class="fa fa-check"></i><b>12.1</b> Objectives<span></span></a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>12.1.1</b> Discussion prompts</a></li>
+<li class="chapter" data-level="12.1.1" data-path="sse-methods.html"><a href="sse-methods.html#discussion-prompts"><i class="fa fa-check"></i><b>12.1.1</b> Discussion prompts<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>13</b> RAxML</a>
+<li class="chapter" data-level="13" data-path="raxml.html"><a href="raxml.html"><i class="fa fa-check"></i><b>13</b> RAxML<span></span></a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-6"><i class="fa fa-check"></i><b>13.1</b> Objectives</a></li>
-<li class="chapter" data-level="13.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>13.2</b> Install RAxML</a></li>
-<li class="chapter" data-level="13.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>13.3</b> Morphology search</a></li>
-<li class="chapter" data-level="13.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>13.4</b> DNA</a></li>
+<li class="chapter" data-level="13.1" data-path="raxml.html"><a href="raxml.html#objectives-6"><i class="fa fa-check"></i><b>13.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="13.2" data-path="raxml.html"><a href="raxml.html#install-raxml"><i class="fa fa-check"></i><b>13.2</b> Install RAxML<span></span></a></li>
+<li class="chapter" data-level="13.3" data-path="raxml.html"><a href="raxml.html#morphology-search"><i class="fa fa-check"></i><b>13.3</b> Morphology search<span></span></a></li>
+<li class="chapter" data-level="13.4" data-path="raxml.html"><a href="raxml.html#dna"><i class="fa fa-check"></i><b>13.4</b> DNA<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>14</b> Gene Tree Species Tree</a>
+<li class="chapter" data-level="14" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html"><i class="fa fa-check"></i><b>14</b> Gene Tree Species Tree<span></span></a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-7"><i class="fa fa-check"></i><b>14.1</b> Objectives</a></li>
+<li class="chapter" data-level="14.1" data-path="gene-tree-species-tree.html"><a href="gene-tree-species-tree.html#objectives-7"><i class="fa fa-check"></i><b>14.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>15</b> Dating</a>
+<li class="chapter" data-level="15" data-path="dating.html"><a href="dating.html"><i class="fa fa-check"></i><b>15</b> Dating<span></span></a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-8"><i class="fa fa-check"></i><b>15.1</b> Objectives</a></li>
-<li class="chapter" data-level="15.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>15.2</b> BEAST</a></li>
-<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.3</b> Applying to your own work</a></li>
+<li class="chapter" data-level="15.1" data-path="dating.html"><a href="dating.html#objectives-8"><i class="fa fa-check"></i><b>15.1</b> Objectives<span></span></a></li>
+<li class="chapter" data-level="15.2" data-path="dating.html"><a href="dating.html#beast"><i class="fa fa-check"></i><b>15.2</b> BEAST<span></span></a></li>
+<li class="chapter" data-level="15.3" data-path="dating.html"><a href="dating.html#applying-to-your-own-work"><i class="fa fa-check"></i><b>15.3</b> Applying to your own work<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html"><i class="fa fa-check"></i><b>16</b> Visualizing trees and trees with data</a>
+<li class="chapter" data-level="16" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html"><i class="fa fa-check"></i><b>16</b> Visualizing trees and trees with data<span></span></a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives</a></li>
+<li class="chapter" data-level="16.1" data-path="visualizing-trees-and-trees-with-data.html"><a href="visualizing-trees-and-trees-with-data.html#objectives-9"><i class="fa fa-check"></i><b>16.1</b> Objectives<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li><a href="references.html#references">References<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -243,10 +269,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sse-methods" class="section level1" number="12">
-<h1 number="12"><span class="header-section-number">12</span> SSE methods</h1>
-<div id="objectives-5" class="section level2" number="12.1">
-<h2 number="12.1"><span class="header-section-number">12.1</span> Objectives</h2>
+<div id="sse-methods" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> SSE methods<a href="sse-methods.html#sse-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="objectives-5" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Objectives<a href="sse-methods.html#objectives-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>By the end of this chapter, you will:</p>
 <ul>
 <li>Understand models that look at the effects of traits on diversification</li>
@@ -261,13 +287,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/evo.12614/abstract">Beaulieu and O’Meara (2015)</a> “Extinction rates can be estimated from moderately sized molecular phylogenies”</li>
 <li><a href="http://onlinelibrary.wiley.com/doi/10.1111/evo.12820/full">Rabosky (2015)</a> “Challenges in the estimation of extinction from molecular phylogenies: A response to Beaulieu and O’Meara”</li>
 </ul>
-<p>And that probably isn’t the last word on this (no, I’m not planning something at the moment). However, despite all the hemming and hawing over what people <em>should</em> do, people still keep using methods: folks using <code>diversitree</code>, <code>BAMM</code>, <code>geiger</code>, or many other approaches merrily estimate extinction rates as a necessary part of their analyses, though they usually don’t focus on them in their studies, instead focusing on diversification (speciation - extinction) or speciation alone. (Note: it is possible to do diversification approaches without estimating extinction rates: one could fix extinction rate at a known value (perhaps using the average duration of fossil “species” to get a fixed estimate), though what is usually done is to fix extinction at 0 (this is called a Yule model, if speciation is constant). This is a bit weird when you think about it: one of the few things we truly know in biology without a doubt is that extinction is far, far from zero in general (though this wasn’t <a href="http://www.ucmp.berkeley.edu/mammal/artio/irishelk.html">really discovered in Western science until the 19th century</a>)). But as skeptical scientists, we should aim higher. It’s often tempting, especially as students or postdocs facing a difficult job market, to focus on what we can get out: is there an exciting result that can get past peer review and build our fame (maybe, in our tiny circle) and fortune (ha!). But it’s important to take a step back: are we confident enough, truly (not just based on the p-value) that our results are actually discoveries about nature? Diversification is an area (ancestral state estimation is another) where the reality of results is especially worrisome. Take, for example, <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12565/abstract">Etienne et al. (2016)</a>, who as part of a broader simulation study, analyzed a dataset of 25 <em>Dendroica</em> warbler species, which is a classic dataset for these studies, fitting a logistic growth model. They found that depending on how the model was conditioned<a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, something most users would ignore, the estimated carrying capacity (in this model, the number of warbler species at which speciation equals extinction; in other models, this would be the number of species at which speciation is zero, with extinction <em>always</em> set to zero) for warblers is 24.59 or 6.09 or 0.656 species. That means, depending on how one conditions, we should expect the number of <em>Dendroica</em> warblers to stay exactly where it is, crash to around six species, or crash to half a species [and of course, in the latter two cases, stochastic change in number of species will lead to them hitting zero species fairly quickly, which is an absorbing state]. Given the sensitivity of the model to factors like conditioning, any result has to be taken with a great deal of skepticism.</p>
+<p>And that probably isn’t the last word on this (no, I’m not planning something at the moment). However, despite all the hemming and hawing over what people <em>should</em> do, people still keep using methods: folks using <code>diversitree</code>, <code>BAMM</code>, <code>geiger</code>, or many other approaches merrily estimate extinction rates as a necessary part of their analyses, though they usually don’t focus on them in their studies, instead focusing on diversification (speciation - extinction) or speciation alone. (Note: it is possible to do diversification approaches without estimating extinction rates: one could fix extinction rate at a known value (perhaps using the average duration of fossil “species” to get a fixed estimate), though what is usually done is to fix extinction at 0 (this is called a Yule model, if speciation is constant). This is a bit weird when you think about it: one of the few things we truly know in biology without a doubt is that extinction is far, far from zero in general (though this wasn’t <a href="http://www.ucmp.berkeley.edu/mammal/artio/irishelk.html">really discovered in Western science until the 19th century</a>)). But as skeptical scientists, we should aim higher. It’s often tempting, especially as students or postdocs facing a difficult job market, to focus on what we can get out: is there an exciting result that can get past peer review and build our fame (maybe, in our tiny circle) and fortune (ha!). But it’s important to take a step back: are we confident enough, truly (not just based on the p-value) that our results are actually discoveries about nature? Diversification is an area (ancestral state estimation is another) where the reality of results is especially worrisome. Take, for example, <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12565/abstract">Etienne et al. (2016)</a>, who as part of a broader simulation study, analyzed a dataset of 25 <em>Dendroica</em> warbler species, which is a classic dataset for these studies, fitting a logistic growth model. They found that depending on how the model was conditioned<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, something most users would ignore, the estimated carrying capacity (in this model, the number of warbler species at which speciation equals extinction; in other models, this would be the number of species at which speciation is zero, with extinction <em>always</em> set to zero) for warblers is 24.59 or 6.09 or 0.656 species. That means, depending on how one conditions, we should expect the number of <em>Dendroica</em> warblers to stay exactly where it is, crash to around six species, or crash to half a species [and of course, in the latter two cases, stochastic change in number of species will lead to them hitting zero species fairly quickly, which is an absorbing state]. Given the sensitivity of the model to factors like conditioning, any result has to be taken with a great deal of skepticism.</p>
 <p>For trait based models, the same history of finding problems and the solutions (or partial solutions) has arisen (there is a paper coming out in the <em>American Journal of Botany</em> in May 2016 that goes into this in more detail). The most relevant parts:</p>
 <p><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.0014-3820.2006.tb00517.x/abstract">Maddison (2006)</a> (and there were similar points made by others earlier) showed that transition rates and diversification rates can be hard to distinguish. Oversimplifying a bit, but if the rate of going from state 0 to state 1 is higher than the reverse rate, then over time there should be many more taxa in state 1 than 0. If the diversification rate in state 1 is higher than in state 0, there will tend to be more taxa in state 1 than 0. So if you see a tree with more state 1 than 0, is it higher transition rate to 1, or higher diversification in 1? Or is it lower transition to 1 but a high enough diversification rate that it overwhelms it? Or just chance? The paper identified the problem but not the solution: the last line of the abstract is “Studies of biased diversification and biased character change need to be unified by joint models and estimation methods, although how successfully the two processes can be teased apart remains to be seen.”</p>
 <p>This was followed up by <a href="http://sysbio.oxfordjournals.org/content/56/5/701.short">Maddison et al. (2007)</a> who figured out a method to deal with this: BiSSE. And systematists looked at it, and it was good. There is now a bestiary of similar *SSE models for different kinds of data: QuaSSE, GeoSSE, MuSSE, ClaSSE, and more.</p>
 <p>However, there are concerns. The original paper showed that estimating extinction was hard to do accurately, and other papers (Davis et al, 2013) showed that you needed a hundreds of species to find significant results (sorry, <em>Dendroica</em> – you will forever remain a mystery). However, a particular scary paper (and talk at Evolution, where it was presented) was <a href="https://sysbio.oxfordjournals.org/content/early/2014/10/23/sysbio.syu070.full">Maddison &amp; FitzJohn (2014)</a>. Their paper mostly discussed correlated characters, but has relevance to SSE approaches. If you have a single change on a tree, you don’t know if a higher rate in the clade descended from that branch is due to that trait, some other trait changing on that branch, or some other trait changing on the tree but in a way that makes it mostly on one part of the tree. <a href="http://sysbio.oxfordjournals.org/content/early/2015/01/18/sysbio.syu131">Rabosky &amp; Goldberg (2015)</a> showed that the way many people interpret BiSSE results, as a testing of a null hypothesis, can be misled if part of the null hypothesis is wrong but not the part you’re interested in. <a href="http://sysbio.oxfordjournals.org/content/early/2016/03/25/sysbio.syw022.abstract">Beaulieu &amp; O’Meara (2016)</a> address some of the Maddison &amp; FitzJohn issues (a character changing elsewhere on the tree driving a result) but not all the issues (a single change being sufficient to give substantial support for an idea that that trait is driving diversification).</p>
-<div id="discussion-prompts" class="section level3" number="12.1.1">
-<h3 number="12.1.1"><span class="header-section-number">12.1.1</span> Discussion prompts</h3>
+<div id="discussion-prompts" class="section level3 hasAnchor" number="12.1.1">
+<h3><span class="header-section-number">12.1.1</span> Discussion prompts<a href="sse-methods.html#discussion-prompts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>What is Type I and Type II error?</li>
 <li>Do we care about them? Why or why not?</li>
@@ -292,6 +318,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Conditional probability is the probability of an event given that some other event has occurred. For example, you could use past information from your department to estimate <code>Prob(getting tenure)</code>, but it is different if you use information that another event has occurred: <code>Prob(getting tenure | made major discovery in evolution)</code> is different from <code>Prob(getting tenure | four years since last publication)</code>. In this domain (diversification alone and diversification plus trait models), we condition on actually having a tree to look at: if the true model is speciation rate equals extinction rate, there’s a good chance that most clades starting X million years ago will have gone extinct, so the ones we see diversified unusually quickly, and this has to be taken into account. The example I usually use for this is the idea that dolphins rescue drowning sailors. It’s known dolphins push interesting objects in the ocean. We could interview previously drowning sailors that dolphins pushed towards shore, and they’ll all say that dolphins saved them, but it’s very hard to interview sailors the dolphins pushed the other way. As always, Randall Munroe’s XKCD explains conditional probability best
+<img src="images/seashell.png" alt="Seashell XKCD" /><a href="sse-methods.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
@@ -302,7 +335,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -321,6 +353,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -341,6 +374,10 @@ gitbook.start({
 "text": null
 },
 "download": ["comparative-methods.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
